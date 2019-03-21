@@ -68,18 +68,19 @@ public class Controller {
 
     @FXML
     private TextArea textAreaConsole;
-    
+
     private Scraper scraper = new Scraper();
-    
+
     @FXML
     void allSubjectSearch() {
-    	
+
     }
 
     @FXML
     void findInstructorSfq() {
     	buttonInstructorSfq.setDisable(true);
-    	textAreaConsole.setText(textAreaConsole.getText()+"\n"+textfieldSfqUrl.getText());
+      // task in Lab5
+      textAreaConsole.setText(textAreaConsole.getText() + "\n" + textfieldSfqUrl.getText());
     }
 
     @FXML
@@ -98,7 +99,7 @@ public class Controller {
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
-    	
+
     	//Add a random block on Saturday
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
     	Label randomLabel = new Label("COMP1022\nL1");
@@ -112,11 +113,11 @@ public class Controller {
     	randomLabel.setMaxWidth(100.0);
     	randomLabel.setMinHeight(60);
     	randomLabel.setMaxHeight(60);
-    
+
     	ap.getChildren().addAll(randomLabel);
-    	
-    	
-    	
+
+
+
     }
 
 }
