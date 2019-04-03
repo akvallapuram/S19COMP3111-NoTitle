@@ -80,7 +80,7 @@ public class Controller {
     void findInstructorSfq() {
     	buttonInstructorSfq.setDisable(true);
       // task in Lab5
-      textAreaConsole.setText(textAreaConsole.getText() + "\n" + textfieldSfqUrl.getText());
+      textAreaConsole.setText(textAreaConsole.getText());
     }
 
     @FXML
