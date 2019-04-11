@@ -181,19 +181,38 @@ public class Controller {
         if (NE.isSelected()) {
             checked[9] = "NE";
         }
+        minisearch(checked);
     }
 
-//    minisearch(String[] constraints) {
-//        List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
-//        for (Course c : v) {
-//            String newline = c.getTitle() + "\n";
-//            for (int i = 0; i < c.getNumSlots(); i++) {
-//                Slot t = c.getSlot(i);
-//                newline += "Slot " + i + ":" + t + "\n";
-//            }
-//            textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
-//        }
-//    }
+    void minisearch(String[] constraints) {
+        List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+        for (Course c : v) {
+            Boolean containsAtLeastOne = false;
+            String newline= c.getTitle() + "\n";
+            //TODO make each constraint a seperate mini method for and then Loop over contraints AND logic
+            if(constraints[2] == "Mon") {
+                String result = checkMonday(c);
+                if (!result.equals("")) {
+                    containsAtLeastOne = true;
+                    newline += result;
+                }
+            }
+            if(containsAtLeastOne) {
+                textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+            }
+        }
+    }
+
+    String checkMonday(Course c) {
+        String toReturn = "";
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            if (t.toString().contains("Mo")) {
+                toReturn += "Slot " + i + ":" + t + "\n";
+            }
+        }
+        return toReturn;
+    }
 
     @FXML
     void selectAll() {
