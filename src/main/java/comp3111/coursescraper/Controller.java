@@ -1,7 +1,8 @@
 package comp3111.coursescraper;
 
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -97,11 +98,39 @@ public class Controller {
     @FXML
     private CheckBox LT;
     @FXML
-    private Button SelectAll;
+    public Button SelectAll;
+    @FXML
+    private Button AllSS;
 
     @FXML
     void allSubjectSearch() {
-
+        //TODO need to add different functionality for different clicks
+        String[] allSubjects = {
+                "ACCT", "BIBU", "BIEN", "BIPH", "CENG", "CHEM", "CIVL", "COMP",
+                "CPEG", "ECON", "ELEC", "ENEG", "ENTR", "ENVR", "ENVS", "FINA",
+                "FYTG", "GBUS", "GNED", "HART", "HLTG", "HUMA", "IDPO", "IEDA",
+                "IIMP", "IROP", "ISDN", "ISOM", "LABU", "LANG", "LIFS", "MARK",
+                "MATH", "MECH", "MGMT", "OCES", "PHYS", "PPOL", "RMBI", "SBMT",
+                "SCIE", "SHSS", "SISP", "SOSC", "SUST", "TEMG", "UROP", "WBBA",
+                "AESF", "BTEC", "CBME", "CHMS", "CIEM", "CSIC", "CSIT", "EEMT",
+                "EESM", "EMBA", "ENGG", "EVNG", "EVSM", "GFIN", "HHMS", "HMMA",
+                "IBTM", "IDPO", "IMBA", "JEVE", "MAED", "MAFS", "MESF", "MGCS",
+                "MILE", "MIMT", "MSBD", "NANO", "PDEV", "SSMA"
+        };
+        textfieldSubject.setText("");
+        int i = 0;
+        while (i < allSubjects.length - 1) {
+            try {
+                textfieldSubject.setText(allSubjects[i]);
+                search(); //TODO bug that doesn't set console output after each successful scrape
+                System.out.println(allSubjects[i] + " is done.");
+                i++;
+            } catch (Exception e) {
+                i++;
+            }
+        }
+        //TODO NEED TO DEAL WITH NUMBER OF COURSES that is COMP3111 COMP 3311 two different courses
+        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: ");
     }
 
     @FXML
@@ -154,6 +183,18 @@ public class Controller {
         }
     }
 
+//    minisearch(String[] constraints) {
+//        List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+//        for (Course c : v) {
+//            String newline = c.getTitle() + "\n";
+//            for (int i = 0; i < c.getNumSlots(); i++) {
+//                Slot t = c.getSlot(i);
+//                newline += "Slot " + i + ":" + t + "\n";
+//            }
+//            textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+//        }
+//    }
+
     @FXML
     void selectAll() {
         AM.setSelected(true);
@@ -168,6 +209,20 @@ public class Controller {
         CC.setSelected(true);
         NE.setSelected(true);
         SelectAll.setText("Deselect All");
+    }
+
+    void deselectAll() {
+        AM.setSelected(false);
+        PM.setSelected(false);
+        Mon.setSelected(false);
+        Tues.setSelected(false);
+        Wed.setSelected(false);
+        Thrs.setSelected(false);
+        Fri.setSelected(false);
+        Sat.setSelected(false);
+        LT.setSelected(false);
+        CC.setSelected(false);
+        NE.setSelected(false);
     }
 
 
