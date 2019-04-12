@@ -20,6 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.List;
 public class Controller {
@@ -145,74 +147,189 @@ public class Controller {
     }
 
     @FXML
+    //TODO need to figure out the search based onfilter stuff
     void filterResults() {
-        String[] checked = new String[10];
-        for (int i = 0; i < 10; i++) {
-            checked[i] = "0";
+        Boolean[] checked = new Boolean[11];
+        List<Boolean> ticked = new ArrayList<Boolean>();
+        for (int i = 0; i < 11; i++) {
+            checked[i] = false;
+            ticked.add(i, false);
         }
-        textAreaConsole.setText("");
-        if (AM.isSelected()) {
-            checked[0] = "AM";
-        }
-        if (PM.isSelected()) {
-            checked[1] = "PM";
-        }
-        if (Mon.isSelected()) {
-            checked[2] = "Mon";
-        }
-        if (Tues.isSelected()) {
-            checked[3] = "Tues";
-        }
-        if (Wed.isSelected()) {
-            checked[4] = "Wed";
-        }
-        if (Thrs.isSelected()) {
-            checked[5] = "Thrs";
-        }
-        if (Fri.isSelected()) {
-            checked[6] = "Fri";
-        }
-        if (LT.isSelected()) {
-            checked[7] = "LT";
-        }
-        if (CC.isSelected()) {
-            checked[8] = "CC";
-        }
-        if (NE.isSelected()) {
-            checked[9] = "NE";
-        }
-        minisearch(checked);
-    }
 
-    void minisearch(String[] constraints) {
+        textAreaConsole.setText("");
         List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
         for (Course c : v) {
-            Boolean containsAtLeastOne = false;
+            Boolean containsAtLeastOne;
             String newline= c.getTitle() + "\n";
             //TODO make each constraint a seperate mini method for and then Loop over contraints AND logic
-            if(constraints[2] == "Mon") {
-                String result = checkMonday(c);
-                if (!result.equals("")) {
-                    containsAtLeastOne = true;
-                    newline += result;
+            //pseudocode here:
+            //for each constraint
+            //String result += checkConstraintThatsNot "0"
+            //if result wasn't updated then don't add
+            //result should contain all slots meeting contraints
+            //change containsAtLeastOne and newLine += result
+//            if(constraints[2] == "Mon") {
+//                String result = check2(c);
+//                if (!result.equals("")) {
+//                    containsAtLeastOne = true;
+//                    newline += result;
+//                }
+//            }
+            if (AM.isSelected()) {
+                checked[0] = false;
+                ticked.add(0, true);
+            }
+            if (PM.isSelected()) {
+                checked[1] = false;
+                ticked.add(1, true);
+            }
+            if (Mon.isSelected()) {
+                checked[2] = check2(c);
+                ticked.add(2, true);
+            }
+            if (Tues.isSelected()) {
+                checked[3] = check3(c);
+                ticked.add(3, true);
+            }
+            if (Wed.isSelected()) {
+                checked[4] = check4(c);
+                ticked.add(4, true);
+            }
+            if (Thrs.isSelected()) {
+                checked[5] = check5(c);
+                ticked.add(5, true);
+            }
+            if (Fri.isSelected()) {
+                checked[6] = check6(c);
+                ticked.add(6, true);
+            }
+            if (Sat.isSelected()) {
+                checked[7] = check7(c);
+                ticked.add(7, true);
+            }
+            if (LT.isSelected()) {
+                checked[8] = false;
+                ticked.add(8, true);
+            }
+            if (CC.isSelected()) {
+                checked[9] = false;
+                ticked.add(9, true);
+            }
+            if (NE.isSelected()) {
+                checked[10] = false;
+                ticked.add(10, true);
+            }
+            // array checked[] has all [T/F values] T means fulfill requirements
+            List<Integer> indeces = new ArrayList<>();
+            int count = 0;
+            while(count < 11) {
+                if(ticked.get(count)) {
+                    indeces.add(count);
+                }
+                count++;
+            }
+            Iterator i = indeces.iterator();
+            containsAtLeastOne = true;
+            System.out.println(indeces);
+            while (i.hasNext()) {
+                if (!checked[(int)i.next()]) {
+                    containsAtLeastOne = false;
                 }
             }
+            System.out.println(c.getTitle() + containsAtLeastOne);
             if(containsAtLeastOne) {
+                for (int j = 0; j < c.getNumSlots(); j++) {
+                    Slot t = c.getSlot(j);
+                    newline += "Slot " + j + ":" + t + "\n";
+                }
                 textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+            }
+            ticked.removeAll(ticked);
+            for (int k = 0; k < 11; k++) {
+                checked[k] = false;
+                ticked.add(k, false);
             }
         }
     }
 
-    String checkMonday(Course c) {
-        String toReturn = "";
+//
+//    Boolean check0(Course c) {
+//
+//
+//    }
+//    Boolean check1(Course c) {
+//
+//
+//    }
+    Boolean check2(Course c) {
+        Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
             if (t.toString().contains("Mo")) {
-                toReturn += "Slot " + i + ":" + t + "\n";
+                check = true;
             }
         }
-        return toReturn;
+        return check;
     }
+
+    Boolean check3(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            if (t.toString().contains("Tu")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    Boolean check4(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            if (t.toString().contains("We")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+
+    Boolean check5(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            if (t.toString().contains("Th")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    Boolean check6(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            if (t.toString().contains("Fr")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+
+    Boolean check7(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            if (t.toString().contains("Sa")) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+
 
     @FXML
     void selectAll() {
@@ -228,6 +345,7 @@ public class Controller {
         CC.setSelected(true);
         NE.setSelected(true);
         SelectAll.setText("Deselect All");
+        //TODO figure out how to change action based on click
     }
 
     void deselectAll() {
