@@ -18,6 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
+import org.apache.bcel.generic.Select;
 
 import javax.swing.*;
 import java.time.LocalTime;
@@ -363,7 +364,7 @@ public class Controller {
         NE.setSelected(true);
         filterResults();
         SelectAll.setText("Deselect All");
-        //TODO figure out how to change action based on click
+        SelectAll.setOnAction(e -> deselectAll());
     }
 
     void deselectAll() {
@@ -378,6 +379,8 @@ public class Controller {
         LT.setSelected(false);
         CC.setSelected(false);
         NE.setSelected(false);
+        SelectAll.setText("Select All");
+        SelectAll.setOnAction(e -> selectAll());
     }
 
 
@@ -393,21 +396,21 @@ public class Controller {
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
 
-    	//Add a random block on Saturday
-    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	Label randomLabel = new Label("COMP1022\nL1");
-    	Random r = new Random();
-    	double start = (r.nextInt(10) + 1) * 20 + 40;
-
-    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	randomLabel.setLayoutX(600.0);
-    	randomLabel.setLayoutY(start);
-    	randomLabel.setMinWidth(100.0);
-    	randomLabel.setMaxWidth(100.0);
-    	randomLabel.setMinHeight(60);
-    	randomLabel.setMaxHeight(60);
-
-    	ap.getChildren().addAll(randomLabel);
+//    	//Add a random block on Saturday
+//    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
+//    	Label randomLabel = new Label("COMP1022\nL1");
+//    	Random r = new Random();
+//    	double start = (r.nextInt(10) + 1) * 20 + 40;
+//
+//    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+//    	randomLabel.setLayoutX(600.0);
+//    	randomLabel.setLayoutY(start);
+//    	randomLabel.setMinWidth(100.0);
+//    	randomLabel.setMaxWidth(100.0);
+//    	randomLabel.setMinHeight(60);
+//    	randomLabel.setMaxHeight(60);
+//
+//    	ap.getChildren().addAll(randomLabel);
 
     }
 
