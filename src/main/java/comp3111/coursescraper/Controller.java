@@ -21,6 +21,7 @@ import javafx.scene.control.CheckBox;
 import org.apache.bcel.generic.Select;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -108,7 +109,7 @@ public class Controller {
 
     @FXML
     void allSubjectSearch() {
-        //TODO need to add different functionality for different clicks
+        ArrayList<String> constructing = new ArrayList<String>();
         String[] allSubjects = {
                 "ACCT", "BIBU", "BIEN", "BIPH", "CENG", "CHEM", "CIVL", "COMP",
                 "CPEG", "ECON", "ELEC", "ENEG", "ENTR", "ENVR", "ENVS", "FINA",
@@ -123,17 +124,53 @@ public class Controller {
         };
         textfieldSubject.setText("");
         int i = 0;
-        while (i < allSubjects.length - 1) {
+        int allsubjectcount = 0;
+        while (i < allSubjects.length) {
+            textfieldSubject.setText(allSubjects[i]);
+            //try {
+            List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+            if (v != null) {
+                constructing.add(allSubjects[i]);
+                allsubjectcount++;
+            }
+            i++;
+//            } catch (NullPointerException e) {
+//                i++;
+//            }
+        }
+        textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount);
+        int finalAllsubjectcount = allsubjectcount;
+        System.out.println(constructing);
+        System.out.println(finalAllsubjectcount + " " + i);
+        Iterator it = constructing.iterator();
+        String[] coursesFound = new String[constructing.size()];
+        int index = 0;
+        while(it.hasNext()) {
+            coursesFound[index] = (String) it.next();
+            index++;
+        }
+        allSubjectSearch2(finalAllsubjectcount, coursesFound);
+//        assert(coursesFound != null);
+//        AllSS.setOnAction(e -> {
+//            allSubjectSearch2(finalAllsubjectcount, coursesFound);
+//        });
+    }
+
+    void allSubjectSearch2(int count, String[] evaluate) {
+        double progress = 0;
+        double step = (double) 1/count;
+        for(int j = 0; j < evaluate.length; j++) {
+            textfieldSubject.setText(evaluate[j]);
+            search();
+            System.out.println(evaluate[j] + " is done.");
+            progress += step;
+            progressbar.setProgress(progress);
             try {
-                textfieldSubject.setText(allSubjects[i]);
-                search(); //TODO bug that doesn't set console output after each successful scrape
-                System.out.println(allSubjects[i] + " is done.");
-                i++;
-            } catch (Exception e) {
-                i++;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-        //TODO NEED TO DEAL WITH NUMBER OF COURSES that is COMP3111 COMP 3311 two different courses
         textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: ");
     }
 
