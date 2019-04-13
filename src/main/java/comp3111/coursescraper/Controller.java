@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
 
 import javax.swing.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -176,11 +177,11 @@ public class Controller {
 //                }
 //            }
             if (AM.isSelected()) {
-                checked[0] = false;
+                checked[0] = check0(c);
                 ticked.add(0, true);
             }
             if (PM.isSelected()) {
-                checked[1] = false;
+                checked[1] = check1(c);
                 ticked.add(1, true);
             }
             if (Mon.isSelected()) {
@@ -230,13 +231,13 @@ public class Controller {
             }
             Iterator i = indeces.iterator();
             containsAtLeastOne = true;
-            System.out.println(indeces);
+            //System.out.println(indeces);
             while (i.hasNext()) {
                 if (!checked[(int)i.next()]) {
                     containsAtLeastOne = false;
                 }
             }
-            System.out.println(c.getTitle() + containsAtLeastOne);
+            //System.out.println(c.getTitle() + containsAtLeastOne);
             if(containsAtLeastOne) {
                 for (int j = 0; j < c.getNumSlots(); j++) {
                     Slot t = c.getSlot(j);
@@ -252,20 +253,36 @@ public class Controller {
         }
     }
 
-//
-//    Boolean check0(Course c) {
-//
-//
-//    }
-//    Boolean check1(Course c) {
-//
-//
-//    }
+
+    Boolean check0(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            LocalTime time1 = LocalTime.parse("12:00");
+            if (t.getStart().compareTo(time1) < 0) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    Boolean check1(Course c) {
+        Boolean check = false;
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            LocalTime time1 = LocalTime.parse("12:00");
+            if (t.getStart().compareTo(time1) > 0) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
     Boolean check2(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
-            if (t.toString().contains("Mo")) {
+            if (t.getDay() == 0) {
                 check = true;
             }
         }
@@ -276,7 +293,7 @@ public class Controller {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
-            if (t.toString().contains("Tu")) {
+            if (t.getDay() == 1) {
                 check = true;
             }
         }
@@ -287,7 +304,7 @@ public class Controller {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
-            if (t.toString().contains("We")) {
+            if (t.getDay() == 2) {
                 check = true;
             }
         }
@@ -299,7 +316,7 @@ public class Controller {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
-            if (t.toString().contains("Th")) {
+            if (t.getDay() == 3) {
                 check = true;
             }
         }
@@ -310,7 +327,7 @@ public class Controller {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
-            if (t.toString().contains("Fr")) {
+            if (t.getDay() == 4) {
                 check = true;
             }
         }
@@ -322,7 +339,7 @@ public class Controller {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
-            if (t.toString().contains("Sa")) {
+            if (t.getDay() == 5) {
                 check = true;
             }
         }
@@ -344,6 +361,7 @@ public class Controller {
         LT.setSelected(true);
         CC.setSelected(true);
         NE.setSelected(true);
+        filterResults();
         SelectAll.setText("Deselect All");
         //TODO figure out how to change action based on click
     }

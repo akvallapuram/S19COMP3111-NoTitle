@@ -111,7 +111,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
+            <state relative-caret-position="1515">
               <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -123,8 +123,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="27">
+              <caret line="33" column="11" selection-start-line="32" selection-end-line="35" />
             </state>
           </provider>
         </entry>
@@ -132,12 +132,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1582">
-              <caret line="258" column="7" lean-forward="true" selection-start-line="258" selection-start-column="7" selection-end-line="258" selection-end-column="7" />
+            <state relative-caret-position="293">
+              <caret line="267" lean-forward="true" selection-start-line="267" selection-end-line="267" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4068#4077#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -145,20 +153,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="40" column="25" selection-start-line="40" selection-end-line="43" />
+            <state relative-caret-position="270">
+              <caret line="58" selection-start-line="58" selection-end-line="63" selection-end-column="5" />
+              <folding>
+                <element signature="e#1088#1089#0" expanded="true" />
+                <element signature="e#1111#1112#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/main/ui.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
+            <state relative-caret-position="960">
               <caret line="64" column="107" selection-start-line="64" selection-end-line="65" />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
     </leaf>
@@ -177,6 +189,7 @@
         <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java" />
         <option value="$PROJECT_DIR$/build/resources/main/ui.fxml" />
         <option value="$PROJECT_DIR$/bin/main/ui.fxml" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" />
       </list>
     </option>
@@ -192,7 +205,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,11 +309,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555052902867" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555133798039" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -345,25 +358,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="S19COMP3111-NoTitle [javadoc]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="javadoc" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="S19COMP3111-NoTitle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -385,13 +379,20 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/courseScraper-0.1.0.jar" />
       <method v="2" />
     </configuration>
+    <configuration name="scratch_1" type="Java Scratch" factoryName="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="scratch_1" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MyApplication" />
+        <item itemvalue="Java Scratch.scratch_1" />
         <item itemvalue="Application.MyApplication (1)" />
         <item itemvalue="JAR Application.courseScraper-0.1.0.jar" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle" />
-        <item itemvalue="Gradle.S19COMP3111-NoTitle [javadoc]" />
       </list>
     </recent_temporary>
   </component>
@@ -438,7 +439,7 @@
     <frame x="0" y="23" width="1680" height="961" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2857143" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2893773" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -447,7 +448,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32911393" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2301496" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930955" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -506,12 +507,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/resources/main/ui.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
           <caret line="59" column="126" lean-forward="true" selection-start-line="59" selection-start-column="126" selection-end-line="59" selection-end-column="126" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/MyApplication.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -545,23 +546,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="40" column="25" selection-start-line="40" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="1515">
           <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -570,20 +557,44 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/main/ui.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
+        <state relative-caret-position="960">
           <caret line="64" column="107" selection-start-line="64" selection-end-line="65" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="58" selection-start-line="58" selection-end-line="63" selection-end-column="5" />
+          <folding>
+            <element signature="e#1088#1089#0" expanded="true" />
+            <element signature="e#1111#1112#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="33" column="11" selection-start-line="32" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-end-line="22" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1582">
-          <caret line="258" column="7" lean-forward="true" selection-start-line="258" selection-start-column="7" selection-end-line="258" selection-end-column="7" />
+        <state relative-caret-position="293">
+          <caret line="267" lean-forward="true" selection-start-line="267" selection-end-line="267" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4068#4077#0" expanded="true" />
           </folding>
         </state>
       </provider>
