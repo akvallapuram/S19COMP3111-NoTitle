@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.List;
+import java.util.regex.*;
+
 public class Controller {
 
     @FXML
@@ -109,6 +111,7 @@ public class Controller {
 
     @FXML
     void allSubjectSearch() {
+        //TODO consider the first line "clicking allsubjectsearch or search
         ArrayList<String> constructing = new ArrayList<String>();
         String[] allSubjects = {
                 "ACCT", "BIBU", "BIEN", "BIPH", "CENG", "CHEM", "CIVL", "COMP",
@@ -136,8 +139,6 @@ public class Controller {
         }
         textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount);
         int finalAllsubjectcount = allsubjectcount;
-//        System.out.println(constructing);
-//        System.out.println(finalAllsubjectcount + " " + i);
         Iterator it = constructing.iterator();
         String[] coursesFound = new String[constructing.size()];
         int index = 0;
@@ -196,7 +197,6 @@ public class Controller {
     }
 
     @FXML
-    //TODO need to figure out the search based onfilter stuff
     void filterResults() {
         Boolean[] checked = new Boolean[11];
         List<Boolean> ticked = new ArrayList<Boolean>();
@@ -210,20 +210,6 @@ public class Controller {
         for (Course c : v) {
             Boolean containsAtLeastOne;
             String newline= c.getTitle() + "\n";
-            //TODO make each constraint a seperate mini method for and then Loop over contraints AND logic
-            //pseudocode here:
-            //for each constraint
-            //String result += checkConstraintThatsNot "0"
-            //if result wasn't updated then don't add
-            //result should contain all slots meeting contraints
-            //change containsAtLeastOne and newLine += result
-//            if(constraints[2] == "Mon") {
-//                String result = check2(c);
-//                if (!result.equals("")) {
-//                    containsAtLeastOne = true;
-//                    newline += result;
-//                }
-//            }
             if (AM.isSelected()) {
                 checked[0] = check0(c);
                 ticked.add(0, true);
@@ -257,7 +243,7 @@ public class Controller {
                 ticked.add(7, true);
             }
             if (LT.isSelected()) {
-                checked[8] = false;
+                checked[8] = check8(c);
                 ticked.add(8, true);
             }
             if (CC.isSelected()) {
@@ -269,6 +255,7 @@ public class Controller {
                 ticked.add(10, true);
             }
             // array checked[] has all [T/F values] T means fulfill requirements
+            // ticked adds a T value; this way we can compare all T ticked values to all T/F values in checked
             List<Integer> indeces = new ArrayList<>();
             int count = 0;
             while(count < 11) {
@@ -278,13 +265,13 @@ public class Controller {
                 count++;
             }
             Iterator i = indeces.iterator();
-            containsAtLeastOne = true;
+            containsAtLeastOne = true; //this is kinda dangerous
+            //for all ticked values there needs to be a T in check[] to print the Course + Slots
             while (i.hasNext()) {
                 if (!checked[(int)i.next()]) {
                     containsAtLeastOne = false;
                 }
             }
-            //System.out.println(c.getTitle() + containsAtLeastOne);
             if(containsAtLeastOne) {
                 for (int j = 0; j < c.getNumSlots(); j++) {
                     Slot t = c.getSlot(j);
@@ -393,11 +380,23 @@ public class Controller {
         return check;
     }
 
+    //Labs and tutorials
     Boolean check8(Course c) {
         Boolean check = false;
-
+        for (int i = 0; i < c.getNumSlots(); i++) {
+            Slot t = c.getSlot(i);
+            String type = t.getType();
+            Boolean b1 = Pattern.matches("T\\d", type);
+            if (type.contains("LA") || b1) {
+                check = true;
+            }
+        }
         return check;
     }
+
+    //Common Core
+
+    //With Labs or Tutorials
 
 
     @FXML
@@ -446,23 +445,6 @@ public class Controller {
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
-
-//    	//Add a random block on Saturday
-//    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-//    	Label randomLabel = new Label("COMP1022\nL1");
-//    	Random r = new Random();
-//    	double start = (r.nextInt(10) + 1) * 20 + 40;
-//
-//    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-//    	randomLabel.setLayoutX(600.0);
-//    	randomLabel.setLayoutY(start);
-//    	randomLabel.setMinWidth(100.0);
-//    	randomLabel.setMaxWidth(100.0);
-//    	randomLabel.setMinHeight(60);
-//    	randomLabel.setMaxHeight(60);
-//
-//    	ap.getChildren().addAll(randomLabel);
-
     }
 
 }

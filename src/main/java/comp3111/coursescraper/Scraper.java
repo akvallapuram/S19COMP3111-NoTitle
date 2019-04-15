@@ -88,6 +88,8 @@ public class Scraper {
 	}
 
 	private void addSlot(HtmlElement e, Course c, boolean secondRow) {
+		//System.out.println(e.getChildNodes().get(secondRow ? 0 : 1).asText());
+		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
 		if (times[0].equals("TBA"))
@@ -101,6 +103,7 @@ public class Scraper {
 			s.setStart(times[1]);
 			s.setEnd(times[3]);
 			s.setVenue(venue);
+			s.setType(type);
 			c.addSlot(s);	
 		}
 
