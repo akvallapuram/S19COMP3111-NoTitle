@@ -105,7 +105,7 @@ public class Controller {
     @FXML
     public Button SelectAll;
     @FXML
-    private Button AllSS;
+    public Button AllSS;
 
     @FXML
     void allSubjectSearch() {
@@ -127,21 +127,17 @@ public class Controller {
         int allsubjectcount = 0;
         while (i < allSubjects.length) {
             textfieldSubject.setText(allSubjects[i]);
-            //try {
             List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
             if (v != null) {
                 constructing.add(allSubjects[i]);
                 allsubjectcount++;
             }
             i++;
-//            } catch (NullPointerException e) {
-//                i++;
-//            }
         }
         textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount);
         int finalAllsubjectcount = allsubjectcount;
-        System.out.println(constructing);
-        System.out.println(finalAllsubjectcount + " " + i);
+//        System.out.println(constructing);
+//        System.out.println(finalAllsubjectcount + " " + i);
         Iterator it = constructing.iterator();
         String[] coursesFound = new String[constructing.size()];
         int index = 0;
@@ -149,29 +145,43 @@ public class Controller {
             coursesFound[index] = (String) it.next();
             index++;
         }
-        allSubjectSearch2(finalAllsubjectcount, coursesFound);
-//        assert(coursesFound != null);
-//        AllSS.setOnAction(e -> {
-//            allSubjectSearch2(finalAllsubjectcount, coursesFound);
-//        });
+        AllSS.setText("All Subject Search");
+        AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
     }
 
     void allSubjectSearch2(int count, String[] evaluate) {
         double progress = 0;
         double step = (double) 1/count;
+        int numcourses = 0;
         for(int j = 0; j < evaluate.length; j++) {
             textfieldSubject.setText(evaluate[j]);
-            search();
+            numcourses += searchCount();
             System.out.println(evaluate[j] + " is done.");
             progress += step;
             progressbar.setProgress(progress);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
-        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: ");
+        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
+        AllSS.setOnAction(e -> allSubjectSearch());
+    }
+
+    int searchCount() {
+        int numcourses = 0;
+        List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+        for (Course c : v) {
+            numcourses++;
+            String newline = c.getTitle() + "\n";
+            for (int i = 0; i < c.getNumSlots(); i++) {
+                Slot t = c.getSlot(i);
+                newline += "Slot " + i + ":" + t + "\n";
+            }
+            textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+        }
+        return numcourses;
     }
 
     @FXML
@@ -269,7 +279,6 @@ public class Controller {
             }
             Iterator i = indeces.iterator();
             containsAtLeastOne = true;
-            //System.out.println(indeces);
             while (i.hasNext()) {
                 if (!checked[(int)i.next()]) {
                     containsAtLeastOne = false;
@@ -384,6 +393,11 @@ public class Controller {
         return check;
     }
 
+    Boolean check8(Course c) {
+        Boolean check = false;
+
+        return check;
+    }
 
 
     @FXML
