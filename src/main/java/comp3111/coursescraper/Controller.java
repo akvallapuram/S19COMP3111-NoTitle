@@ -247,11 +247,11 @@ public class Controller {
                 ticked.add(8, true);
             }
             if (CC.isSelected()) {
-                checked[9] = false;
+                checked[9] = check9(c);
                 ticked.add(9, true);
             }
             if (NE.isSelected()) {
-                checked[10] = false;
+                checked[10] = check10(c);
                 ticked.add(10, true);
             }
             // array checked[] has all [T/F values] T means fulfill requirements
@@ -395,8 +395,18 @@ public class Controller {
     }
 
     //Common Core
+    Boolean check9(Course c) {
+        return c.getCommonCourse();
 
-    //With Labs or Tutorials
+    }
+
+    //No Exclusion
+    Boolean check10(Course c) {
+        if (c.getExclusion() == "null") {
+            return true;
+        }
+        return false;
+    }
 
 
     @FXML

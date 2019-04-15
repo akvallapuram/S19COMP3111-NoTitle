@@ -4,8 +4,8 @@
     <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -113,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="105" column="12" selection-start-line="105" selection-start-column="12" selection-end-line="105" selection-end-column="12" />
+            <state relative-caret-position="357">
+              <caret line="142" column="43" lean-forward="true" selection-start-line="142" selection-start-column="43" selection-end-line="142" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -125,8 +125,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+            <state relative-caret-position="420">
+              <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
               <folding>
                 <element signature="e#741#742#0" expanded="true" />
                 <element signature="e#833#834#0" expanded="true" />
@@ -138,8 +138,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="67" column="7" lean-forward="true" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
+            <state relative-caret-position="-452">
+              <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-end-line="13" />
               <folding>
                 <element signature="e#1088#1089#0" expanded="true" />
                 <element signature="e#1111#1112#0" expanded="true" />
@@ -151,8 +151,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="398" column="29" lean-forward="true" selection-start-line="398" selection-start-column="29" selection-end-line="398" selection-end-column="29" />
+            <state relative-caret-position="261">
+              <caret line="253" column="41" lean-forward="true" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -209,6 +209,7 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java" />
         <option value="$PROJECT_DIR$/src/main/resources/ui.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" />
+        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" />
       </list>
@@ -334,7 +335,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555314826627" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555326077704" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -626,20 +627,10 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="105" column="12" selection-start-line="105" selection-start-column="12" selection-end-line="105" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+        <state relative-caret-position="420">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
           <folding>
             <element signature="e#741#742#0" expanded="true" />
             <element signature="e#833#834#0" expanded="true" />
@@ -649,8 +640,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="67" column="7" lean-forward="true" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
+        <state relative-caret-position="-452">
+          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-end-line="13" />
           <folding>
             <element signature="e#1088#1089#0" expanded="true" />
             <element signature="e#1111#1112#0" expanded="true" />
@@ -658,10 +649,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="142" column="43" lean-forward="true" selection-start-line="142" selection-start-column="43" selection-end-line="142" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="398" column="29" lean-forward="true" selection-start-line="398" selection-start-column="29" selection-end-line="398" selection-end-column="29" />
+        <state relative-caret-position="261">
+          <caret line="253" column="41" lean-forward="true" selection-start-line="253" selection-start-column="41" selection-end-line="253" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
