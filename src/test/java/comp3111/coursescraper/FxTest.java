@@ -39,7 +39,7 @@ public class FxTest extends ApplicationTest {
 
 
 	@Test
-	public void testButton() {
+	public void testTabSFQButton() {
 		clickOn("#tabSfq");
 		FxRobotInterface click = clickOn("#buttonInstructorSfq");
 		Button b = (Button)s.lookup("#buttonInstructorSfq");

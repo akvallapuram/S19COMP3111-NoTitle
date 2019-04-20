@@ -83,7 +83,6 @@ public class Controller {
 
     @FXML
     private CheckBox AM;
-
     @FXML
     private CheckBox PM;
     @FXML
@@ -288,7 +287,7 @@ public class Controller {
     }
 
 
-    Boolean check0(Course c) {
+    static Boolean check0(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -300,7 +299,7 @@ public class Controller {
         return check;
     }
 
-    Boolean check1(Course c) {
+    static Boolean check1(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -312,7 +311,7 @@ public class Controller {
         return check;
     }
 
-    Boolean check2(Course c) {
+    static Boolean check2(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -323,7 +322,7 @@ public class Controller {
         return check;
     }
 
-    Boolean check3(Course c) {
+    static Boolean check3(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -334,7 +333,7 @@ public class Controller {
         return check;
     }
 
-    Boolean check4(Course c) {
+    static Boolean check4(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -346,7 +345,7 @@ public class Controller {
     }
 
 
-    Boolean check5(Course c) {
+    static Boolean check5(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -357,7 +356,7 @@ public class Controller {
         return check;
     }
 
-    Boolean check6(Course c) {
+    static Boolean check6(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -369,7 +368,7 @@ public class Controller {
     }
 
 
-    Boolean check7(Course c) {
+    static Boolean check7(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -381,7 +380,7 @@ public class Controller {
     }
 
     //Labs and tutorials
-    Boolean check8(Course c) {
+    static Boolean check8(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -401,7 +400,7 @@ public class Controller {
     }
 
     //No Exclusion
-    Boolean check10(Course c) {
+    static Boolean check10(Course c) {
         if (c.getExclusion() == "null") {
             return true;
         }
