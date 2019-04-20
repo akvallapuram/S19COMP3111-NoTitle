@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Course.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Scraper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Scraper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Slot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Slot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/ui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/ui.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -110,30 +103,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2005">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="699">
-              <caret line="90" column="36" lean-forward="true" selection-start-line="90" selection-end-line="91" />
+            <state relative-caret-position="178">
+              <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+              <folding>
+                <element signature="e#693#694#0" expanded="true" />
+                <element signature="e#712#713#0" expanded="true" />
+                <element signature="e#795#796#0" expanded="true" />
+                <element signature="e#820#821#0" expanded="true" />
+                <element signature="e#893#894#0" expanded="true" />
+                <element signature="e#918#919#0" expanded="true" />
+                <element signature="e#1025#1026#0" expanded="true" />
+                <element signature="e#1062#1063#0" expanded="true" />
+                <element signature="e#1131#1132#0" expanded="true" />
+                <element signature="e#1154#1155#0" expanded="true" />
+                <element signature="e#1253#1254#0" expanded="true" />
+                <element signature="e#1286#1287#0" expanded="true" />
+                <element signature="e#1350#1351#0" expanded="true" />
+                <element signature="e#1372#1373#0" expanded="true" />
+                <element signature="e#1464#1465#0" expanded="true" />
+                <element signature="e#1495#1496#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,21 +132,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-66">
-              <caret line="26" column="15" lean-forward="true" selection-start-line="26" selection-end-line="27" />
+            <state relative-caret-position="2220">
+              <caret line="152" column="31" selection-start-line="152" selection-start-column="31" selection-end-line="152" selection-end-column="31" />
               <folding>
-                <element signature="e#870#871#0" expanded="true" />
-                <element signature="e#899#900#0" expanded="true" />
+                <element signature="e#831#832#0" expanded="true" />
+                <element signature="e#910#911#0" expanded="true" />
+                <element signature="e#1037#1038#0" expanded="true" />
+                <element signature="e#1066#1067#0" expanded="true" />
+                <element signature="e#1147#1148#0" expanded="true" />
+                <element signature="e#1178#1179#0" expanded="true" />
+                <element signature="e#1260#1261#0" expanded="true" />
+                <element signature="e#1287#1288#0" expanded="true" />
+                <element signature="e#1369#1370#0" expanded="true" />
+                <element signature="e#1398#1399#0" expanded="true" />
+                <element signature="e#1149#1150#0" expanded="true" />
+                <element signature="e#1168#1169#0" expanded="true" />
+                <element signature="e#1401#1402#0" expanded="true" />
+                <element signature="e#1418#1419#0" expanded="true" />
+                <element signature="e#1492#1493#0" expanded="true" />
+                <element signature="e#1580#1581#0" expanded="true" />
+                <element signature="e#1640#1641#0" expanded="true" />
+                <element signature="e#1659#1660#0" expanded="true" />
+                <element signature="e#1741#1742#0" expanded="true" />
+                <element signature="e#1766#1767#0" expanded="true" />
+                <element signature="e#1820#1821#0" expanded="true" />
+                <element signature="e#1837#1838#0" expanded="true" />
+                <element signature="e#1908#1909#0" expanded="true" />
+                <element signature="e#1929#1930#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="84" column="12" selection-start-line="84" selection-start-column="12" selection-end-line="84" selection-end-column="12" />
+            <state relative-caret-position="276">
+              <caret line="526" column="11" selection-start-line="526" selection-start-column="11" selection-end-line="526" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -164,10 +177,29 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/ui.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1678">
+              <caret line="156" column="64" selection-start-line="156" selection-start-column="45" selection-end-line="156" selection-end-column="64" />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="395">
+              <caret line="52" column="27" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="210" selection-start-line="210" selection-end-line="210" />
+            <state relative-caret-position="3195">
+              <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -195,9 +227,9 @@
       <find>SelectAll</find>
       <find>setOnaction</find>
       <find>selectAll</find>
-      <find>search()</find>
       <find>search</find>
       <find>td</find>
+      <find>search()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -210,13 +242,13 @@
         <option value="$PROJECT_DIR$/bin/main/ui.fxml" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java" />
         <option value="$PROJECT_DIR$/src/main/resources/ui.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" />
-        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java" />
-        <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" />
+        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" />
+        <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" />
       </list>
     </option>
   </component>
@@ -247,6 +279,19 @@
               <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
               <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="javadoc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
               <item name="jacocoHTML" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -269,6 +314,19 @@
               <item name="reports" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="tmp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="tmp" type="462c0819:PsiDirectoryNode" />
+              <item name="javadoc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
@@ -338,7 +396,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555737563394" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555742266772" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -356,7 +414,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.testAMClick">
+  <component name="RunManager" selected="Gradle.S19COMP3111-NoTitle [test]">
     <configuration name="S19COMP3111-NoTitle [jacocoTestCoverageVerification]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -414,7 +472,7 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ControllerTest.testAMClick" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FxTest.checkAM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="S19COMP3111-NoTitle.test" />
       <extension name="coverage">
         <pattern>
@@ -423,14 +481,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="comp3111.coursescraper" />
-      <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.ControllerTest" />
-      <option name="METHOD_NAME" value="testAMClick" />
+      <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.FxTest" />
+      <option name="METHOD_NAME" value="checkAM" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ItemTest.testCheck2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FxTest.testTabSFQButton" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="S19COMP3111-NoTitle.test" />
       <extension name="coverage">
         <pattern>
@@ -439,8 +497,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="comp3111.coursescraper" />
-      <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.ItemTest" />
-      <option name="METHOD_NAME" value="testCheck2" />
+      <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.FxTest" />
+      <option name="METHOD_NAME" value="testTabSFQButton" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -448,11 +506,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ControllerTest.testAMClick" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle [test]" />
-        <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestCoverageVerification]" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestReport]" />
-        <item itemvalue="JUnit.ItemTest.testCheck2" />
+        <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestCoverageVerification]" />
+        <item itemvalue="JUnit.FxTest.testTabSFQButton" />
+        <item itemvalue="JUnit.FxTest.checkAM" />
       </list>
     </recent_temporary>
   </component>
@@ -470,21 +528,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 12h 51m 48s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 12h 54m 54s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 12h 55m 34s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 12h 56m 12s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 12h 56m 54s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
     <history-entry file="ItemTest_testCheck2 - 2019.04.20 at 13h 00m 05s.xml">
       <configuration name="ItemTest.testCheck2" configurationId="JUnit" />
     </history-entry>
@@ -500,9 +543,25 @@
     <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 13h 15m 05s.xml">
       <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
     </history-entry>
+    <history-entry file="ControllerTest_testAMClick - 2019.04.20 at 13h 18m 51s.xml">
+      <configuration name="ControllerTest.testAMClick" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FxTest_checkAM - 2019.04.20 at 14h 30m 58s.xml">
+      <configuration name="FxTest.checkAM" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FxTest_checkAM - 2019.04.20 at 14h 31m 31s.xml">
+      <configuration name="FxTest.checkAM" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FxTest_checkAM - 2019.04.20 at 14h 33m 21s.xml">
+      <configuration name="FxTest.checkAM" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="FxTest_testTabSFQButton - 2019.04.20 at 14h 33m 54s.xml">
+      <configuration name="FxTest.testTabSFQButton" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984375" visible="true" weight="0.2967033" />
       <window_info id="Structure" order="1" sideWeight="0.5015625" side_tool="true" weight="0.2893773" />
@@ -513,7 +572,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26352128" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26352128" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930955" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -528,7 +587,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Maven" order="4" />
-      <window_info active="true" anchor="right" id="Gradle" order="5" visible="true" weight="0.17460318" />
+      <window_info anchor="right" id="Gradle" order="5" visible="true" weight="0.17460318" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
@@ -563,6 +622,18 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.classpath">
@@ -632,13 +703,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -646,39 +710,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/ui.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="137" column="66" selection-start-line="137" selection-start-column="66" selection-end-line="137" selection-end-column="66" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2005">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/reports/tests/test/index.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="90" column="36" lean-forward="true" selection-start-line="90" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -687,34 +720,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="26" column="15" lean-forward="true" selection-start-line="26" selection-end-line="27" />
+        <state>
           <folding>
-            <element signature="e#870#871#0" expanded="true" />
-            <element signature="e#899#900#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="210" selection-start-line="210" selection-end-line="210" />
+        <state relative-caret-position="50">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#693#694#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#795#796#0" expanded="true" />
+            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#893#894#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+            <element signature="e#1025#1026#0" expanded="true" />
+            <element signature="e#1062#1063#0" expanded="true" />
+            <element signature="e#1131#1132#0" expanded="true" />
+            <element signature="e#1154#1155#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#1286#1287#0" expanded="true" />
+            <element signature="e#1350#1351#0" expanded="true" />
+            <element signature="e#1372#1373#0" expanded="true" />
+            <element signature="e#1464#1465#0" expanded="true" />
+            <element signature="e#1495#1496#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="84" column="12" selection-start-line="84" selection-start-column="12" selection-end-line="84" selection-end-column="12" />
+        <state relative-caret-position="276">
+          <caret line="526" column="11" selection-start-line="526" selection-start-column="11" selection-end-line="526" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="152" column="31" selection-start-line="152" selection-start-column="31" selection-end-line="152" selection-end-column="31" />
+          <folding>
+            <element signature="e#831#832#0" expanded="true" />
+            <element signature="e#910#911#0" expanded="true" />
+            <element signature="e#1037#1038#0" expanded="true" />
+            <element signature="e#1066#1067#0" expanded="true" />
+            <element signature="e#1147#1148#0" expanded="true" />
+            <element signature="e#1178#1179#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1287#1288#0" expanded="true" />
+            <element signature="e#1369#1370#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+            <element signature="e#1149#1150#0" expanded="true" />
+            <element signature="e#1168#1169#0" expanded="true" />
+            <element signature="e#1401#1402#0" expanded="true" />
+            <element signature="e#1418#1419#0" expanded="true" />
+            <element signature="e#1492#1493#0" expanded="true" />
+            <element signature="e#1580#1581#0" expanded="true" />
+            <element signature="e#1640#1641#0" expanded="true" />
+            <element signature="e#1659#1660#0" expanded="true" />
+            <element signature="e#1741#1742#0" expanded="true" />
+            <element signature="e#1766#1767#0" expanded="true" />
+            <element signature="e#1820#1821#0" expanded="true" />
+            <element signature="e#1837#1838#0" expanded="true" />
+            <element signature="e#1908#1909#0" expanded="true" />
+            <element signature="e#1929#1930#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3195">
+          <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ui.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1678">
+          <caret line="156" column="64" selection-start-line="156" selection-start-column="45" selection-end-line="156" selection-end-column="64" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="52" column="27" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="27" />
         </state>
       </provider>
     </entry>

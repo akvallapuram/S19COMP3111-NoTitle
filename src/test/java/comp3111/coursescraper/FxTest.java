@@ -7,6 +7,7 @@ package comp3111.coursescraper;
 
 import static org.junit.Assert.*;
 
+import javafx.scene.control.CheckBox;
 import org.junit.Test;
 import org.testfx.api.FxRobotInterface;
 import org.testfx.assertions.api.Assertions;
