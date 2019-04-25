@@ -7,6 +7,7 @@ package comp3111.coursescraper;
 
 import static org.junit.Assert.*;
 
+import javafx.scene.control.CheckBox;
 import org.junit.Test;
 import org.testfx.api.FxRobotInterface;
 import org.testfx.assertions.api.Assertions;
@@ -39,7 +40,7 @@ public class FxTest extends ApplicationTest {
 
 
 	@Test
-	public void testButton() {
+	public void testTabSFQButton() {
 		clickOn("#tabSfq");
 		FxRobotInterface click = clickOn("#buttonInstructorSfq");
 		Button b = (Button)s.lookup("#buttonInstructorSfq");

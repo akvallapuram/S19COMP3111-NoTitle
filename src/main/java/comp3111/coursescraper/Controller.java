@@ -31,6 +31,9 @@ import java.util.regex.*;
 
 public class Controller {
 
+    /**
+     * Main Tab b
+     */
     @FXML
     private Tab tabMain;
 
@@ -83,7 +86,6 @@ public class Controller {
 
     @FXML
     private CheckBox AM;
-
     @FXML
     private CheckBox PM;
     @FXML
@@ -109,8 +111,14 @@ public class Controller {
     @FXML
     public Button AllSS;
 
+
+    /**
+     * AllSubjectSearch Button First Click
+     * Returns Total Number of Categories/Code Prefix:
+     * Changes the next AllSS button Action to allSubjectSearch2()
+     */
     @FXML
-    void allSubjectSearch() {
+    public void allSubjectSearch() {
         //TODO consider the first line "clicking allsubjectsearch or search
         ArrayList<String> constructing = new ArrayList<String>();
         String[] allSubjects = {
@@ -150,7 +158,12 @@ public class Controller {
         AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
     }
 
-    void allSubjectSearch2(int count, String[] evaluate) {
+    /**
+     * AllSubjectSearch Button Second Click
+     * Updates the Progress Bar and returns all Courses in All Subjects and its Count
+     * Changes the next AllSS button Action back to allSubjectSearch()
+     */
+    public void allSubjectSearch2(int count, String[] evaluate) {
         double progress = 0;
         double step = (double) 1/count;
         int numcourses = 0;
@@ -170,7 +183,12 @@ public class Controller {
         AllSS.setOnAction(e -> allSubjectSearch());
     }
 
-    int searchCount() {
+    /**
+     * Scrapes based on textfieldURL, textfieldTerm, textfieldSubject
+     * returns the num of courses within the result
+     * @return num courses within result of scraping
+     */
+    public int searchCount() {
         int numcourses = 0;
         List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
         for (Course c : v) {
@@ -196,8 +214,13 @@ public class Controller {
 
     }
 
+    /**
+     * Filter Results Task 2
+     * Based on AND logic. If there exists 1+ slot in a Course for every requirement/filter,
+     * Displays all slots of course based on filter
+     */
     @FXML
-    void filterResults() {
+    public void filterResults() {
         Boolean[] checked = new Boolean[11];
         List<Boolean> ticked = new ArrayList<Boolean>();
         for (int i = 0; i < 11; i++) {
@@ -287,8 +310,12 @@ public class Controller {
         }
     }
 
-
-    Boolean check0(Course c) {
+    /**
+     * Checks a Course if there is a Slot that starts in AM
+     * @param c Course to be checked
+     * @return Boolean there is a Slot that starts in AM
+     */
+    static Boolean check0(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -300,7 +327,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check1(Course c) {
+    /**
+     * Checks a Course if there is a Slot that starts in PM
+     * @param c Course to be checked
+     * @return Boolean there is a Slot that starts in PM
+     */
+    public static Boolean check1(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -312,7 +344,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check2(Course c) {
+    /**
+     * Checks a Course if there is a slot in Monday
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Monday
+     */
+    public static Boolean check2(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -323,7 +360,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check3(Course c) {
+    /**
+     * Checks a Course if there is a slot in Tues
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Tues
+     */
+   public static Boolean check3(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -334,7 +376,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check4(Course c) {
+    /**
+     * Checks a Course if there is a slot in Wed
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Wed
+     */
+    public static Boolean check4(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -345,8 +392,12 @@ public class Controller {
         return check;
     }
 
-
-    Boolean check5(Course c) {
+    /**
+     * Checks a Course if there is a slot in Thurs
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Thurs
+     */
+    public static Boolean check5(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -357,7 +408,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check6(Course c) {
+    /**
+     * Checks a Course if there is a slot in Fri
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Fri
+     */
+    public static Boolean check6(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -368,8 +424,12 @@ public class Controller {
         return check;
     }
 
-
-    Boolean check7(Course c) {
+    /**
+     * Checks a Course if there is a slot in Sat
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Sat
+     */
+    public static Boolean check7(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -380,8 +440,12 @@ public class Controller {
         return check;
     }
 
-    //Labs and tutorials
-    Boolean check8(Course c) {
+    /**
+     * Checks a Course if there is a slot that is of type Lab or Tutorial
+     * @param c Course to be checked
+     * @return Boolean there is a slot that is of type Lab or Tutorial
+     */
+    public static Boolean check8(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -394,23 +458,34 @@ public class Controller {
         return check;
     }
 
-    //Common Core
-    Boolean check9(Course c) {
+    /**
+     * Checks a Course if it is 4YCC
+     * @param c Course to be checked
+     * @return Boolean the course is 4YCC
+     */
+    public Boolean check9(Course c) {
         return c.getCommonCourse();
 
     }
 
-    //No Exclusion
-    Boolean check10(Course c) {
+    /**
+     * Checks a Course for No Exclusion
+     * @param c Course to be checked
+     * @return Boolean the course has No Exclusion
+     */
+    public static Boolean check10(Course c) {
         if (c.getExclusion() == "null") {
             return true;
         }
         return false;
     }
 
-
+    /**
+     * Implementation of SelectAll Button in Filter Tab
+     * Selects All filters and changes next click to DeselectAll
+     */
     @FXML
-    void selectAll() {
+    public void selectAll() {
         AM.setSelected(true);
         PM.setSelected(true);
         Mon.setSelected(true);
@@ -427,7 +502,11 @@ public class Controller {
         SelectAll.setOnAction(e -> deselectAll());
     }
 
-    void deselectAll() {
+    /**
+     * Implementation of DeselectAll Button in Filter Tab
+     * Deselects all filters and changes next click to SelectAll
+     */
+    public void deselectAll() {
         AM.setSelected(false);
         PM.setSelected(false);
         Mon.setSelected(false);
@@ -445,7 +524,7 @@ public class Controller {
 
 
     @FXML
-    void search() {
+    public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
       // handling 404 error - Anish
