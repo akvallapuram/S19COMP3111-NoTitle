@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/S19COMP3111-NoTitle.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" afterDir="false" />
-    </list>
+    <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -63,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+            <state relative-caret-position="298">
+              <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -163,6 +159,44 @@
             </path>
             <path>
               <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="javadoc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="doc-img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="gradle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -173,7 +207,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556165318784" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556165723458" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -333,7 +367,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26352128" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26352128" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930955" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -538,12 +572,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
-          <folding>
-            <element signature="e#2563#2571#0" expanded="true" />
-            <element signature="e#6732#6741#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="298">
+          <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
         </state>
       </provider>
     </entry>
