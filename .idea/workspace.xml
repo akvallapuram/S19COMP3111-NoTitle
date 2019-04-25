@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -189,8 +183,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="52" column="27" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="27" />
+            <state relative-caret-position="345">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
             </state>
           </provider>
         </entry>
@@ -396,7 +390,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555742266772" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555742283247" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -528,24 +522,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ItemTest_testCheck2 - 2019.04.20 at 13h 00m 05s.xml">
-      <configuration name="ItemTest.testCheck2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 13h 02m 15s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 13h 07m 13s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 13h 07m 40s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 13h 15m 05s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="ControllerTest_testAMClick - 2019.04.20 at 13h 18m 51s.xml">
-      <configuration name="ControllerTest.testAMClick" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FxTest_checkAM - 2019.04.20 at 14h 30m 58s.xml">
       <configuration name="FxTest.checkAM" configurationId="JUnit" />
     </history-entry>
@@ -558,12 +534,30 @@
     <history-entry file="FxTest_testTabSFQButton - 2019.04.20 at 14h 33m 54s.xml">
       <configuration name="FxTest.testTabSFQButton" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="FxTest_testTabSFQButton - 2019.04.20 at 14h 34m 56s.xml">
+      <configuration name="FxTest.testTabSFQButton" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 14h 35m 21s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 14h 36m 21s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 14h 37m 32s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 14h 37m 36s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.20 at 14h 37m 40s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984375" visible="true" weight="0.2967033" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4984375" visible="true" weight="0.2967033" />
       <window_info id="Structure" order="1" sideWeight="0.5015625" side_tool="true" weight="0.2893773" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -572,7 +566,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26352128" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26352128" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930955" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -824,8 +818,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="52" column="27" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="27" />
+        <state relative-caret-position="345">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
         </state>
       </provider>
     </entry>
