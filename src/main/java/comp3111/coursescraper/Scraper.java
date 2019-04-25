@@ -88,6 +88,8 @@ public class Scraper {
 	}
 
 	private void addSlot(HtmlElement e, Course c, boolean secondRow) {
+		//System.out.println(e.getChildNodes().get(secondRow ? 0 : 1).asText());
+		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
 		if (times[0].equals("TBA"))
@@ -101,6 +103,7 @@ public class Scraper {
 			s.setStart(times[1]);
 			s.setEnd(times[3]);
 			s.setVenue(venue);
+			s.setType(type);
 			c.addSlot(s);
 		}
 
@@ -126,15 +129,23 @@ public class Scraper {
 
 				List<?> popupdetailslist = (List<?>) htmlItem.getByXPath(".//div[@class='popupdetail']/table/tbody/tr");
 				HtmlElement exclusion = null;
+				HtmlElement attributes = null;
 				for ( HtmlElement e : (List<HtmlElement>)popupdetailslist) {
 					HtmlElement t = (HtmlElement) e.getFirstByXPath(".//th");
 					HtmlElement d = (HtmlElement) e.getFirstByXPath(".//td");
+					//System.out.println(t.getFirstChild());
+					//System.out.println(d.getChildNodes().get(0).asText());
 					if (t.asText().equals("EXCLUSION")) {
 						exclusion = d;
 					}
+					if (t.asText().equals("ATTRIBUTES")) {
+						if (d.asText().contains("4Y") && d.asText().contains("Common Core")) {
+							attributes = d;
+						}
+					}
 				}
 				c.setExclusion((exclusion == null ? "null" : exclusion.asText()));
-
+				c.setCommonCourse((attributes != null));
 				List<?> sections = (List<?>) htmlItem.getByXPath(".//tr[contains(@class,'newsect')]");
 				for ( HtmlElement e: (List<HtmlElement>)sections) {
 					addSlot(e, c, false);

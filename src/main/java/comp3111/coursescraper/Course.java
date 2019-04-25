@@ -10,6 +10,8 @@ public class Course {
 	private String exclusion;
 	private Slot [] slots;
 	private int numSlots;
+	private boolean commonCourse;
+
 
 	public Course() {
 		slots = new Slot[DEFAULT_MAX_SLOT];
@@ -84,5 +86,7 @@ public class Course {
 		this.numSlots = numSlots;
 	}
 
+	public boolean getCommonCourse() { return commonCourse; }
 
+	public void setCommonCourse(boolean cc) { this.commonCourse = cc; }
 }

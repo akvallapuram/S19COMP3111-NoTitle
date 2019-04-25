@@ -11,6 +11,7 @@ public class Slot {
 	private LocalTime start;
 	private LocalTime end;
 	private String venue;
+	private String type;
 	public static final String DAYS[] = {"Mo", "Tu", "We", "Th", "Fr", "Sa"};
 	public static final Map<String, Integer> DAYS_MAP = new HashMap<String, Integer>();
 	static {
@@ -25,6 +26,7 @@ public class Slot {
 		s.start = this.start;
 		s.end = this.end;
 		s.venue = this.venue;
+		s.type = this.type;
 		return s;
 	}
 	public String toString() {
@@ -91,5 +93,9 @@ public class Slot {
 	public void setDay(int day) {
 		this.day = day;
 	}
+
+	public String getType() { return type; }
+
+	public void setType(String type) { this.type = type; }
 
 }
