@@ -91,6 +91,25 @@ public class Controller {
     @FXML
     void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+
+      // handling 404 error - Anish
+      if(v == null){
+        textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
+        return;
+      }
+
+
+    // number of courses found - Anish
+    textAreaConsole.setText("Total Number of Course in this search: " + v.size());
+
+
+    // textAreaConsole.setText(textAreaConsole.getText + "\n" +
+    // "Total Number of difference sections in this search: ")
+
+    // textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    // "textnstructors who has teaching assignment this term but does not need to teach at Tu 3:10pm: ")
+
+
     	for (Course c : v) {
     		String newline = c.getTitle() + "\n";
     		for (int i = 0; i < c.getNumSlots(); i++) {
@@ -99,6 +118,7 @@ public class Controller {
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
+
 
     	//Add a random block on Saturday
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
@@ -115,8 +135,6 @@ public class Controller {
     	randomLabel.setMaxHeight(60);
 
     	ap.getChildren().addAll(randomLabel);
-
-
 
     }
 

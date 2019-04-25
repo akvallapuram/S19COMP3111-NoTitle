@@ -4,19 +4,19 @@ package comp3111.coursescraper;
 
 public class Course {
 	private static final int DEFAULT_MAX_SLOT = 20;
-	
-	private String title ; 
+
+	private String title ;
 	private String description ;
 	private String exclusion;
 	private Slot [] slots;
 	private int numSlots;
-	
+
 	public Course() {
 		slots = new Slot[DEFAULT_MAX_SLOT];
 		for (int i = 0; i < DEFAULT_MAX_SLOT; i++) slots[i] = null;
 		numSlots = 0;
 	}
-	
+
 	public void addSlot(Slot s) {
 		if (numSlots >= DEFAULT_MAX_SLOT)
 			return;
@@ -83,6 +83,6 @@ public class Course {
 	public void setNumSlots(int numSlots) {
 		this.numSlots = numSlots;
 	}
-	
+
 
 }
