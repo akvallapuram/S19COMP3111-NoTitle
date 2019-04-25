@@ -526,6 +526,25 @@ public class Controller {
     @FXML
     public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+
+      // handling 404 error - Anish
+      if(v == null){
+        textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
+        return;
+      }
+
+
+    // number of courses found - Anish
+    textAreaConsole.setText("Total Number of Course in this search: " + v.size());
+
+
+    // textAreaConsole.setText(textAreaConsole.getText + "\n" +
+    // "Total Number of difference sections in this search: ")
+
+    // textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    // "textnstructors who has teaching assignment this term but does not need to teach at Tu 3:10pm: ")
+
+
     	for (Course c : v) {
     		String newline = c.getTitle() + "\n";
     		for (int i = 0; i < c.getNumSlots(); i++) {
@@ -534,6 +553,24 @@ public class Controller {
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
+
+
+    	//Add a random block on Saturday
+    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
+    	Label randomLabel = new Label("COMP1022\nL1");
+    	Random r = new Random();
+    	double start = (r.nextInt(10) + 1) * 20 + 40;
+
+    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+    	randomLabel.setLayoutX(600.0);
+    	randomLabel.setLayoutY(start);
+    	randomLabel.setMinWidth(100.0);
+    	randomLabel.setMaxWidth(100.0);
+    	randomLabel.setMinHeight(60);
+    	randomLabel.setMaxHeight(60);
+
+    	ap.getChildren().addAll(randomLabel);
+
     }
 
 }
