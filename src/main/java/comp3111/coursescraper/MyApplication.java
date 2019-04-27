@@ -3,13 +3,15 @@
  */
 package comp3111.coursescraper;
 
-import javafx.application.Application;
+import javafx.application.Application;  
 import javafx.stage.Stage;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * @author kevinw
@@ -55,7 +57,7 @@ public class MyApplication extends Application {
    		stage.setTitle("Course Scraper");
    		stage.show();
     		
-
+   		
 	}
 
 	/**
@@ -65,6 +67,13 @@ public class MyApplication extends Application {
 	public static void main(String args[]) {
 		Application.launch(args);
 	}
+	
+	/*public ObservableList<TableClass> getTableClass()
+	{
+		ObservableList<TableClass> datas = FXCollections.observableArrayList();
+		datas.add(new TableClass("1", "1", "1", "1", "1"));
+		return datas;
+	}*/
 
 
 }
