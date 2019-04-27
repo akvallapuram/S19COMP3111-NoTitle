@@ -444,33 +444,102 @@ public class Controller {
     }
 
 
+    /**check if slot is lecture, lab or tutorial and in 9AM-10PM **/
+    public static boolean isValidSlot(Slot s){
+
+          if(s == null) return false;
+
+          String type = s.getType();
+          boolean b1 = type.startsWith("T");
+          boolean b2 = type.startsWith("L");
+
+          boolean b3 = (s.getStartHour() >= 9) && (s.getEndHour() <= 22);
+
+          if((b1 || b2) && b3) return true;
+          else return false;
+  }
+
+
+  /**Check if a course contains atleast a lecture, lab or tutorial**/
+  boolean isValidCourse(Course c){
+
+    for(int i = 0; i < c.getNumSlots(); i++){
+      if(isValidSlot(c.getSlot(i))) return true;
+    }
+    return false;
+  }
+
+
+  /**Used by scraper to check if a section has already been scraped before**/
+  public static int inSectionSearch(int _sid){
+
+    if(SECTIONS_IN_SEARCH.size() == 0) return -1;
+
+    for(int i = 0; i < SECTIONS_IN_SEARCH.size(); i++){
+      int sid = SECTIONS_IN_SEARCH.get(i).getSectionID();
+      if( sid == _sid) return sid;
+    }
+
+    return -1;
+  }
+
+
+  /** Used by scraper to check if an instructor has already been scraped**/
+  public static int inInstructorSearch(String _ins){
+
+    if(INSTRUCTORS_IN_SEARCH.size() == 0) return -1;
+
+    for(int i = 0; i < INSTRUCTORS_IN_SEARCH.size(); i++){
+      if(INSTRUCTORS_IN_SEARCH.get(i).getName() == _ins) {
+        System.out.println("Found " + _ins);
+        return i;
+      }
+    }
+
+
+    return -1;
+
+  }
+
+    // used for the search
+    public static int NUMBER_OF_COURSES = 0;
+    public static int NUMBER_OF_SECTIONS = 0;
+    public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
+    public static List<Section> SECTIONS_IN_SEARCH = new ArrayList<Section>();
+
+    // TASK 1
     @FXML
     void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
-      // handling 404 error - Anish
+      // handling 404 error
       if(v == null){
         textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
         return;
       }
 
 
-    // number of courses found - Anish
-    textAreaConsole.setText("Total Number of Course in this search: " + v.size());
+    // number of courses found
+    Controller.NUMBER_OF_COURSES = 0;
+    for(Course c : v) if(isValidCourse(c)) Controller.NUMBER_OF_COURSES++;
+    textAreaConsole.setText("Total Number of different courses in this search: " + Controller.NUMBER_OF_COURSES);
 
 
-    // textAreaConsole.setText(textAreaConsole.getText + "\n" +
-    // "Total Number of difference sections in this search: ")
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    "Total Number of difference sections in this search: " + Controller.NUMBER_OF_SECTIONS + "\n\n");
 
     // textAreaConsole.setText(textAreaConsole.getText() + "\n" +
     // "textnstructors who has teaching assignment this term but does not need to teach at Tu 3:10pm: ")
 
 
     	for (Course c : v) {
+
+        // if(!isValidCourse(c)) continue;
     		String newline = c.getTitle() + "\n";
     		for (int i = 0; i < c.getNumSlots(); i++) {
     			Slot t = c.getSlot(i);
-    			newline += "Slot " + i + ":" + t + "\n";
+    			if(isValidSlot(t))
+            newline += t.getType() + ":" + t + "\n";
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}

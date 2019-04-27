@@ -111,6 +111,9 @@ public class Scraper {
 
 	public List<Course> scrape(String baseurl, String term, String sub) {
 
+		// used by the controller
+		Controller.NUMBER_OF_SECTIONS = 0;
+
 		try {
 
 			HtmlPage page = client.getPage(baseurl + "/" + term + "/subject/" + sub);
@@ -134,7 +137,7 @@ public class Scraper {
 					HtmlElement t = (HtmlElement) e.getFirstByXPath(".//th");
 					HtmlElement d = (HtmlElement) e.getFirstByXPath(".//td");
 					//System.out.println(t.getFirstChild());
-					//System.out.println(d.getChildNodes().get(0).asText());
+					// System.out.println(d.getChildNodes().get(0).asText());
 					if (t.asText().equals("EXCLUSION")) {
 						exclusion = d;
 					}
@@ -152,15 +155,50 @@ public class Scraper {
 					e = (HtmlElement)e.getNextSibling();
 					if (e != null && !e.getAttribute("class").contains("newsect"))
 						addSlot(e, c, true);
+
+					// used by search() in Controller.java for SECTIONS_IN_SEARCH
+					Slot slotInSearch = c.getSlot(c.getNumSlots()-1);
+
+
+					if(Controller.isValidSlot(slotInSearch)){
+
+						String type = slotInSearch.getType();
+						String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
+						sectionCode += " " + type.split(" ")[0];
+						int sectionID = Integer.parseInt(type.split("[\\(\\)]")[1]);
+
+
+					}
+
+
+					// used by search() in Controller.java for INSTRUCTORS_IN_SEARCH
+					if(e!= null){
+						List<?> instructors = (List<?>) e.getByXPath(".//a[contains(@href,'instructor')]");
+						for(HtmlElement ins: (List<HtmlElement>)instructors){
+
+							// find the name
+							String insName = ins.asText();
+
+							// check if instructor already in search
+							int insIndex = Controller.inInstructorSearch(insName);
+							if(insIndex == -1) Controller.INSTRUCTORS_IN_SEARCH.add(new Instructor(insName, c));
+							else Controller.INSTRUCTORS_IN_SEARCH.get(insIndex).addCourse(c);
+						}
+
+						
+					}
+
 				}
 
 				result.add(c);
+				// Controller.NUMBER_OF_SECTIONS += sections.size();
 			}
 			client.close();
 			return result;
 		} catch (Exception e) {
 
-			// handling 404 exception with by returning null - Anish
+			// handling 404 exception with by returning null
+			System.out.println(e);
 			return null;
 		}
 	}
