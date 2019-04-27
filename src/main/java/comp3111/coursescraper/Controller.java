@@ -2,6 +2,7 @@ package comp3111.coursescraper;
 
 
 import javafx.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +20,8 @@ import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
 import org.apache.bcel.generic.Select;
+import javafx.concurrent.Task;
+
 
 import javax.swing.*;
 import java.lang.reflect.Array;
@@ -28,6 +31,27 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.List;
 import java.util.regex.*;
+
+
+
+//class BarThread extends Thread {
+//    private static int DELAY = 500;
+//    ProgressBar progressBar;
+//    Double progress;
+//
+//    public BarThread(ProgressBar bar, Double progress) {
+//        progressBar = bar;
+//        this.progress = progress;
+//    }
+//
+//    public void run() {
+//        try {
+//            progressBar.setProgress(progress);
+//            Thread.sleep(DELAY);
+//        } catch (InterruptedException ignoredException) {
+//        }
+//    }
+//}
 
 public class Controller {
 
@@ -111,7 +135,6 @@ public class Controller {
     @FXML
     public Button AllSS;
 
-
     /**
      * AllSubjectSearch Button First Click
      * Returns Total Number of Categories/Code Prefix:
@@ -173,11 +196,25 @@ public class Controller {
             System.out.println(evaluate[j] + " is done.");
             progress += step;
             progressbar.setProgress(progress);
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
+//            class ProgressBarTest extends MyApplication {
+//                Task<Void> task = new Task<Void>() {
+//                    public Void call() {
+//                        for (int i = 0; i < count; i++) {
+//                            try {
+//                                Thread.sleep(100);
+//                            } catch (InterruptedException e) {
+//                                Thread.interrupted();
+//                                break;
+//                            }
+//                            System.out.println(i + 1);
+//                            updateProgress(i + 1, count);
+//                        }
+//                        return null;
+//                    }
+//                };
 //            }
+            //Thread stepper = new BarThread(progressbar, progress);
+            //stepper.start();
         }
         textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
         AllSS.setOnAction(e -> allSubjectSearch());
@@ -519,7 +556,7 @@ public class Controller {
         CC.setSelected(false);
         NE.setSelected(false);
         SelectAll.setText("Select All");
-        SelectAll.setOnAction(e -> selectAll());
+        SelectAll.setOnAction(t -> selectAll());
     }
 
 
@@ -527,15 +564,54 @@ public class Controller {
     public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
-      // handling 404 error - Anish
+        //need to display the number of all subjects in a given term even when search is clicked
+        //(task5) - Jeff
+        ArrayList<String> constructing = new ArrayList<String>();
+        String[] allSubjects = {
+                "ACCT", "BIBU", "BIEN", "BIPH", "CENG", "CHEM", "CIVL", "COMP",
+                "CPEG", "ECON", "ELEC", "ENEG", "ENTR", "ENVR", "ENVS", "FINA",
+                "FYTG", "GBUS", "GNED", "HART", "HLTG", "HUMA", "IDPO", "IEDA",
+                "IIMP", "IROP", "ISDN", "ISOM", "LABU", "LANG", "LIFS", "MARK",
+                "MATH", "MECH", "MGMT", "OCES", "PHYS", "PPOL", "RMBI", "SBMT",
+                "SCIE", "SHSS", "SISP", "SOSC", "SUST", "TEMG", "UROP", "WBBA",
+                "AESF", "BTEC", "CBME", "CHMS", "CIEM", "CSIC", "CSIT", "EEMT",
+                "EESM", "EMBA", "ENGG", "EVNG", "EVSM", "GFIN", "HHMS", "HMMA",
+                "IBTM", "IDPO", "IMBA", "JEVE", "MAED", "MAFS", "MESF", "MGCS",
+                "MILE", "MIMT", "MSBD", "NANO", "PDEV", "SSMA"
+        };
+        textfieldSubject.setText("");
+        int i = 0;
+        int allsubjectcount = 0;
+        while (i < allSubjects.length) {
+            textfieldSubject.setText(allSubjects[i]);
+            List<Course> v1 = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
+            if (v1 != null) {
+                constructing.add(allSubjects[i]);
+                allsubjectcount++;
+            }
+            i++;
+        }
+        textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount);
+        int finalAllsubjectcount = allsubjectcount;
+        Iterator it = constructing.iterator();
+        String[] coursesFound = new String[constructing.size()];
+        int index = 0;
+        while(it.hasNext()) {
+            coursesFound[index] = (String) it.next();
+            index++;
+        }
+        AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
+
+        // handling 404 error - Anish
       if(v == null){
         textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
         return;
       }
 
+        textfieldSubject.setText("");
 
-    // number of courses found - Anish
-    textAreaConsole.setText("Total Number of Course in this search: " + v.size());
+        // number of courses found - Anish
+        textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount + " Total Number of Courses in this search: " + v.size());
 
 
     // textAreaConsole.setText(textAreaConsole.getText + "\n" +
@@ -547,29 +623,12 @@ public class Controller {
 
     	for (Course c : v) {
     		String newline = c.getTitle() + "\n";
-    		for (int i = 0; i < c.getNumSlots(); i++) {
-    			Slot t = c.getSlot(i);
-    			newline += "Slot " + i + ":" + t + "\n";
+    		for (int j = 0; j < c.getNumSlots(); j++) {
+    			Slot t = c.getSlot(j);
+    			newline += "Slot " + j + ":" + t + "\n";
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
-
-
-    	//Add a random block on Saturday
-    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	Label randomLabel = new Label("COMP1022\nL1");
-    	Random r = new Random();
-    	double start = (r.nextInt(10) + 1) * 20 + 40;
-
-    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	randomLabel.setLayoutX(600.0);
-    	randomLabel.setLayoutY(start);
-    	randomLabel.setMinWidth(100.0);
-    	randomLabel.setMaxWidth(100.0);
-    	randomLabel.setMinHeight(60);
-    	randomLabel.setMaxHeight(60);
-
-    	ap.getChildren().addAll(randomLabel);
 
     }
 

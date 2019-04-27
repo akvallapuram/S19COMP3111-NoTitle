@@ -4,11 +4,15 @@
 package comp3111.coursescraper;
 
 import javafx.application.Application;
+import javafx.embed.swing.SwingNode;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
+import javax.swing.SwingUtilities;
+import javax.swing.JProgressBar;
 
 
 /**
