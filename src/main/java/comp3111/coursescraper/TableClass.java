@@ -10,11 +10,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.control.Label;
 
 /**
+ * This class is for the List Tab as well as TimeTable. A row in the List corresponds to an object of TableClass class.
+ *Thus, the List contains multiple TableClass objects.
  * 
  * @author nikhilnanda
- *
- *This class is for the List Tab as well as TimeTable. A row in the List corresponds to an object of TableClass class.
- *Thus, the List contains multiple TableClass objects.
  *
  */
 public class TableClass {

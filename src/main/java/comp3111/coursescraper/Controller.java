@@ -326,10 +326,7 @@ public class Controller {
                 for (int j = 0; j < c.getNumSlots(); j++) {
                     Slot t = c.getSlot(j);
                     //newline += "Slot " + j + ":" + t + "\n";
-                    //For List
-                    //System.out.println(t);
-                    //datas3.add(new TableClass(c.getTitle().substring(0, 9), t.getType().substring(0, 3), c.getTitle().substring(12), "1"));
-                    //TableClass obj = new TableClass(c.getTitle().substring(0, 9), t.getType().substring(0, 3), c.getTitle().substring(12), "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5));
+                    
                     TableClass obj = new TableClass(c.getTitle().substring(0, 10), t.getType().substring(0, 3), c.getTitle().substring(12), "1", col, t.getDay());
                     //Have to prevent duplication
                     TableClass dupl = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
@@ -354,15 +351,12 @@ public class Controller {
                 	}
                 	
                 	//End of prevention of duplication
-                    //if((t.getType()!=sec)&&(t.getType().substring(0,  3)!="Mo ")&&(t.getType().substring(0,  3)!="Tu ")&&(t.getType().substring(0,  3)!="We ")&&(t.getType()!="Th ")&&(t.getType().substring(0,  3)!="Fr ")&&(t.getType().substring(0,  3)!="Sa "))
+                    
                     if((t.getType()!=sec)&&(t.getType().length()<11))	
                     {
-                    	//System.out.println(t.getType() + "sec: " + sec);
-                    	
                     	if(flagg!=1)
                     	{
                     		datas3.add(obj);
-                    		//newList.add(obj);
                     	}
                     	
                     	if(flagg==1)
@@ -374,13 +368,9 @@ public class Controller {
                     		newList.add(obj);
                     	}
                     	
-                    	//newList.add(obj);
-                    	
-                    	//datas3.add(obj);
                     	sec = t.getType();
                     	col = new Color(Math.random(), Math.random(), Math.random(), 0.5);
                     	obj.setColorr(col);
-                    	//System.out.println(t.getType() + "sec: " + sec);
                     }
                     
                     if(t.getType().length()>11)
@@ -394,8 +384,6 @@ public class Controller {
                     {
                     	datasAll.add(obj);
                     }
-                    //datasAll.add(obj);
-                    //llist.setItems(datas3);
                     llist.setItems(newList);
                     
                     newline += obj.getCcode() + " " + obj.getLecturesec() + "Slot " + j + ":" + t + "\n";	//My version which adds sections
@@ -405,7 +393,7 @@ public class Controller {
                     {
                     	obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
                     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            	//chk2.setSelected(!newValue);
+                            	
                     			if(newValue==true)
                     			{
                     				System.out.println("Checkbox is checked");
@@ -413,7 +401,6 @@ public class Controller {
                         			sameSection(obj, t);
                         			printEnrolled(obj);
                     			}
-                    			//else if((newValue==false))
                     			else if((newValue==false)&&(oldValue==true))
                     			{
                     				//Need to remove label from TimeTable and print on console
@@ -421,38 +408,12 @@ public class Controller {
                     				{
                     					printEnrolledRemove(obj);
                     				}
-                    				//printEnrolledRemove(obj);
                     				removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
                     			}
                     		
                         	}
                     	});
                     }
-                    
-                    /*obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    	public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            //chk2.setSelected(!newValue);
-                    		if(newValue==true)
-                    		{
-                    			System.out.println("Checkbox is checked");
-                        		blocks(obj, t);
-                        		sameSection(obj, t);
-                        		printEnrolled(obj);
-                    		}
-                    		//else if((newValue==false))
-                    		else if((newValue==false)&&(oldValue==true))
-                    		{
-                    			//Need to remove label from TimeTable and print on console
-                    			if(datas3.contains(obj))
-                    			{
-                    				printEnrolledRemove(obj);
-                    			}
-                    			//printEnrolledRemove(obj);
-                    			removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
-                    		}
-                    		
-                        }
-                    });*/
                     
                     prevSecType = sec;
                 }
@@ -636,18 +597,11 @@ public class Controller {
     	}
     }
     
-    /*public ObservableList<TableClass> getTableClass()
-	{
-		ObservableList<TableClass> datas = FXCollections.observableArrayList();
-		datas.add(new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1));
-		return datas;
-	}*/
-    
     /**
      * Creates a List for the list Tab and aligns each column with a property
      */
     @FXML
-    void createList2()
+    public void createList2()
     {
     	System.out.println(":-/");
     	
@@ -658,44 +612,6 @@ public class Controller {
     	flEnroll.setCellValueFactory(new PropertyValueFactory<>("enroll"));
     	
     }
-    
-    
-    /*@FXML
-    void timeTable()
-    {
-    	//AnchorPane ap = (AnchorPane)tabList.getContent();
-    	
-    	for(int i=0; i<llist.getItems().size(); ++i)
-    	{
-    		TableClass block = llist.getItems().get(i);
-    		
-    		if(llist.getItems().get(i).getEnroll().isSelected())
-    		{
-    			System.out.println(":/");
-    			
-    			//Not Sure
-    			
-    			AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	    	//Label randomLabel = new Label("COMP1022\nL1");
-    			Label randomLabel = new Label(block.getCcode()+"\n"+block.getLecturesec());
-    	    	Random r = new Random();
-    	    	double start = (r.nextInt(10) + 1) * 20 + 40;
-
-    	    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	    	randomLabel.setLayoutX(600.0);
-    	    	randomLabel.setLayoutY(start);
-    	    	randomLabel.setMinWidth(100.0);
-    	    	randomLabel.setMaxWidth(100.0);
-    	    	randomLabel.setMinHeight(60);
-    	    	randomLabel.setMaxHeight(60);
-    	    
-    	    	ap.getChildren().addAll(randomLabel);
-    	    	
-    	    	//Not sure ends
-    		}
-    	}
-    	
-    }*/
     
     /**
      * Adds a block for the section specified by ts object to the timetable
@@ -738,7 +654,7 @@ public class Controller {
     	System.out.println(atls);
     	System.out.println(atls*0.33);
     	
-    	if(atls<60)
+    	if(atls<130)
     	{
     		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
     	}
@@ -752,7 +668,7 @@ public class Controller {
      * @param s Slot that is part of section of ts
      */
     @FXML
-    void sameSection(TableClass ts, Slot s)
+    public void sameSection(TableClass ts, Slot s)
     {
     	for(int i=0; i<datasAll.size(); ++i)
     	{
@@ -771,7 +687,7 @@ public class Controller {
      * As soon as a section is enrolled the Console output is updated with all the sections enrolled
      * @param ts Section that has been enrolled
      */
-    void printEnrolled(TableClass ts)
+    public void printEnrolled(TableClass ts)
     {
     	
     	if(textAreaConsole.getText().substring(0, 36).equals("The following sections are enrolled:"))
@@ -810,7 +726,7 @@ public class Controller {
      * whose enrolment status has been changed from checked to unchecked
      * @param ts Section whose enrolment status has been changed from checked to unchecked
      */
-    void printEnrolledRemove(TableClass ts)
+    public void printEnrolledRemove(TableClass ts)
     {
     	String match = ts.getCcode() + " " + ts.getLecturesec();
     	String resultant = "";
@@ -844,7 +760,7 @@ public class Controller {
     /**
      * Prints the enrolled courses on the Console
      */
-    void lostEnrollment()
+    public void lostEnrollment()
     {
     	String prefix = "";
     	int flag = 0;
@@ -869,9 +785,9 @@ public class Controller {
     /**
      * Removes all labels of a particular section from the timetable and changes the enrollment status of the sections
      * @param ts TableClass object that specifies which section to remove from timetable 
-     * @param s
+     * @param s Slot of the Section
      */
-    void removeBlocks(TableClass ts, Slot s)
+    public void removeBlocks(TableClass ts, Slot s)
     {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
     	
