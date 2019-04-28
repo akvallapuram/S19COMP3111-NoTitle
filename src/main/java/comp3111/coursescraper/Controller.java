@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 
 
 
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent; 
 import javafx.event.EventHandler;
@@ -141,6 +142,7 @@ public class Controller {
     
     ObservableList<TableClass> datas3 = FXCollections.observableArrayList();
     List<TableClass> datasAll = new ArrayList<TableClass>();
+    ObservableList<TableClass> newList = FXCollections.observableArrayList();
 
     @FXML
     void allSubjectSearch() {
@@ -245,6 +247,7 @@ public class Controller {
         textAreaConsole.setText("");
         
         lostEnrollment();
+        newList.clear();
         
         List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
         for (Course c : v) {
@@ -322,13 +325,14 @@ public class Controller {
             	
                 for (int j = 0; j < c.getNumSlots(); j++) {
                     Slot t = c.getSlot(j);
-                    newline += "Slot " + j + ":" + t + "\n";
+                    //newline += "Slot " + j + ":" + t + "\n";
                     //For List
                     //System.out.println(t);
                     //datas3.add(new TableClass(c.getTitle().substring(0, 9), t.getType().substring(0, 3), c.getTitle().substring(12), "1"));
                     //TableClass obj = new TableClass(c.getTitle().substring(0, 9), t.getType().substring(0, 3), c.getTitle().substring(12), "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5));
                     TableClass obj = new TableClass(c.getTitle().substring(0, 10), t.getType().substring(0, 3), c.getTitle().substring(12), "1", col, t.getDay());
                     //Have to prevent duplication
+                    TableClass dupl = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
                     int flagg = 0;
                 	for(int l=0; l<datasAll.size(); ++l)
                 	{
@@ -341,11 +345,14 @@ public class Controller {
                 				{
                 					//obj = dup;
                 					flagg = 1;
+                					dupl = dup;
+                					break;
                 				}
                 			}
                 		}
                 		
                 	}
+                	
                 	//End of prevention of duplication
                     //if((t.getType()!=sec)&&(t.getType().substring(0,  3)!="Mo ")&&(t.getType().substring(0,  3)!="Tu ")&&(t.getType().substring(0,  3)!="We ")&&(t.getType()!="Th ")&&(t.getType().substring(0,  3)!="Fr ")&&(t.getType().substring(0,  3)!="Sa "))
                     if((t.getType()!=sec)&&(t.getType().length()<11))	
@@ -355,7 +362,19 @@ public class Controller {
                     	if(flagg!=1)
                     	{
                     		datas3.add(obj);
+                    		//newList.add(obj);
                     	}
+                    	
+                    	if(flagg==1)
+                    	{
+                    		newList.add(dupl);
+                    	}
+                    	else
+                    	{
+                    		newList.add(obj);
+                    	}
+                    	
+                    	//newList.add(obj);
                     	
                     	//datas3.add(obj);
                     	sec = t.getType();
@@ -376,10 +395,41 @@ public class Controller {
                     	datasAll.add(obj);
                     }
                     //datasAll.add(obj);
-                    llist.setItems(datas3);
+                    //llist.setItems(datas3);
+                    llist.setItems(newList);
+                    
+                    newline += obj.getCcode() + " " + obj.getLecturesec() + "Slot " + j + ":" + t + "\n";	//My version which adds sections
                     
                     
-                    obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    if(flagg!=1) 
+                    {
+                    	obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                            	//chk2.setSelected(!newValue);
+                    			if(newValue==true)
+                    			{
+                    				System.out.println("Checkbox is checked");
+                        			blocks(obj, t);
+                        			sameSection(obj, t);
+                        			printEnrolled(obj);
+                    			}
+                    			//else if((newValue==false))
+                    			else if((newValue==false)&&(oldValue==true))
+                    			{
+                    				//Need to remove label from TimeTable and print on console
+                    				if(datas3.contains(obj))
+                    				{
+                    					printEnrolledRemove(obj);
+                    				}
+                    				//printEnrolledRemove(obj);
+                    				removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
+                    			}
+                    		
+                        	}
+                    	});
+                    }
+                    
+                    /*obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
                     	public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                             //chk2.setSelected(!newValue);
                     		if(newValue==true)
@@ -402,13 +452,11 @@ public class Controller {
                     		}
                     		
                         }
-                    });
+                    });*/
                     
                     prevSecType = sec;
-                    //sameSection(obj, t);
                 }
                 textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
-                //createList2();
             }
             ticked.removeAll(ticked);
             for (int k = 0; k < 11; k++) {
@@ -416,9 +464,6 @@ public class Controller {
                 ticked.add(k, false);
             }
         }
-        
-        //For timetable
-        //timeTable();
     }
 
 
@@ -559,8 +604,6 @@ public class Controller {
         filterResults();
         SelectAll.setText("Deselect All");
         SelectAll.setOnAction(e -> deselectAll());
-        //createList2();
-        //timeTable();
     }
 
     void deselectAll() {
@@ -591,40 +634,20 @@ public class Controller {
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
-    	
-    	//For timetable
-    	//timeTable();
     }
     
-    public ObservableList<TableClass> getTableClass()
+    /*public ObservableList<TableClass> getTableClass()
 	{
 		ObservableList<TableClass> datas = FXCollections.observableArrayList();
 		datas.add(new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1));
 		return datas;
-	}
+	}*/
     
-    @FXML
-    void createList()
-    {
-    	System.out.println(":-/");
-    	
-    	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
-    	flSection.setCellValueFactory(new PropertyValueFactory<>("lecturesec"));
-    	fcName.setCellValueFactory(new PropertyValueFactory<>("cname"));
-    	flInstructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
-    	flEnroll.setCellValueFactory(new PropertyValueFactory<>("enroll"));
-    	
-    	llist.setItems(getTableClass());
-    	/*llist.getColumns().addAll(fcCode, flSection, fcName, flInstructor, flEnroll);*/
-    	
-    	//System.out.println(":-/");
-    	
-    }
+    
     
     @FXML
     void createList2()
     {
-    	//Better version
     	System.out.println(":-/");
     	
     	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
@@ -633,12 +656,10 @@ public class Controller {
     	flInstructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
     	flEnroll.setCellValueFactory(new PropertyValueFactory<>("enroll"));
     	
-    	//ObservableList<TableClass> datas2 = FXCollections.observableArrayList(new TableClass("1", "2", "3", "4"));
-    	//llist.setItems(datas2);
     }
     
     
-    @FXML
+    /*@FXML
     void timeTable()
     {
     	//AnchorPane ap = (AnchorPane)tabList.getContent();
@@ -673,15 +694,13 @@ public class Controller {
     		}
     	}
     	
-    }
+    }*/
     
-    //@FXML
-    void blocks(TableClass ts, Slot s)
+    @FXML
+    public void blocks(TableClass ts, Slot s)
     {
     	
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	
-    	//ts.setLab(new Label(ts.getCcode()+"\n"+ts.getLecturesec()));
     	
     	ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
     	
@@ -691,13 +710,11 @@ public class Controller {
     	ts.getLab().setLayoutX((d*100.0)+100.0);
     	int stimeh = s.getStartHour();
     	int stimem = s.getStartMinute();
-    	//int started = (stimeh*100)+stimem;
     	int started = (stimeh*60)+stimem;
     	
     	ts.getLab().setLayoutY(40.0 + (stimeh-9)*20.0 + (stimem*0.33));
     	int etimeh = s.getEndHour();
     	int etimem = s.getEndMinute();
-    	//int ended  = (etimeh*100)+etimem;
     	int ended  = (etimeh*60)+etimem;
     	
     	ts.getLab().setMinWidth(100.0);
@@ -707,19 +724,12 @@ public class Controller {
     	int diff = etimem-stimem;
     	int offfset = diff==50 ? 30 : diff==20 ? 15 : 0;
     	
-    	
     	int atls = ended-started;
-    	
-    	
-    	
-    	//ts.getLab().setMinHeight((20*(atls/100))+((atls%100)*0.33));	
-    	//ts.getLab().setMaxHeight((20*(atls/100))+((atls%100)*0.33));
     	
     	ts.getLab().setMinHeight(atls*0.33);	
     	ts.getLab().setMaxHeight(atls*0.33);
     	
     	System.out.println(atls);
-    	//System.out.println((20*(atls/100))+((atls%100)*0.33));
     	System.out.println(atls*0.33);
     	
     	if(atls<60)
@@ -728,108 +738,28 @@ public class Controller {
     	}
     
     	ap.getChildren().addAll(ts.getLab());
-    	
-    	//sameSection(ts, s);
     }
     
-    /*void blocks(TableClass ts, Slot s)
-    {
-    	
-    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	//Label randomLabel = new Label("COMP1022\nL1");
-		Label randomLabel = new Label(ts.getCcode()+"\n"+ts.getLecturesec());
-    	//ts.setLab(new Label(ts.getCcode()+"\n"+ts.getLecturesec()));
-    	//Random r = new Random();
-    	//double start = (r.nextInt(10) + 1) * 20 + 40;
-    	//Color randomColor = new Color(r.nextInt(1), r.nextInt(1), r.nextDouble(), 1.0);
-
-    	//randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	//randomLabel.setBackground(new Background(new BackgroundFill(Color.color(Math.random(), Math.random(), Math.random(), 0.5), CornerRadii.EMPTY, Insets.EMPTY)));
-    	randomLabel.setBackground(new Background(new BackgroundFill(ts.getColorr(), CornerRadii.EMPTY, Insets.EMPTY)));
-    	//ts.getLab().setBackground(new Background(new BackgroundFill(ts.getColorr(), CornerRadii.EMPTY, Insets.EMPTY)));
-    	int d = s.getDay();
-    	randomLabel.setLayoutX((d*100.0)+100.0);
-    	//ts.getLab().setLayoutX((d*100.0)+100.0);
-    	int stimeh = s.getStartHour();
-    	int stimem = s.getStartMinute();
-    	int started = (stimeh*100)+stimem;
-    	//System.out.println(started);
-    	//double m = stimem==30 ? 10.0 : 0.0;
-    	randomLabel.setLayoutY(40.0 + (stimeh-9)*20.0 + (stimem*0.33));
-    	//ts.getLab().setLayoutY(40.0 + (stimeh-9)*20.0 + (stimem*0.33));
-    	int etimeh = s.getEndHour();
-    	int etimem = s.getEndMinute();
-    	int ended  = (etimeh*100)+etimem;
-    	//System.out.println(ended-started);
-    	randomLabel.setMinWidth(100.0);
-    	//ts.getLab().setMinWidth(100.0);
-    	randomLabel.setMaxWidth(100.0);
-    	//ts.getLab().setMaxWidth(100.0);
-    	//randomLabel.setMinHeight((30*(etimeh-stimeh))+((float)(((etimem-stimem)/60.0)*15.0)));
-    	//randomLabel.setMaxHeight((30*(etimeh-stimeh))+((float)(((etimem-stimem)/60.0)*15.0)));
-    	int diff = etimem-stimem;
-    	int offfset = diff==50 ? 30 : diff==20 ? 15 : 0;
-    	//offfset = diff==20 ? 15 : 0;
-    	
-    	//randomLabel.setMinHeight((30*(etimeh-stimeh))+((float)(((etimem-stimem))*0.15)));	//Better than 1st time
-    	//randomLabel.setMaxHeight((30*(etimeh-stimeh))+((float)(((etimem-stimem))*0.15)));
-    	
-    	//randomLabel.setMinHeight((30*(etimeh-stimeh))+offfset);	//Better than 1st time
-    	//randomLabel.setMaxHeight((30*(etimeh-stimeh))+offfset);
-    	
-    	int atls = ended-started;
-    	
-    	randomLabel.setMinHeight((20*(atls/100))+((atls%100)*0.33));	
-    	randomLabel.setMaxHeight((20*(atls/100))+((atls%100)*0.33));
-    	
-    	//ts.getLab().setMinHeight((20*(atls/100))+((atls%100)*0.33));	
-    	//ts.getLab().setMaxHeight((20*(atls/100))+((atls%100)*0.33));
-    	
-    	System.out.println(atls);
-    	System.out.println((20*(atls/100))+((atls%100)*0.33));
     
-    	ap.getChildren().addAll(randomLabel);
-    	//ap.getChildren().addAll(ts.getLab());
-    	
-    	//sameSection(ts, s);
-    }*/
     
     @FXML
     void sameSection(TableClass ts, Slot s)
     {
-    	//System.out.println(datasAll);
     	for(int i=0; i<datasAll.size(); ++i)
     	{
-    		//System.out.println(datasAll.get(i).getCcode() + " " + datasAll.get(i).getLecturesec());
-    		//System.out.println("Same section fn working.2?");
     		if((datasAll.get(i).getCcode().equals(ts.getCcode()))&&(datasAll.get(i).getLecturesec().equals(ts.getLecturesec())))
     		{
-    			//System.out.println("Same section fn working?");
     			if((datasAll.get(i).getEnroll().isSelected()==false)&&((ts.getEnroll().isSelected())==true))
     			{
     				datasAll.get(i).getEnroll().setSelected(true);
     				System.out.println("Same section");
-    				//datasAll.get(i).setColorr(ts.getColorr());
     			}
     		}
     	}
     }
     
-    //It is still taking COMP1022P L1 and COMP1022Q as the same - fixed this
-    
     void printEnrolled(TableClass ts)
     {
-    	/*String enrolledSec = "The following sections are enrolled:";
-    	
-    	for(int i=0; i<datas3.size(); ++i)
-    	{
-    		if(datas3.get(i).getEnroll().isSelected())
-    		{
-    			enrolledSec += "\n" + datas3.get(i).getCcode() + " " + datas3.get(i).getLecturesec();
-    		}
-    	}
-    	
-    	textAreaConsole.setText(enrolledSec + "\n" + textAreaConsole.getText());*/
     	
     	if(textAreaConsole.getText().substring(0, 36).equals("The following sections are enrolled:"))
     	{
@@ -855,8 +785,6 @@ public class Controller {
     		{
     			textAreaConsole.setText(textAreaConsole.getText().substring(0, 37) + ts.getCcode() + " " + ts.getLecturesec() + "\n" + textAreaConsole.getText().substring(37));
     		}
-    		
-    		//textAreaConsole.setText(textAreaConsole.getText().substring(0, 37) + ts.getCcode() + " " + ts.getLecturesec() + "\n" + textAreaConsole.getText().substring(37));
     	}
     	else
     	{
@@ -884,8 +812,7 @@ public class Controller {
     	}
     	
     	resultant = resultant + textAreaConsole.getText().substring(end+14);
-    	//if((textAreaConsole.getText().charAt(end+14)=='\n')&&(textAreaConsole.getText().charAt(end+15)=='\n')&&(end==37))
-    	//if((end==37)&&(textAreaConsole.getText().charAt(end+14)=='\n'))
+    	
     	if((textAreaConsole.getText().charAt(end+14)=='\n')&&(textAreaConsole.getText().charAt(end+15)=='\n')&&(end==37))
     	{
     		textAreaConsole.setText(resultant.substring(1));
@@ -894,7 +821,6 @@ public class Controller {
     	{
     		textAreaConsole.setText("The following sections are enrolled:" + resultant);
     	}
-    	//textAreaConsole.setText("The following sections are enrolled:" + resultant);
     }
     
     void lostEnrollment()
@@ -919,11 +845,14 @@ public class Controller {
     	textAreaConsole.setText(prefix);
     }
     
+    /**
+     * Removes all labels of a particular section from the timetable and changes the enrollment status of the sections
+     * @param ts TableClass object that specifies which section to remove from timetable 
+     * @param s
+     */
     void removeBlocks(TableClass ts, Slot s)
     {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	
-    	//ap.getChildren().remove(ts.getLab());
     	
     	for(int i=0; i<datasAll.size(); ++i)
     	{
@@ -935,7 +864,6 @@ public class Controller {
     				datasAll.get(i).getEnroll().setSelected(false);
     			}
     		}
-    		//something here
     	}
     }
 

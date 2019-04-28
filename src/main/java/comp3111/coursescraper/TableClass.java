@@ -23,26 +23,50 @@ public class TableClass {
 	
 	TableClass(String c, String l, String cn, String i, Color co, int d)
 	{
-		this.ccode = new String(c);
-		this.lecturesec = new String(l);
-		this.cname = new String(cn);
-		this.instructor = new String(i);
+		this.ccode = c;
+		this.lecturesec = l;
+		this.cname = cn;
+		this.instructor = i;
 		this.enroll = new CheckBox();
 		this.colorr = co;
 		this.lab = new Label();
 		this.tday = d;
 	}
 	
+	TableClass()
+	{
+		this.ccode = " ";
+		this.lecturesec = " ";
+		this.cname = " ";
+		this.instructor = " ";
+		//this.enroll = new CheckBox();
+		this.colorr = Color.rgb(0, 0, 0, 0);
+		//this.lab = new Label();
+		this.tday = 1;
+	}
+	
+	/**
+	 * Gets the Course Code of the TableClass object
+	 * @return Get the Course Code of the TableClass object
+	 */
 	public String getCcode()
 	{
 		return this.ccode;
 	}
 	
+	/**
+	 * Gets the Lecture Section of the TableClass object
+	 * @return Get the Lecture Section of the TableClass object
+	 */
 	public String getLecturesec()
 	{
 		return this.lecturesec;
 	}
 	
+	/**
+	 * Gets the Course Name of the TableClass object
+	 * @return Get the 
+	 */
 	public String getCname()
 	{
 		return this.cname;
