@@ -9,7 +9,7 @@ import javafx.collections.FXCollections;
 
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent; 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -139,7 +139,7 @@ public class Controller {
     private TableColumn<TableClass, String> flInstructor;
     @FXML
     private TableColumn<TableClass, CheckBox> flEnroll;
-    
+
     ObservableList<TableClass> datas3 = FXCollections.observableArrayList();
     List<TableClass> datasAll = new ArrayList<TableClass>();
     ObservableList<TableClass> newList = FXCollections.observableArrayList();
@@ -183,6 +183,9 @@ public class Controller {
         }
         AllSS.setText("All Subject Search");
         AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
+
+        // TASK_6 - enable buttonSfqEnrollCourse
+        buttonSfqEnrollCourse.setDisable(false);
     }
 
     void allSubjectSearch2(int count, String[] evaluate) {
@@ -203,6 +206,9 @@ public class Controller {
         }
         textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
         AllSS.setOnAction(e -> allSubjectSearch());
+
+        // TASK_6 - enable buttonSfqEnrollCourse
+        buttonSfqEnrollCourse.setDisable(false);
     }
 
     int searchCount() {
@@ -222,8 +228,15 @@ public class Controller {
 
     @FXML
     void findInstructorSfq() {
-    	buttonInstructorSfq.setDisable(true);
+        Scraper scraperSFQ = new Scraper();
+        String url = textfieldSfqUrl.getText();
+        List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm");
         //textAreaConsole.setText(textAreaConsole.getText() + "\n" + testfieldSfqUrl.getText());
+
+        String newline = "";
+        for(Instructor ins : instructors) newline += ins.getName() + "\t\t" + String.format("%.2f\n", ins.getScoreSFQ());
+        textAreaConsole.setText(newline);
+
     }
 
     @FXML
@@ -239,16 +252,16 @@ public class Controller {
             checked[i] = false;
             ticked.add(i, false);
         }
-        
+
         //For List
         createList2();
         //ObservableList<TableClass> datas3 = FXCollections.observableArrayList();
 
         textAreaConsole.setText("");
-        
+
         lostEnrollment();
         newList.clear();
-        
+
         List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
         for (Course c : v) {
             Boolean containsAtLeastOne;
@@ -315,14 +328,14 @@ public class Controller {
                     containsAtLeastOne = false;
                 }
             }
-            
-            
+
+
             if(containsAtLeastOne) {
-            	
+
             	String sec = " ";
             	Color col = new Color(Math.random(), Math.random(), Math.random(), 0.5);
             	String prevSecType = " ";
-            	
+
                 for (int j = 0; j < c.getNumSlots(); j++) {
                     Slot t = c.getSlot(j);
                     //newline += "Slot " + j + ":" + t + "\n";
@@ -350,21 +363,21 @@ public class Controller {
                 				}
                 			}
                 		}
-                		
+
                 	}
-                	
+
                 	//End of prevention of duplication
                     //if((t.getType()!=sec)&&(t.getType().substring(0,  3)!="Mo ")&&(t.getType().substring(0,  3)!="Tu ")&&(t.getType().substring(0,  3)!="We ")&&(t.getType()!="Th ")&&(t.getType().substring(0,  3)!="Fr ")&&(t.getType().substring(0,  3)!="Sa "))
-                    if((t.getType()!=sec)&&(t.getType().length()<11))	
+                    if((t.getType()!=sec)&&(t.getType().length()<11))
                     {
                     	//System.out.println(t.getType() + "sec: " + sec);
-                    	
+
                     	if(flagg!=1)
                     	{
                     		datas3.add(obj);
                     		//newList.add(obj);
                     	}
-                    	
+
                     	if(flagg==1)
                     	{
                     		newList.add(dupl);
@@ -373,16 +386,16 @@ public class Controller {
                     	{
                     		newList.add(obj);
                     	}
-                    	
+
                     	//newList.add(obj);
-                    	
+
                     	//datas3.add(obj);
                     	sec = t.getType();
                     	col = new Color(Math.random(), Math.random(), Math.random(), 0.5);
                     	obj.setColorr(col);
                     	//System.out.println(t.getType() + "sec: " + sec);
                     }
-                    
+
                     if(t.getType().length()>11)
                     {
                     	obj.setLecturesec(prevSecType.substring(0, 3));
@@ -397,11 +410,11 @@ public class Controller {
                     //datasAll.add(obj);
                     //llist.setItems(datas3);
                     llist.setItems(newList);
-                    
+
                     newline += obj.getCcode() + " " + obj.getLecturesec() + "Slot " + j + ":" + t + "\n";	//My version which adds sections
-                    
-                    
-                    if(flagg!=1) 
+
+
+                    if(flagg!=1)
                     {
                     	obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
                     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -424,11 +437,11 @@ public class Controller {
                     				//printEnrolledRemove(obj);
                     				removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
                     			}
-                    		
+
                         	}
                     	});
                     }
-                    
+
                     /*obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
                     	public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                             //chk2.setSelected(!newValue);
@@ -450,10 +463,10 @@ public class Controller {
                     			//printEnrolledRemove(obj);
                     			removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
                     		}
-                    		
+
                         }
                     });*/
-                    
+
                     prevSecType = sec;
                 }
                 textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
@@ -634,46 +647,50 @@ public class Controller {
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
+
+
+      // TASK_6 - enable buttonSfqEnrollCourse
+      buttonSfqEnrollCourse.setDisable(false);
     }
-    
+
     /*public ObservableList<TableClass> getTableClass()
 	{
 		ObservableList<TableClass> datas = FXCollections.observableArrayList();
 		datas.add(new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1));
 		return datas;
 	}*/
-    
-    
-    
+
+
+
     @FXML
     void createList2()
     {
     	System.out.println(":-/");
-    	
+
     	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
     	flSection.setCellValueFactory(new PropertyValueFactory<>("lecturesec"));
     	fcName.setCellValueFactory(new PropertyValueFactory<>("cname"));
     	flInstructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
     	flEnroll.setCellValueFactory(new PropertyValueFactory<>("enroll"));
-    	
+
     }
-    
-    
+
+
     /*@FXML
     void timeTable()
     {
     	//AnchorPane ap = (AnchorPane)tabList.getContent();
-    	
+
     	for(int i=0; i<llist.getItems().size(); ++i)
     	{
     		TableClass block = llist.getItems().get(i);
-    		
+
     		if(llist.getItems().get(i).getEnroll().isSelected())
     		{
     			System.out.println(":/");
-    			
+
     			//Not Sure
-    			
+
     			AnchorPane ap = (AnchorPane)tabTimetable.getContent();
     	    	//Label randomLabel = new Label("COMP1022\nL1");
     			Label randomLabel = new Label(block.getCcode()+"\n"+block.getLecturesec());
@@ -687,61 +704,61 @@ public class Controller {
     	    	randomLabel.setMaxWidth(100.0);
     	    	randomLabel.setMinHeight(60);
     	    	randomLabel.setMaxHeight(60);
-    	    
+
     	    	ap.getChildren().addAll(randomLabel);
-    	    	
+
     	    	//Not sure ends
     		}
     	}
-    	
+
     }*/
-    
+
     @FXML
     public void blocks(TableClass ts, Slot s)
     {
-    	
+
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	
+
     	ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
-    	
+
     	ts.getLab().setBackground(new Background(new BackgroundFill(ts.getColorr(), CornerRadii.EMPTY, Insets.EMPTY)));
     	int d = s.getDay();
-    	
+
     	ts.getLab().setLayoutX((d*100.0)+100.0);
     	int stimeh = s.getStartHour();
     	int stimem = s.getStartMinute();
     	int started = (stimeh*60)+stimem;
-    	
+
     	ts.getLab().setLayoutY(40.0 + (stimeh-9)*20.0 + (stimem*0.33));
     	int etimeh = s.getEndHour();
     	int etimem = s.getEndMinute();
     	int ended  = (etimeh*60)+etimem;
-    	
+
     	ts.getLab().setMinWidth(100.0);
-    	
+
     	ts.getLab().setMaxWidth(100.0);
-    	
+
     	int diff = etimem-stimem;
     	int offfset = diff==50 ? 30 : diff==20 ? 15 : 0;
-    	
+
     	int atls = ended-started;
-    	
-    	ts.getLab().setMinHeight(atls*0.33);	
+
+    	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
-    	
+
     	System.out.println(atls);
     	System.out.println(atls*0.33);
-    	
+
     	if(atls<60)
     	{
     		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
     	}
-    
+
     	ap.getChildren().addAll(ts.getLab());
     }
-    
-    
-    
+
+
+
     @FXML
     void sameSection(TableClass ts, Slot s)
     {
@@ -757,15 +774,15 @@ public class Controller {
     		}
     	}
     }
-    
+
     void printEnrolled(TableClass ts)
     {
-    	
+
     	if(textAreaConsole.getText().substring(0, 36).equals("The following sections are enrolled:"))
     	{
     		String consoleCurr = textAreaConsole.getText();
     		String newstr = "";
-    		
+
     		for(int i=37; i<100; ++i)		//change 100 later
     		{
     			if(consoleCurr.charAt(i)=='\n')
@@ -777,10 +794,10 @@ public class Controller {
     				newstr += consoleCurr.charAt(i);
     			}
     		}
-    		
+
     		System.out.println("newstr" + newstr);
     		System.out.println(ts.getCcode() + " " + ts.getLecturesec());
-    		
+
     		if((ts.getCcode() + " " + ts.getLecturesec()).equals(newstr)==false)
     		{
     			textAreaConsole.setText(textAreaConsole.getText().substring(0, 37) + ts.getCcode() + " " + ts.getLecturesec() + "\n" + textAreaConsole.getText().substring(37));
@@ -791,13 +808,13 @@ public class Controller {
     		textAreaConsole.setText("The following sections are enrolled:" + "\n" + ts.getCcode() + " " + ts.getLecturesec() +"\n" + textAreaConsole.getText());
     	}
     }
-    
+
     void printEnrolledRemove(TableClass ts)
     {
     	String match = ts.getCcode() + " " + ts.getLecturesec();
     	String resultant = "";
     	int end = 0;
-    	
+
     	for(int i=37; i<1000; i=i+15)		//change 1000 later
     	{
     		if(match.equals(textAreaConsole.getText().substring(i, i+14)))
@@ -810,9 +827,9 @@ public class Controller {
     			resultant = resultant + "\n" + textAreaConsole.getText().substring(i, i+14);
     		}
     	}
-    	
+
     	resultant = resultant + textAreaConsole.getText().substring(end+14);
-    	
+
     	if((textAreaConsole.getText().charAt(end+14)=='\n')&&(textAreaConsole.getText().charAt(end+15)=='\n')&&(end==37))
     	{
     		textAreaConsole.setText(resultant.substring(1));
@@ -822,12 +839,12 @@ public class Controller {
     		textAreaConsole.setText("The following sections are enrolled:" + resultant);
     	}
     }
-    
+
     void lostEnrollment()
     {
     	String prefix = "";
     	int flag = 0;
-    	
+
     	for(int i=0; i<datas3.size(); ++i)
     	{
     		if(datas3.get(i).getEnroll().isSelected())
@@ -836,24 +853,24 @@ public class Controller {
     			flag = 1;
     		}
     	}
-    	
+
     	if(flag==1)
     	{
     		prefix = "The following sections are enrolled:" + "\n" + prefix;
     	}
-    	
+
     	textAreaConsole.setText(prefix);
     }
-    
+
     /**
      * Removes all labels of a particular section from the timetable and changes the enrollment status of the sections
-     * @param ts TableClass object that specifies which section to remove from timetable 
+     * @param ts TableClass object that specifies which section to remove from timetable
      * @param s
      */
     void removeBlocks(TableClass ts, Slot s)
     {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	
+
     	for(int i=0; i<datasAll.size(); ++i)
     	{
     		if((datasAll.get(i).getLab().getText()).equals(ts.getLab().getText()))
