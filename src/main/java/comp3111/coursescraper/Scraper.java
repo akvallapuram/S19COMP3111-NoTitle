@@ -11,7 +11,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import java.util.Vector;
-
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * WebScraper provide a sample code that scrape web content. After it is constructed, you can call the method scrape with a keyword,
@@ -109,6 +109,66 @@ public class Scraper {
 
 	}
 
+	private void addInstructor(HtmlElement e, Section sec){
+
+
+
+	}
+
+	private void addSection(HtmlElement e, Course c, boolean secondRow){
+
+		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
+		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
+		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
+
+		String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
+		sectionCode += " " + type.split(" ")[0];
+		String sID = StringUtils.substringBetween(type, "(", ")");
+		if(sID == null) return;
+		int sectionID = Integer.parseInt(sID);
+
+		if (times[0].equals("TBA"))
+			return;
+
+
+		Section sec = new Section(sectionCode, sectionID);
+
+		for (int j = 0; j < times[0].length(); j+=2) {
+			String code = times[0].substring(j , j + 2);
+			if (Slot.DAYS_MAP.get(code) == null)
+				break;
+			Slot s = new Slot();
+			s.setDay(Slot.DAYS_MAP.get(code));
+			s.setStart(times[1]);
+			s.setEnd(times[3]);
+			s.setVenue(venue);
+			s.setType(type);
+			sec.addSlot(s);
+
+	}
+
+	Controller.SECTIONS_IN_SEARCH.add(sec);
+	c.addSection(sec);
+
+
+	if(e!= null){
+		List<?> instructors = (List<?>) e.getByXPath(".//a[contains(@href,'instructor')]");
+		for(HtmlElement ins: (List<HtmlElement>)instructors){
+
+			// find the name
+			String insName = ins.asText();
+
+			// check if instructor already in search
+			int insIndex = Controller.inInstructorSearch(insName);
+			if(insIndex == -1) Controller.INSTRUCTORS_IN_SEARCH.add(new Instructor(insName, sec));
+			else Controller.INSTRUCTORS_IN_SEARCH.get(insIndex).addSection(sec);
+		}
+	}
+
+
+}
+
+
 	public List<Course> scrape(String baseurl, String term, String sub) {
 
 		// used by the controller
@@ -152,22 +212,11 @@ public class Scraper {
 				List<?> sections = (List<?>) htmlItem.getByXPath(".//tr[contains(@class,'newsect')]");
 				for ( HtmlElement e: (List<HtmlElement>)sections) {
 					addSlot(e, c, false);
+					addSection(e, c, false);
 					e = (HtmlElement)e.getNextSibling();
-					if (e != null && !e.getAttribute("class").contains("newsect"))
+					if (e != null && !e.getAttribute("class").contains("newsect")){
 						addSlot(e, c, true);
-
-					// used by search() in Controller.java for SECTIONS_IN_SEARCH
-					Slot slotInSearch = c.getSlot(c.getNumSlots()-1);
-
-
-					if(Controller.isValidSlot(slotInSearch)){
-
-						String type = slotInSearch.getType();
-						String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
-						sectionCode += " " + type.split(" ")[0];
-						int sectionID = Integer.parseInt(type.split("[\\(\\)]")[1]);
-
-
+						addSection(e, c, true);
 					}
 
 
@@ -178,14 +227,15 @@ public class Scraper {
 
 							// find the name
 							String insName = ins.asText();
+							// System.out.println(insName);
 
-							// check if instructor already in search
-							int insIndex = Controller.inInstructorSearch(insName);
-							if(insIndex == -1) Controller.INSTRUCTORS_IN_SEARCH.add(new Instructor(insName, c));
-							else Controller.INSTRUCTORS_IN_SEARCH.get(insIndex).addCourse(c);
+							// // check if instructor already in search
+							// int insIndex = Controller.inInstructorSearch(insName);
+							// if(insIndex == -1) Controller.INSTRUCTORS_IN_SEARCH.add(new Instructor(insName, c));
+							// else Controller.INSTRUCTORS_IN_SEARCH.get(insIndex).addCourse(c);
 						}
 
-						
+
 					}
 
 				}

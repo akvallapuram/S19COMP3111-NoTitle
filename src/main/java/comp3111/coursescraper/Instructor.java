@@ -12,22 +12,22 @@ import java.util.regex.*;
 
 public class Instructor{
 
-  private List<Course> coursesTaught;
+  private List<Section> sectionsTaught;
   private String name;
   private boolean freeTu310;
   private int scoreSFQ;
 
 
-  public void addCourse(Course c){
-    this.coursesTaught.add(c);
+  public void addSection(Section s){
+    this.sectionsTaught.add(s);
 
-    if(c.getNumSlots() == 0) return;
-    for(int i = 0; i < c.getNumSlots(); i++){
+    if(s.getNumSlots() == 0) return;
+    for(int i = 0; i < s.getNumSlots(); i++){
 
-      int startHour = c.getSlot(i).getStartHour();
-      int startMinute = c.getSlot(i).getStartMinute();
-      int endHour = c.getSlot(i).getEndHour();
-      int endMinute = c.getSlot(i).getEndMinute();
+      int startHour = s.getSlot(i).getStartHour();
+      int startMinute = s.getSlot(i).getStartMinute();
+      int endHour = s.getSlot(i).getEndHour();
+      int endMinute = s.getSlot(i).getEndMinute();
 
       if(startHour <= 15 && endHour >= 15 &&
          startMinute <= 10 && endMinute >= 10){
@@ -37,12 +37,12 @@ public class Instructor{
 
   }
 
-  public Instructor(String _name, Course _course){
+  public Instructor(String _name, Section _section){
     this.name = _name;
     this.freeTu310 = true;
-    this.coursesTaught = new ArrayList<Course>();
-    this.addCourse(_course);
-    System.out.println("Constructed " + this.name);
+    this.sectionsTaught = new ArrayList<Section>();
+    this.addSection(_section);
+    // System.out.println("Constructed " + this.name);
   }
 
 
@@ -60,13 +60,12 @@ public class Instructor{
     return this.scoreSFQ;
   }
 
-  public int isTeaching(Course c){
+  public boolean isTeaching(String _secCode){
+    
+    for(Section sec : sectionsTaught)
+      if(sec.getSectionCode().equals(_secCode)) return true;
 
-    String title = c.getTitle();
-    for(int i = 0; i < coursesTaught.size(); i++)
-      if(coursesTaught.get(i).getTitle() == title) return i;
-
-    return -1;
+    return false;
   }
 
 }

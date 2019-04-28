@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.List;
+import java.util.Collections;
 import java.util.regex.*;
 
 public class Controller {
@@ -443,28 +444,11 @@ public class Controller {
         SelectAll.setOnAction(e -> selectAll());
     }
 
-
-    /**check if slot is lecture, lab or tutorial and in 9AM-10PM **/
-    public static boolean isValidSlot(Slot s){
-
-          if(s == null) return false;
-
-          String type = s.getType();
-          boolean b1 = type.startsWith("T");
-          boolean b2 = type.startsWith("L");
-
-          boolean b3 = (s.getStartHour() >= 9) && (s.getEndHour() <= 22);
-
-          if((b1 || b2) && b3) return true;
-          else return false;
-  }
-
-
   /**Check if a course contains atleast a lecture, lab or tutorial**/
   boolean isValidCourse(Course c){
 
     for(int i = 0; i < c.getNumSlots(); i++){
-      if(isValidSlot(c.getSlot(i))) return true;
+      if(Section.isValidSlot(c.getSlot(i))) return true;
     }
     return false;
   }
@@ -490,8 +474,8 @@ public class Controller {
     if(INSTRUCTORS_IN_SEARCH.size() == 0) return -1;
 
     for(int i = 0; i < INSTRUCTORS_IN_SEARCH.size(); i++){
-      if(INSTRUCTORS_IN_SEARCH.get(i).getName() == _ins) {
-        System.out.println("Found " + _ins);
+      if(INSTRUCTORS_IN_SEARCH.get(i).getName().equals(_ins)) {
+        // System.out.println("Found " + _ins);
         return i;
       }
     }
@@ -525,42 +509,32 @@ public class Controller {
     textAreaConsole.setText("Total Number of different courses in this search: " + Controller.NUMBER_OF_COURSES);
 
 
+    // number of sections Found
+    Controller.NUMBER_OF_SECTIONS = SECTIONS_IN_SEARCH.size();
     textAreaConsole.setText(textAreaConsole.getText() + "\n" +
     "Total Number of difference sections in this search: " + Controller.NUMBER_OF_SECTIONS + "\n\n");
 
-    // textAreaConsole.setText(textAreaConsole.getText() + "\n" +
-    // "textnstructors who has teaching assignment this term but does not need to teach at Tu 3:10pm: ")
+
+    //Free instructors
+    List<String> freeInstructors = new ArrayList<String>();
+    for(Instructor ins : Controller.INSTRUCTORS_IN_SEARCH) if(ins.isFreeTu310()) freeInstructors.add(ins.getName());
+    Collections.sort(freeInstructors);
+    String freeIns = "";
+    for(String str : freeInstructors) freeIns  += str + "\n";
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    "Instructors who has teaching assignment this term but does not need to teach at Tu 3:10pm:\n" + freeIns + "\n\n");
 
 
-    	for (Course c : v) {
+    //print sections
+  	for (Course c : v) {
+      // if(!isValidCourse(c)) continue;
+  		String newline = c.getTitle() + "\n";
+      for(Section sec : c.getSections()) newline += sec.toString();
+  		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+  	}
 
-        // if(!isValidCourse(c)) continue;
-    		String newline = c.getTitle() + "\n";
-    		for (int i = 0; i < c.getNumSlots(); i++) {
-    			Slot t = c.getSlot(i);
-    			if(isValidSlot(t))
-            newline += t.getType() + ":" + t + "\n";
-    		}
-    		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
-    	}
-
-
-    	//Add a random block on Saturday
-    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	Label randomLabel = new Label("COMP1022\nL1");
-    	Random r = new Random();
-    	double start = (r.nextInt(10) + 1) * 20 + 40;
-
-    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	randomLabel.setLayoutX(600.0);
-    	randomLabel.setLayoutY(start);
-    	randomLabel.setMinWidth(100.0);
-    	randomLabel.setMaxWidth(100.0);
-    	randomLabel.setMinHeight(60);
-    	randomLabel.setMaxHeight(60);
-
-    	ap.getChildren().addAll(randomLabel);
-
+      freeInstructors.clear();
+      INSTRUCTORS_IN_SEARCH.clear();
     }
 
 }
