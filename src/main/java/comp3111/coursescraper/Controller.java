@@ -1,57 +1,26 @@
 package comp3111.coursescraper;
 
 
-import javafx.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
-import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
-import org.apache.bcel.generic.Select;
 import javafx.concurrent.Task;
 
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.*;
 
-
-
-//class BarThread extends Thread {
-//    private static int DELAY = 500;
-//    ProgressBar progressBar;
-//    Double progress;
-//
-//    public BarThread(ProgressBar bar, Double progress) {
-//        progressBar = bar;
-//        this.progress = progress;
-//    }
-//
-//    public void run() {
-//        try {
-//            progressBar.setProgress(progress);
-//            Thread.sleep(DELAY);
-//        } catch (InterruptedException ignoredException) {
-//        }
-//    }
-//}
 
 public class Controller {
 
@@ -135,6 +104,7 @@ public class Controller {
     @FXML
     public Button AllSS;
 
+
     /**
      * AllSubjectSearch Button First Click
      * Returns Total Number of Categories/Code Prefix:
@@ -178,46 +148,49 @@ public class Controller {
             index++;
         }
         AllSS.setText("All Subject Search");
-        AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
-    }
 
-    /**
-     * AllSubjectSearch Button Second Click
-     * Updates the Progress Bar and returns all Courses in All Subjects and its Count
-     * Changes the next AllSS button Action back to allSubjectSearch()
-     */
-    public void allSubjectSearch2(int count, String[] evaluate) {
-        double progress = 0;
-        double step = (double) 1/count;
-        int numcourses = 0;
-        for(int j = 0; j < evaluate.length; j++) {
-            textfieldSubject.setText(evaluate[j]);
-            numcourses += searchCount();
-            System.out.println(evaluate[j] + " is done.");
-            progress += step;
-            progressbar.setProgress(progress);
-//            class ProgressBarTest extends MyApplication {
-//                Task<Void> task = new Task<Void>() {
-//                    public Void call() {
-//                        for (int i = 0; i < count; i++) {
-//                            try {
-//                                Thread.sleep(100);
-//                            } catch (InterruptedException e) {
-//                                Thread.interrupted();
-//                                break;
-//                            }
-//                            System.out.println(i + 1);
-//                            updateProgress(i + 1, count);
-//                        }
-//                        return null;
-//                    }
-//                };
-//            }
-            //Thread stepper = new BarThread(progressbar, progress);
-            //stepper.start();
-        }
-        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
-        AllSS.setOnAction(e -> allSubjectSearch());
+        Task<Void> task = new Task<Void>() {
+            int numcourses = 0;
+            double progress = 0;
+            @Override
+            protected Void call() throws Exception {
+                for(int j = 0; j < coursesFound.length; j++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    int finalJ = j;
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            textfieldSubject.setText(coursesFound[finalJ]);
+                            numcourses += searchCount();
+                        }
+                    });
+                    System.out.println(coursesFound[j] + " is done.");
+                    updateProgress(j+1, finalAllsubjectcount);
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
+                    }
+                });
+                return null;
+
+            }
+        };
+        progressbar.progressProperty().bind(task.progressProperty());
+        AllSS.setOnAction(event -> {
+            try {
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                th.start();
+            } catch (NullPointerException e){
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
     /**
@@ -566,41 +539,7 @@ public class Controller {
 
         //need to display the number of all subjects in a given term even when search is clicked
         //(task5) - Jeff
-        ArrayList<String> constructing = new ArrayList<String>();
-        String[] allSubjects = {
-                "ACCT", "BIBU", "BIEN", "BIPH", "CENG", "CHEM", "CIVL", "COMP",
-                "CPEG", "ECON", "ELEC", "ENEG", "ENTR", "ENVR", "ENVS", "FINA",
-                "FYTG", "GBUS", "GNED", "HART", "HLTG", "HUMA", "IDPO", "IEDA",
-                "IIMP", "IROP", "ISDN", "ISOM", "LABU", "LANG", "LIFS", "MARK",
-                "MATH", "MECH", "MGMT", "OCES", "PHYS", "PPOL", "RMBI", "SBMT",
-                "SCIE", "SHSS", "SISP", "SOSC", "SUST", "TEMG", "UROP", "WBBA",
-                "AESF", "BTEC", "CBME", "CHMS", "CIEM", "CSIC", "CSIT", "EEMT",
-                "EESM", "EMBA", "ENGG", "EVNG", "EVSM", "GFIN", "HHMS", "HMMA",
-                "IBTM", "IDPO", "IMBA", "JEVE", "MAED", "MAFS", "MESF", "MGCS",
-                "MILE", "MIMT", "MSBD", "NANO", "PDEV", "SSMA"
-        };
-        textfieldSubject.setText("");
-        int i = 0;
-        int allsubjectcount = 0;
-        while (i < allSubjects.length) {
-            textfieldSubject.setText(allSubjects[i]);
-            List<Course> v1 = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
-            if (v1 != null) {
-                constructing.add(allSubjects[i]);
-                allsubjectcount++;
-            }
-            i++;
-        }
-        textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount);
-        int finalAllsubjectcount = allsubjectcount;
-        Iterator it = constructing.iterator();
-        String[] coursesFound = new String[constructing.size()];
-        int index = 0;
-        while(it.hasNext()) {
-            coursesFound[index] = (String) it.next();
-            index++;
-        }
-        AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
+        allSubjectSearch();
 
         // handling 404 error - Anish
       if(v == null){
@@ -611,7 +550,8 @@ public class Controller {
         textfieldSubject.setText("");
 
         // number of courses found - Anish
-        textAreaConsole.setText("Total Number of Categories/Code Prefix: " + allsubjectcount + " Total Number of Courses in this search: " + v.size());
+        textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+                "Total Number of Courses in this search: " + v.size());
 
 
     // textAreaConsole.setText(textAreaConsole.getText + "\n" +
