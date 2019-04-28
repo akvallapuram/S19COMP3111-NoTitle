@@ -643,8 +643,9 @@ public class Controller {
 		return datas;
 	}*/
     
-    
-    
+    /**
+     * Creates a List for the list Tab and aligns each column with a property
+     */
     @FXML
     void createList2()
     {
@@ -696,6 +697,11 @@ public class Controller {
     	
     }*/
     
+    /**
+     * Adds a block for the section specified by ts object to the timetable
+     * @param ts Section to be added to timetable
+     * @param s Slot that belongs to section ts
+     */
     @FXML
     public void blocks(TableClass ts, Slot s)
     {
@@ -740,8 +746,11 @@ public class Controller {
     	ap.getChildren().addAll(ts.getLab());
     }
     
-    
-    
+    /**
+     * Checks whether a slot belongs to section of ts object
+     * @param ts Section to be checked with
+     * @param s Slot that is part of section of ts
+     */
     @FXML
     void sameSection(TableClass ts, Slot s)
     {
@@ -758,6 +767,10 @@ public class Controller {
     	}
     }
     
+    /**
+     * As soon as a section is enrolled the Console output is updated with all the sections enrolled
+     * @param ts Section that has been enrolled
+     */
     void printEnrolled(TableClass ts)
     {
     	
@@ -792,6 +805,11 @@ public class Controller {
     	}
     }
     
+    /**
+     * Prints the enrolled courses on the Console after removing the section ts
+     * whose enrolment status has been changed from checked to unchecked
+     * @param ts Section whose enrolment status has been changed from checked to unchecked
+     */
     void printEnrolledRemove(TableClass ts)
     {
     	String match = ts.getCcode() + " " + ts.getLecturesec();
@@ -823,6 +841,9 @@ public class Controller {
     	}
     }
     
+    /**
+     * Prints the enrolled courses on the Console
+     */
     void lostEnrollment()
     {
     	String prefix = "";
