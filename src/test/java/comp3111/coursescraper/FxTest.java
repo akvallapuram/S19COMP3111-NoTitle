@@ -48,4 +48,31 @@ public class FxTest extends ApplicationTest {
 		assertTrue(b.isDisabled());
 	}
 
+//	@Test
+//	public void testAM() {
+//		clickOn("#tabFilter");
+//		FxRobotInterface click = clickOn("#AM");
+//		CheckBox cb = (CheckBox)s.lookup("#AM");
+//		assertTrue(cb.isSelected());
+//	}
+
+	@Test
+	public void testSelectAll() {
+		clickOn("#tabFilter");
+		clickOn("#SelectAll");
+		Button b = (Button) s.lookup("#SelectAll");
+		sleep(100);
+		assertEquals(b.getText(), "Deselect All");
+	}
+
+	@Test
+	public void testDeselectAll() {
+		clickOn("#tabFilter");
+		clickOn("#SelectAll");
+		clickOn("#SelectAll");
+		Button b = (Button) s.lookup("#SelectAll");
+		sleep(100);
+		assertEquals(b.getText(), "Select All");
+	}
+
 }

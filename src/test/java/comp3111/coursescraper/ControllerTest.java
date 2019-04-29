@@ -204,11 +204,28 @@ public class ControllerTest {
         assertFalse(Controller.check10(i1));
     }
 
-//    @Test
-//    public void testAMClick() {
-//        AM.setSelected(true);
-//        assertTrue(AM.isSelected());
-//    }
+
+    @Test
+    public void allSubjectSearch2() {
+
+    }
+
+    @Test
+    public void searchCount() {
+    }
+
+    @Test
+    public void findInstructorSfq() {
+    }
+
+    @Test
+    public void findSfqEnrollCourse() {
+    }
+
+    @Test
+    public void filterResults() {
+    }
+
 }
 
 

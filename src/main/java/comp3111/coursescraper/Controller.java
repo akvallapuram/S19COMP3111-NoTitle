@@ -1,33 +1,26 @@
 package comp3111.coursescraper;
 
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
-import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
-import org.apache.bcel.generic.Select;
+import javafx.concurrent.Task;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.*;
+
 
 public class Controller {
 
@@ -155,32 +148,49 @@ public class Controller {
             index++;
         }
         AllSS.setText("All Subject Search");
-        AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
-    }
 
-    /**
-     * AllSubjectSearch Button Second Click
-     * Updates the Progress Bar and returns all Courses in All Subjects and its Count
-     * Changes the next AllSS button Action back to allSubjectSearch()
-     */
-    public void allSubjectSearch2(int count, String[] evaluate) {
-        double progress = 0;
-        double step = (double) 1/count;
-        int numcourses = 0;
-        for(int j = 0; j < evaluate.length; j++) {
-            textfieldSubject.setText(evaluate[j]);
-            numcourses += searchCount();
-            System.out.println(evaluate[j] + " is done.");
-            progress += step;
-            progressbar.setProgress(progress);
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-        }
-        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
-        AllSS.setOnAction(e -> allSubjectSearch());
+        Task<Void> task = new Task<Void>() {
+            int numcourses = 0;
+            double progress = 0;
+            @Override
+            protected Void call() throws Exception {
+                for(int j = 0; j < coursesFound.length; j++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    int finalJ = j;
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            textfieldSubject.setText(coursesFound[finalJ]);
+                            numcourses += searchCount();
+                        }
+                    });
+                    System.out.println(coursesFound[j] + " is done.");
+                    updateProgress(j+1, finalAllsubjectcount);
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
+                    }
+                });
+                return null;
+
+            }
+        };
+        progressbar.progressProperty().bind(task.progressProperty());
+        AllSS.setOnAction(event -> {
+            try {
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                th.start();
+            } catch (NullPointerException e){
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
     /**
@@ -519,7 +529,7 @@ public class Controller {
         CC.setSelected(false);
         NE.setSelected(false);
         SelectAll.setText("Select All");
-        SelectAll.setOnAction(e -> selectAll());
+        SelectAll.setOnAction(t -> selectAll());
     }
 
 
@@ -527,15 +537,21 @@ public class Controller {
     public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
-      // handling 404 error - Anish
+        //need to display the number of all subjects in a given term even when search is clicked
+        //(task5) - Jeff
+        allSubjectSearch();
+
+        // handling 404 error - Anish
       if(v == null){
         textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
         return;
       }
 
+        textfieldSubject.setText("");
 
-    // number of courses found - Anish
-    textAreaConsole.setText("Total Number of Course in this search: " + v.size());
+        // number of courses found - Anish
+        textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+                "Total Number of Courses in this search: " + v.size());
 
 
     // textAreaConsole.setText(textAreaConsole.getText + "\n" +
@@ -547,29 +563,12 @@ public class Controller {
 
     	for (Course c : v) {
     		String newline = c.getTitle() + "\n";
-    		for (int i = 0; i < c.getNumSlots(); i++) {
-    			Slot t = c.getSlot(i);
-    			newline += "Slot " + i + ":" + t + "\n";
+    		for (int j = 0; j < c.getNumSlots(); j++) {
+    			Slot t = c.getSlot(j);
+    			newline += "Slot " + j + ":" + t + "\n";
     		}
     		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
     	}
-
-
-    	//Add a random block on Saturday
-    	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	Label randomLabel = new Label("COMP1022\nL1");
-    	Random r = new Random();
-    	double start = (r.nextInt(10) + 1) * 20 + 40;
-
-    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	randomLabel.setLayoutX(600.0);
-    	randomLabel.setLayoutY(start);
-    	randomLabel.setMinWidth(100.0);
-    	randomLabel.setMaxWidth(100.0);
-    	randomLabel.setMinHeight(60);
-    	randomLabel.setMaxHeight(60);
-
-    	ap.getChildren().addAll(randomLabel);
 
     }
 

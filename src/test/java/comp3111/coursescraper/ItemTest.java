@@ -46,10 +46,16 @@ public class ItemTest {
     public void testCourseAddSlot() {
         Slot s = new Slot();
         s.setStart("02:00AM");
+        s.setEnd("03:00AM");
+        s.setVenue("CYT");
         Course i = new Course();
         i.addSlot(s);
         assertEquals(i.getSlot(0).getStartHour(), 2);
+        assertEquals(i.getSlot(0).getEndHour(), 3);
+        assertEquals("CYT", s.getVenue());
     }
+
+
 
     @Test
     public void testCourseNumSlots() {
@@ -58,5 +64,7 @@ public class ItemTest {
         assertEquals(i.getNumSlots(), 10);
 
     }
+
+
 
 }
