@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * You might want to uncomment the following code to learn testFX. Sorry, no tutorial session on this.
- * 
+ *
  */
 package comp3111.coursescraper;
 
@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 import javafx.scene.control.CheckBox;
 import org.junit.Test;
-import org.testfx.api.FxRobotInterface;
+//import org.testfx.api.FxRobotInterface;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -42,10 +42,23 @@ public class FxTest extends ApplicationTest {
 	@Test
 	public void testTabSFQButton() {
 		clickOn("#tabSfq");
-		FxRobotInterface click = clickOn("#buttonInstructorSfq");
+		//FxRobotInterface click = clickOn("#buttonInstructorSfq");
+		clickOn("#buttonInstructorSfq");
 		Button b = (Button)s.lookup("#buttonInstructorSfq");
 		sleep(1000);
-		assertTrue(b.isDisabled());
+		assertFalse(b.isDisabled());
+	}
+
+	@Test
+	public void testList()
+	{
+		//clickOn("#buttonSearch");
+		clickOn("#tabFilter");
+		sleep(1000);
+		clickOn("#CC");
+		sleep(1000);
+		clickOn("#tabList");
+		assertEquals(true, true);
 	}
 
 //	@Test
