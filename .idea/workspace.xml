@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Controller.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -16,6 +17,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/S19COMP3111_NoTitle$S19COMP3111_NoTitle__test_.ic" NAME="S19COMP3111-NoTitle [test] Coverage Results" MODIFIED="1556382298596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/S19COMP3111_NoTitle$S19COMP3111_NoTitle__jar_.ic" NAME="S19COMP3111-NoTitle [jar] Coverage Results" MODIFIED="1556513354459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/S19COMP3111_NoTitle$FxTest.ic" NAME="FxTest Coverage Results" MODIFIED="1556381966139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>comp3111.coursescraper.*</FILTER>
     </SUITE>
@@ -50,6 +52,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="S19COMP3111-NoTitle" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="S19COMP3111-NoTitle" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="verification" type="c8890929:TasksNode$1" />
               </path>
               <path>
@@ -78,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
+            <state relative-caret-position="615">
               <caret line="52" column="53" selection-start-line="52" selection-start-column="53" selection-end-line="52" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -90,8 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+            <state relative-caret-position="300">
+              <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -99,8 +107,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="553" column="17" lean-forward="true" selection-start-line="553" selection-start-column="17" selection-end-line="553" selection-end-column="17" />
+            <state relative-caret-position="273">
+              <caret line="232" column="16" selection-start-line="232" selection-start-column="16" selection-end-line="232" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -287,12 +295,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556457941143" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556513763582" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
@@ -321,19 +329,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MyApplication">
-    <configuration name="MyApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.MyApplication" />
-      <module name="S19COMP3111-NoTitle.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="comp3111.coursescraper.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager" selected="Gradle.S19COMP3111-NoTitle [jar]">
+    <configuration name="S19COMP3111-NoTitle [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="check" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
     </configuration>
     <configuration name="S19COMP3111-NoTitle [jacocoTestCoverageVerification]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -373,7 +387,7 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="S19COMP3111-NoTitle [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="S19COMP3111-NoTitle [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -384,7 +398,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="test" />
+            <option value="jar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -411,29 +425,32 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ItemTest.testCourseAddSlot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="S19COMP3111-NoTitle.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="comp3111.coursescraper.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="comp3111.coursescraper" />
-      <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.ItemTest" />
-      <option name="METHOD_NAME" value="testCourseAddSlot" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="S19COMP3111-NoTitle [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MyApplication" />
-        <item itemvalue="JUnit.ItemTest.testCourseAddSlot" />
-        <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestCoverageVerification]" />
-        <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestReport]" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle [test]" />
+        <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestReport]" />
+        <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestCoverageVerification]" />
+        <item itemvalue="Gradle.S19COMP3111-NoTitle [check]" />
+        <item itemvalue="Gradle.S19COMP3111-NoTitle [jar]" />
       </list>
     </recent_temporary>
   </component>
@@ -451,24 +468,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FxTest - 2019.04.28 at 00h 16m 41s.xml">
-      <configuration name="FxTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.28 at 00h 16m 59s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[check] - 2019.04.28 at 00h 17m 07s.xml">
-      <configuration name="S19COMP3111-NoTitle [check]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.28 at 00h 18m 54s.xml">
-      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
-    </history-entry>
-    <history-entry file="FxTest_testSelectAll - 2019.04.28 at 00h 19m 12s.xml">
-      <configuration name="FxTest.testSelectAll" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FxTest - 2019.04.28 at 00h 19m 37s.xml">
-      <configuration name="FxTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.28 at 00h 20m 14s.xml">
       <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
     </history-entry>
@@ -481,13 +480,30 @@
     <history-entry file="ItemTest_testCourseAddSlot - 2019.04.28 at 14h 52m 44s.xml">
       <configuration name="ItemTest.testCourseAddSlot" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.28 at 23h 43m 00s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[check] - 2019.04.28 at 23h 43m 14s.xml">
+      <configuration name="S19COMP3111-NoTitle [check]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[check] - 2019.04.29 at 12h 38m 13s.xml">
+      <configuration name="S19COMP3111-NoTitle [check]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.29 at 12h 38m 24s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[check] - 2019.04.29 at 12h 49m 32s.xml">
+      <configuration name="S19COMP3111-NoTitle [check]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="S19COMP3111-NoTitle_[test] - 2019.04.29 at 12h 49m 37s.xml">
+      <configuration name="S19COMP3111-NoTitle [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7376788" visible="true" weight="0.26923078" />
-      <window_info id="Structure" order="1" sideWeight="0.26232114" side_tool="true" visible="true" weight="0.26923078" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.73532796" visible="true" weight="0.2753358" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.26467204" side_tool="true" visible="true" weight="0.2753358" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -495,13 +511,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993895" visible="true" weight="0.27617952" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993895" weight="0.27617952" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39930955" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32911393" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32911393" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50061053" side_tool="true" weight="0.39010358" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.32911393" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.31300345" />
@@ -514,7 +530,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50057536" side_tool="true" visible="true" weight="0.24297924" />
+      <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50057536" side_tool="true" weight="0.24297924" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984375" visible="true" weight="0.33333334" />
@@ -703,13 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="489">
@@ -720,9 +729,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/AllSearchTask.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
+        <state relative-caret-position="615">
           <caret line="52" column="53" selection-start-line="52" selection-start-column="53" selection-end-line="52" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -732,18 +749,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Course.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+        <state relative-caret-position="300">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/AllSearchTask.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="553" column="17" lean-forward="true" selection-start-line="553" selection-start-column="17" selection-end-line="553" selection-end-column="17" />
+        <state relative-caret-position="273">
+          <caret line="232" column="16" selection-start-line="232" selection-start-column="16" selection-end-line="232" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
