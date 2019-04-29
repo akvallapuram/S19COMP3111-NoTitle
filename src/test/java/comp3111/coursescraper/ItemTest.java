@@ -14,6 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
 
+import javax.accessibility.AccessibleStateSet;
+
+import comp3111.coursescraper.*;
+
 import static org.junit.Assert.*;
 
 import comp3111.coursescraper.*;
@@ -89,7 +93,7 @@ public class ItemTest {
 		assertEquals(tab.getCcode(), "ABC");
 		//assertEquals("ABC", "ABC");
 	}
-	
+
 	@Test
 	public void testSetLecturesec()
 	{
@@ -100,7 +104,7 @@ public class ItemTest {
 		tab.setLecturesec("ABC");
 		assertEquals(tab.getLecturesec(), "ABC");
 	}
-	
+
 	@Test
 	public void testSetCname()
 	{
@@ -111,7 +115,7 @@ public class ItemTest {
 		tab.setCname("ABC");
 		assertEquals(tab.getCname(), "ABC");
 	}
-	
+
 	@Test
 	public void testSetInstructor()
 	{
@@ -123,7 +127,7 @@ public class ItemTest {
 		assertTrue(a.equals("ABC"));
 		//assertEquals(tab.getInstructor(), "ABC");
 	}
-	
+
 	/*@Test
 	public void testSetEnroll()
 	{
@@ -135,7 +139,7 @@ public class ItemTest {
 		tab.setEnroll(chk);
 		assertEquals(tab.getEnroll().isSelected(), chk.isSelected());
 	}*/
-	
+
 	@Test
 	public void testSetColorr()
 	{
@@ -145,7 +149,7 @@ public class ItemTest {
 		tab.setColorr(cl);
 		assertEquals(tab.getColorr(), cl); //Not sure
 	}
-	
+
 	/*@Test
 	public void testSetLab()
 	{
@@ -155,7 +159,7 @@ public class ItemTest {
 		tab.setLab(lb);
 		assertEquals(tab.getLab(), lb);
 	}*/
-	
+
 	@Test
 	public void testSetTday()
 	{
