@@ -195,7 +195,7 @@ public class Controller {
         for(int j = 0; j < evaluate.length; j++) {
             textfieldSubject.setText(evaluate[j]);
             numcourses += searchCount();
-            System.out.println(evaluate[j] + " is done.");
+            // System.out.println(evaluate[j] + " is done.");
             progress += step;
             progressbar.setProgress(progress);
 //            try {
@@ -230,18 +230,25 @@ public class Controller {
     void findInstructorSfq() {
         Scraper scraperSFQ = new Scraper();
         String url = textfieldSfqUrl.getText();
+        @SuppressWarnings("FIXME: this is a hack and should be fixed.")
         List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm");
         //textAreaConsole.setText(textAreaConsole.getText() + "\n" + testfieldSfqUrl.getText());
 
         String newline = "";
-        for(Instructor ins : instructors) newline += ins.getName() + "\t\t" + String.format("%.2f\n", ins.getScoreSFQ());
+        for(Instructor ins : instructors) newline += String.format("%s %.2f %n", ins.getName(), ins.getScoreSFQ());
         textAreaConsole.setText(newline);
-
     }
 
     @FXML
     void findSfqEnrollCourse() {
+      Scraper scraperSFQ = new Scraper();
+      String url = textfieldSfqUrl.getText();
+      @SuppressWarnings("FIXME: this is a hack and should be fixed.")
+      List<Course> courses = scraperSFQ.scrapeCourseSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm", datasAll);
 
+      String newline = "";
+      for(Course c : courses) newline += String.format("%s %.2f %n", c.getTitle(), c.getScoreSFQ());
+      textAreaConsole.setText(newline);
     }
 
     @FXML
@@ -400,7 +407,7 @@ public class Controller {
                     {
                     	obj.setLecturesec(prevSecType.substring(0, 3));
                     	obj.setColorr(col);
-                    	System.out.println("prev sec: " + prevSecType);
+                    	// System.out.println("prev sec: " + prevSecType);
                     }
                     //datas3.add(obj);
                     if(flagg!=1)
@@ -421,7 +428,7 @@ public class Controller {
                             	//chk2.setSelected(!newValue);
                     			if(newValue==true)
                     			{
-                    				System.out.println("Checkbox is checked");
+                    				// System.out.println("Checkbox is checked");
                         			blocks(obj, t);
                         			sameSection(obj, t);
                         			printEnrolled(obj);
@@ -665,7 +672,7 @@ public class Controller {
     @FXML
     void createList2()
     {
-    	System.out.println(":-/");
+    	// System.out.println(":-/");
 
     	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
     	flSection.setCellValueFactory(new PropertyValueFactory<>("lecturesec"));
@@ -746,8 +753,8 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-    	System.out.println(atls);
-    	System.out.println(atls*0.33);
+    	// System.out.println(atls);
+    	// System.out.println(atls*0.33);
 
     	if(atls<60)
     	{
@@ -769,7 +776,7 @@ public class Controller {
     			if((datasAll.get(i).getEnroll().isSelected()==false)&&((ts.getEnroll().isSelected())==true))
     			{
     				datasAll.get(i).getEnroll().setSelected(true);
-    				System.out.println("Same section");
+    				// System.out.println("Same section");
     			}
     		}
     	}
@@ -795,8 +802,8 @@ public class Controller {
     			}
     		}
 
-    		System.out.println("newstr" + newstr);
-    		System.out.println(ts.getCcode() + " " + ts.getLecturesec());
+    		// System.out.println("newstr" + newstr);
+    		// System.out.println(ts.getCcode() + " " + ts.getLecturesec());
 
     		if((ts.getCcode() + " " + ts.getLecturesec()).equals(newstr)==false)
     		{

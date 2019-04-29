@@ -43,7 +43,6 @@ public class Instructor{
     this.freeTu310 = true;
     this.sectionsTaught = new ArrayList<Section>();
     this.addSection(_section);
-    // System.out.println("Constructed " + this.name);
   }
 
 
@@ -53,7 +52,6 @@ public class Instructor{
     this.scoreSFQ = 0;
     this.freeTu310 = true;
     this.sectionsTaught = null;
-    System.out.println("Constructed " + this.name);
   }
 
 

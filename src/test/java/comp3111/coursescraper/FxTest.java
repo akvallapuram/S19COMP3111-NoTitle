@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * You might want to uncomment the following code to learn testFX. Sorry, no tutorial session on this.
- * 
+ *
  */
 package comp3111.coursescraper;
 
@@ -48,7 +48,7 @@ public class FxTest extends ApplicationTest {
 		sleep(1000);
 		assertFalse(b.isDisabled());
 	}
-	
+
 	@Test
 	public void testList()
 	{

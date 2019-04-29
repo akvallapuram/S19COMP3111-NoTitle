@@ -169,7 +169,7 @@ public class Scraper {
 	}
 
 
-/**Helper function for the scrapeInstructorSFQ function**/
+/**Helper function for the scrapeInstructorSFQ function below**/
 	public static int instructorInSFQ(String name, List<Instructor> instructors){
 		if(instructors.size() == 0) return -1;
 		for(int i = 0; i < instructors.size(); i++)
@@ -200,7 +200,7 @@ public class Scraper {
 					// name
 					String ins = row.getCell(2).asText();
 					// section score
-					String score = row.getCell(3).asText().split("\\(")[0];
+					String score = row.getCell(4).asText().split("\\(")[0];
 
 					if(row.getCells().size() == 8 && !ins.trim().isEmpty() && !ins.contains("Instructor") && !score.contains("-")){
 
@@ -221,6 +221,118 @@ public class Scraper {
 
 				} // end of rows in a Dept.
 			} // end of Depts.
+
+		}catch (Exception e){
+			System.out.println(e);
+			System.out.println(sfqURL);
+		}
+
+		return result;
+	}
+
+
+	/**Helper function for the scrapeCourseSFQ function below**/
+	public static boolean isCourseEnrolled(String name, List<TableClass> courses){
+
+		for(int i = 0; i < courses.size(); i++){
+			TableClass course = courses.get(i);
+			String cCode = course.getCcode().trim();
+			String _name = name.trim();
+			if(cCode.equals(_name) && course.getEnroll().isSelected()) return true;
+		}
+
+		return false;
+	}
+
+
+	/**Helper function for the scrapeCourseSFQ function below**/
+	public static int courseInSFQ(String name, List<Course> courses){
+
+		if(courses.size() == 0) return -1;
+
+		String _name = name.trim();
+		for(int i = 0; i < courses.size(); i++)
+			if(courses.get(i).getTitle().trim().equals(_name)) return i;
+
+		return -1;
+	}
+
+
+
+	/**TASK_6: scrapping the SFQ webpage for Courses**/
+	public List<Course> scrapeCourseSFQ(String sfqURL, List<TableClass> courses){
+
+
+		// retrieve a list of enrolled courses
+		List<String> enrolledCourses = new ArrayList<String>();
+
+		for(TableClass cou : courses){
+
+			boolean check = false;
+			String name = cou.getCcode().trim();
+			boolean isEnrolled = cou.getEnroll().isSelected();
+
+			if(!isEnrolled) continue;
+			for(int i = 0; i < enrolledCourses.size(); i++){
+				if(enrolledCourses.get(i).equals(name)) check = true;
+			}
+
+			if(!check) enrolledCourses.add(name);
+
+		} // end of creating list of enrolled courses
+
+		List<Course> result = new ArrayList<Course>();
+
+		try{
+
+			// get page
+			HtmlPage page = client.getPage(sfqURL);
+
+			// get all tables for a Department
+			List<?> departments = (List<?>) page.getByXPath(".//table[contains(@border, '1')]");
+
+			// skip the first table - it is overall statistics
+			departments.remove(0);
+
+			// search every department
+			for ( HtmlTable dept : (List<HtmlTable>)departments){
+
+
+				List<HtmlTableRow> rows = dept.getRows();
+				for(int r = 0; r < rows.size(); r++){
+
+						// name
+						String cName = rows.get(r).getCell(0).asText().trim();
+						boolean checkEnroll = false;
+
+						// not a new course row
+						if(cName.isEmpty() || cName.contains("Course") ||
+							 cName.contains("Overall") || rows.get(r).getCells().size() != 6) continue;
+
+						// check if name in enrolledCourses
+						for(String course : enrolledCourses)
+							if(course.equals(cName)) checkEnroll = true;
+
+						if(checkEnroll){
+							// create new course
+							Course courseSFQ = new Course();
+							courseSFQ.setTitle(cName);
+
+							// get all the scores
+							while(rows.get(++r).getCells().size() == 8){
+								String score = rows.get(r).getCell(3).asText().split("\\(")[0];
+								float scoref = 0;
+								if(!score.contains("-")) scoref = Float.parseFloat(score);
+								if(!rows.get(r).getCell(1).asText().trim().isEmpty()) courseSFQ.addToScoreSFQ(scoref);
+							}
+
+							result.add(courseSFQ);
+
+						}
+
+				} // end of rows in a Dept.
+			} // end of Depts.
+
 
 		}catch (Exception e){
 			System.out.println(e);
