@@ -84,6 +84,7 @@ public class Section {
 
         if((b1 || b2) && b3) return true;
         else return false;
+
 }
 
   public String toString(){

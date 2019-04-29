@@ -36,6 +36,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.Collections;
 import java.util.regex.*;
 
 import javafx.scene.control.TableView ;
@@ -367,6 +368,16 @@ public class Controller {
                     //newline += "Slot " + j + ":" + t + "\n";
 
                     TableClass obj = new TableClass(c.getTitle().substring(0, 10), t.getType().substring(0, 3), c.getTitle().substring(12), "1", col, t.getDay());
+                    //Get instructor
+                    String inst = "";
+                    for(int a=0; a<INSTRUCTORS_IN_SEARCH.size(); ++a)
+                    {
+                        if(INSTRUCTORS_IN_SEARCH.get(a).isTeaching(obj.getCcode()+" "+obj.getLecturesec()))
+                        {
+                            inst += INSTRUCTORS_IN_SEARCH.get(a).getName() + "\n";
+                        }
+                    }
+                    obj.setInstructor(inst);
                     //Have to prevent duplication
                     TableClass dupl = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
                     int flagg = 0;
@@ -416,7 +427,7 @@ public class Controller {
                     {
                     	obj.setLecturesec(prevSecType.substring(0, 3));
                     	obj.setColorr(col);
-                    	System.out.println("prev sec: " + prevSecType);
+                    	//System.out.println("prev sec: " + prevSecType);
                     }
                     //datas3.add(obj);
                     if(flagg!=1)
@@ -435,7 +446,7 @@ public class Controller {
 
                     			if(newValue==true)
                     			{
-                    				System.out.println("Checkbox is checked");
+                    				//System.out.println("Checkbox is checked");
                         			blocks(obj, t);
                         			sameSection(obj, t);
                         			printEnrolled(obj);
@@ -678,7 +689,54 @@ public class Controller {
         SelectAll.setOnAction(t -> selectAll());
     }
 
+  /**Check if a course contains atleast a lecture, lab or tutorial**/
+  boolean isValidCourse(Course c){
 
+    for(int i = 0; i < c.getNumSlots(); i++){
+      if(Section.isValidSlot(c.getSlot(i))) return true;
+    }
+    return false;
+  }
+
+
+  /**Used by scraper to check if a section has already been scraped before**/
+  public static int inSectionSearch(int _sid){
+
+    if(SECTIONS_IN_SEARCH.size() == 0) return -1;
+
+    for(int i = 0; i < SECTIONS_IN_SEARCH.size(); i++){
+      int sid = SECTIONS_IN_SEARCH.get(i).getSectionID();
+      if( sid == _sid) return sid;
+    }
+
+    return -1;
+  }
+
+
+  /** Used by scraper to check if an instructor has already been scraped**/
+  public static int inInstructorSearch(String _ins){
+
+    if(INSTRUCTORS_IN_SEARCH.size() == 0) return -1;
+
+    for(int i = 0; i < INSTRUCTORS_IN_SEARCH.size(); i++){
+      if(INSTRUCTORS_IN_SEARCH.get(i).getName().equals(_ins)) {
+        // System.out.println("Found " + _ins);
+        return i;
+      }
+    }
+
+
+    return -1;
+
+  }
+
+    // used for the search
+    public static int NUMBER_OF_COURSES = 0;
+    public static int NUMBER_OF_SECTIONS = 0;
+    public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
+    public static List<Section> SECTIONS_IN_SEARCH = new ArrayList<Section>();
+
+    // TASK 1
     @FXML
     public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
@@ -695,26 +753,38 @@ public class Controller {
 
         textfieldSubject.setText("");
 
-        // number of courses found - Anish
-        textAreaConsole.setText(textAreaConsole.getText() + "\n" +
-                "Total Number of Courses in this search: " + v.size());
+
+    // number of courses found
+    Controller.NUMBER_OF_COURSES = 0;
+    for(Course c : v) if(isValidCourse(c)) Controller.NUMBER_OF_COURSES++;
+    textAreaConsole.setText("Total Number of different courses in this search: " + Controller.NUMBER_OF_COURSES);
 
 
-    // textAreaConsole.setText(textAreaConsole.getText + "\n" +
-    // "Total Number of difference sections in this search: ")
+    // number of sections Found
+    Controller.NUMBER_OF_SECTIONS = SECTIONS_IN_SEARCH.size();
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    "Total Number of difference sections in this search: " + Controller.NUMBER_OF_SECTIONS + "\n\n");
 
-    // textAreaConsole.setText(textAreaConsole.getText() + "\n" +
-    // "textnstructors who has teaching assignment this term but does not need to teach at Tu 3:10pm: ")
+    //Free instructors
+    List<String> freeInstructors = new ArrayList<String>();
+    for(Instructor ins : Controller.INSTRUCTORS_IN_SEARCH) if(ins.isFreeTu310()) freeInstructors.add(ins.getName());
+    Collections.sort(freeInstructors);
+    String freeIns = "";
+    for(String str : freeInstructors) freeIns  += str + "\n";
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    "Instructors who has teaching assignment this term but does not need to teach at Tu 3:10pm:\n" + freeIns + "\n\n");
 
 
-    	for (Course c : v) {
-    		String newline = c.getTitle() + "\n";
-    		for (int j = 0; j < c.getNumSlots(); j++) {
-    			Slot t = c.getSlot(j);
-    			newline += "Slot " + j + ":" + t + "\n";
-    		}
-    		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
-    	}
+    //print sections
+  	for (Course c : v) {
+      // if(!isValidCourse(c)) continue;
+  		String newline = c.getTitle() + "\n";
+      for(Section sec : c.getSections()) newline += sec.toString();
+  		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+  	}
+
+      freeInstructors.clear();
+      INSTRUCTORS_IN_SEARCH.clear();
 
     }
 
@@ -742,7 +812,6 @@ public class Controller {
     @FXML
     public void blocks(TableClass ts, Slot s)
     {
-
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
 
     	ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
@@ -798,7 +867,7 @@ public class Controller {
     			if((datasAll.get(i).getEnroll().isSelected()==false)&&((ts.getEnroll().isSelected())==true))
     			{
     				datasAll.get(i).getEnroll().setSelected(true);
-    				System.out.println("Same section");
+    				//System.out.println("Same section");
     			}
     		}
     	}
@@ -853,7 +922,7 @@ public class Controller {
     	String resultant = "";
     	int end = 0;
 
-    	for(int i=37; i<1000; i=i+15)		//change 1000 later
+    	for(int i=37; i<10000; i=i+15)		//change 1000 later
     	{
     		if(match.equals(textAreaConsole.getText().substring(i, i+14)))
     		{
@@ -925,6 +994,10 @@ public class Controller {
     	}
     }
 
+    /**
+     * Returns the TableView for List
+     * @return TableView for List
+     */
     public TableView<TableClass> getTable()
     {
     	return llist;

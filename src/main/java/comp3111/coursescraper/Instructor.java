@@ -56,7 +56,6 @@ public class Instructor{
     System.out.println("Constructed " + this.name);
   }
 
-
   public String getName(){
     return this.name;
   }
@@ -66,16 +65,16 @@ public class Instructor{
     return freeTu310;
   }
 
-
-
   public boolean isTeaching(String _secCode){
-
+    String [] _secName = _secCode.split("\\s+");
+    String _secN = String.join(" ", _secName);
+    //System.out.println(_secN);
+    _secN = _secN.substring(0, 4) + _secN.substring(5);
     for(Section sec : sectionsTaught)
-      if(sec.getSectionCode().equals(_secCode)) return true;
+      if(sec.getSectionCode().equals(_secN)) return true;
 
     return false;
   }
-
 
   public float getScoreSFQ(){
     return this.scoreSFQ;

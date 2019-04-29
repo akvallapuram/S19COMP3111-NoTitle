@@ -1,9 +1,11 @@
 package comp3111.coursescraper;
 
-
 /**
  * OOP representation of a Course in a term. E.G. COMP 3111
  */
+import java.util.List;
+import java.util.ArrayList;
+
 public class Course {
 	private static final int DEFAULT_MAX_SLOT = 20;
 
@@ -13,6 +15,7 @@ public class Course {
 	private Slot [] slots;
 	private int numSlots;
 	private boolean commonCourse;
+	private List<Section> sections;
 
 
 	/**
@@ -23,6 +26,8 @@ public class Course {
 		slots = new Slot[DEFAULT_MAX_SLOT];
 		for (int i = 0; i < DEFAULT_MAX_SLOT; i++) slots[i] = null;
 		numSlots = 0;
+
+		sections = new ArrayList<Section>();
 	}
 
 	/**
@@ -123,4 +128,15 @@ public class Course {
 	 * @param cc T/F if a course is a common course
 	 */
 	public void setCommonCourse(boolean cc) { this.commonCourse = cc; }
+
+
+	public void addSection(Section s){
+		this.sections.add(s);
+	}
+
+	public List<Section> getSections(){
+		return this.sections;
+	}
+
+
 }

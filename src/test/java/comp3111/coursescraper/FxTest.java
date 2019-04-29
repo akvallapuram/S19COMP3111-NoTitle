@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.scene.control.TableView ;
 import javafx.scene.control.CheckBox ;
+import javafx.scene.control.Label;
 
 
 public class FxTest extends ApplicationTest {
@@ -73,6 +74,15 @@ public void testList()
 	assertEquals(cb.isSelected(), false);
 }
 
+@Test
+public void testSameSection()
+{
+	TableClass tab = new TableClass();
+	Slot st = new Slot();
+	//tab.setLab(new Label());
+	ctr.sameSection(tab, st);
+}
+
 //	@Test
 //	public void testAM() {
 //		clickOn("#tabFilter");
@@ -99,5 +109,12 @@ public void testList()
 		sleep(100);
 		assertEquals(b.getText(), "Select All");
 	}
+
+	/*@Test
+	public void testGetTable()
+	{
+		TableView<TableClass> tab = ctr.getTable();
+
+	}*/
 
 }
