@@ -1,13 +1,13 @@
 /**
- * 
+ *
  * You might want to uncomment the following code to learn testFX. Sorry, no tutorial session on this.
- * 
+ *
  */
 package comp3111.coursescraper;
 
 import static org.junit.Assert.*;
 
-
+import javafx.scene.control.CheckBox;
 import org.junit.Test;
 //import org.testfx.api.FxRobotInterface;
 import org.testfx.assertions.api.Assertions;
@@ -40,7 +40,7 @@ public class FxTest extends ApplicationTest {
 
 
 	@Test
-	public void testButton() {
+	public void testTabSFQButton() {
 		clickOn("#tabSfq");
 		//FxRobotInterface click = clickOn("#buttonInstructorSfq");
 		clickOn("#buttonInstructorSfq");
@@ -48,7 +48,7 @@ public class FxTest extends ApplicationTest {
 		sleep(1000);
 		assertFalse(b.isDisabled());
 	}
-	
+
 	@Test
 	public void testList()
 	{
@@ -59,6 +59,33 @@ public class FxTest extends ApplicationTest {
 		sleep(1000);
 		clickOn("#tabList");
 		assertEquals(true, true);
+	}
+
+//	@Test
+//	public void testAM() {
+//		clickOn("#tabFilter");
+//		FxRobotInterface click = clickOn("#AM");
+//		CheckBox cb = (CheckBox)s.lookup("#AM");
+//		assertTrue(cb.isSelected());
+//	}
+
+	@Test
+	public void testSelectAll() {
+		clickOn("#tabFilter");
+		clickOn("#SelectAll");
+		Button b = (Button) s.lookup("#SelectAll");
+		sleep(100);
+		assertEquals(b.getText(), "Deselect All");
+	}
+
+	@Test
+	public void testDeselectAll() {
+		clickOn("#tabFilter");
+		clickOn("#SelectAll");
+		clickOn("#SelectAll");
+		Button b = (Button) s.lookup("#SelectAll");
+		sleep(100);
+		assertEquals(b.getText(), "Select All");
 	}
 
 }
