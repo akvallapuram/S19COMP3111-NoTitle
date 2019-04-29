@@ -20,11 +20,16 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import javafx.scene.control.TableView ;
+import javafx.scene.control.CheckBox ;
+
 
 public class FxTest extends ApplicationTest {
 
 	private Scene s;
 	private Button button;
+	private Controller ctr;
+	private CheckBox cb;
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -34,7 +39,8 @@ public class FxTest extends ApplicationTest {
    		Scene scene =  new Scene(root);
    		stage.setScene(scene);
    		stage.setTitle("Course Scraper");
-   		stage.show();
+		stage.show();
+		ctr = loader.getController(); 
    		s = scene;
 	}
 
@@ -49,17 +55,23 @@ public class FxTest extends ApplicationTest {
 //		assertFalse(b.isDisabled());
 //	}
 
-	@Test
-	public void testList()
-	{
-		//clickOn("#buttonSearch");
-		clickOn("#tabFilter");
-		sleep(1000);
-		clickOn("#CC");
-		sleep(1000);
-		clickOn("#tabList");
-		assertEquals(true, true);
-	}
+@Test
+public void testList()
+{
+	//clickOn("#buttonSearch");
+	clickOn("#tabFilter");
+	sleep(1000);
+	clickOn("#CC");
+	sleep(1000);
+	clickOn("#tabList");
+	TableView<TableClass> tabl = ctr.getTable();
+	TableClass obj = tabl.getItems().get(1);
+	//obj.getEnroll().setSelected(true);
+	cb = obj.getEnroll();
+	//cb.setSelected(true);
+	sleep(1000);
+	assertEquals(cb.isSelected(), false);
+}
 
 //	@Test
 //	public void testAM() {

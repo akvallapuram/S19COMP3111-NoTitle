@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 
 
 
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -684,7 +685,7 @@ public class Controller {
 
         //need to display the number of all subjects in a given term even when search is clicked
         //(task5) - Jeff
-        allSubjectSearch();
+        //allSubjectSearch();
 
         // handling 404 error - Anish
       if(v == null){
@@ -922,6 +923,11 @@ public class Controller {
     			}
     		}
     	}
+    }
+
+    public TableView<TableClass> getTable()
+    {
+    	return llist;
     }
 
 }
