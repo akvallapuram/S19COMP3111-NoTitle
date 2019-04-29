@@ -39,15 +39,15 @@ public class FxTest extends ApplicationTest {
 	}
 
 
-	@Test
-	public void testTabSFQButton() {
-		clickOn("#tabSfq");
-		//FxRobotInterface click = clickOn("#buttonInstructorSfq");
-		clickOn("#buttonInstructorSfq");
-		Button b = (Button)s.lookup("#buttonInstructorSfq");
-		sleep(1000);
-		assertFalse(b.isDisabled());
-	}
+	//@Test
+//	public void testTabSFQButton() {
+//		clickOn("#tabSfq");
+//		//FxRobotInterface click = clickOn("#buttonInstructorSfq");
+//		clickOn("#buttonInstructorSfq");
+//		Button b = (Button)s.lookup("#buttonInstructorSfq");
+//		sleep(1000);
+//		assertFalse(b.isDisabled());
+//	}
 
 	@Test
 	public void testList()

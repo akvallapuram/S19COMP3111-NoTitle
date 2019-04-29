@@ -19,7 +19,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.concurrent.Task;
+import javafx.geometry.Insets;
 
 
 import javax.swing.*;
