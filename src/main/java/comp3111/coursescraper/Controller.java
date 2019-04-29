@@ -8,25 +8,23 @@ import javafx.collections.FXCollections;
 
 
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
-import javafx.scene.paint.Color;
 import javafx.scene.control.CheckBox;
-import org.apache.bcel.generic.Select;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.concurrent.Task;
+import javafx.geometry.Insets;
+
 
 import javax.swing.*;
 //import javax.swing.event.ChangeListener;
@@ -35,8 +33,10 @@ import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.Collections;
 import java.util.regex.*;
 
 import javafx.scene.control.TableView ;
@@ -50,6 +50,9 @@ import javafx.beans.value.ObservableValue ;
 
 public class Controller {
 
+    /**
+     * Main Tab b
+     */
     @FXML
     private Tab tabMain;
 
@@ -102,7 +105,6 @@ public class Controller {
 
     @FXML
     private CheckBox AM;
-
     @FXML
     private CheckBox PM;
     @FXML
@@ -144,8 +146,14 @@ public class Controller {
     List<TableClass> datasAll = new ArrayList<TableClass>();
     ObservableList<TableClass> newList = FXCollections.observableArrayList();
 
+
+    /**
+     * AllSubjectSearch Button First Click
+     * Returns Total Number of Categories/Code Prefix:
+     * Changes the next AllSS button Action to allSubjectSearch2()
+     */
     @FXML
-    void allSubjectSearch() {
+    public void allSubjectSearch() {
         //TODO consider the first line "clicking allsubjectsearch or search
         ArrayList<String> constructing = new ArrayList<String>();
         String[] allSubjects = {
@@ -182,36 +190,57 @@ public class Controller {
             index++;
         }
         AllSS.setText("All Subject Search");
-        AllSS.setOnAction(e -> allSubjectSearch2(finalAllsubjectcount, coursesFound));
 
-        // TASK_6 - enable buttonSfqEnrollCourse
-        buttonSfqEnrollCourse.setDisable(false);
+        Task<Void> task = new Task<Void>() {
+            int numcourses = 0;
+            double progress = 0;
+            @Override
+            protected Void call() throws Exception {
+                for(int j = 0; j < coursesFound.length; j++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    int finalJ = j;
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            textfieldSubject.setText(coursesFound[finalJ]);
+                            numcourses += searchCount();
+                        }
+                    });
+                    System.out.println(coursesFound[j] + " is done.");
+                    updateProgress(j+1, finalAllsubjectcount);
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
+                    }
+                });
+                return null;
+
+            }
+        };
+        progressbar.progressProperty().bind(task.progressProperty());
+        AllSS.setOnAction(event -> {
+            try {
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                th.start();
+            } catch (NullPointerException e){
+                System.out.println(e.getMessage());
+            }
+        });
     }
 
-    void allSubjectSearch2(int count, String[] evaluate) {
-        double progress = 0;
-        double step = (double) 1/count;
-        int numcourses = 0;
-        for(int j = 0; j < evaluate.length; j++) {
-            textfieldSubject.setText(evaluate[j]);
-            numcourses += searchCount();
-            // System.out.println(evaluate[j] + " is done.");
-            progress += step;
-            progressbar.setProgress(progress);
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-        }
-        textAreaConsole.setText(textAreaConsole.getText() + "\n" + "Total Number of Courses Fetched: " + numcourses);
-        AllSS.setOnAction(e -> allSubjectSearch());
-
-        // TASK_6 - enable buttonSfqEnrollCourse
-        buttonSfqEnrollCourse.setDisable(false);
-    }
-
-    int searchCount() {
+    /**
+     * Scrapes based on textfieldURL, textfieldTerm, textfieldSubject
+     * returns the num of courses within the result
+     * @return num courses within result of scraping
+     */
+    public int searchCount() {
         int numcourses = 0;
         List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
         for (Course c : v) {
@@ -251,8 +280,13 @@ public class Controller {
       textAreaConsole.setText(newline);
     }
 
+    /**
+     * Filter Results Task 2
+     * Based on AND logic. If there exists 1+ slot in a Course for every requirement/filter,
+     * Displays all slots of course based on filter
+     */
     @FXML
-    void filterResults() {
+    public void filterResults() {
         Boolean[] checked = new Boolean[11];
         List<Boolean> ticked = new ArrayList<Boolean>();
         for (int i = 0; i < 11; i++) {
@@ -346,11 +380,18 @@ public class Controller {
                 for (int j = 0; j < c.getNumSlots(); j++) {
                     Slot t = c.getSlot(j);
                     //newline += "Slot " + j + ":" + t + "\n";
-                    //For List
-                    //System.out.println(t);
-                    //datas3.add(new TableClass(c.getTitle().substring(0, 9), t.getType().substring(0, 3), c.getTitle().substring(12), "1"));
-                    //TableClass obj = new TableClass(c.getTitle().substring(0, 9), t.getType().substring(0, 3), c.getTitle().substring(12), "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5));
+
                     TableClass obj = new TableClass(c.getTitle().substring(0, 10), t.getType().substring(0, 3), c.getTitle().substring(12), "1", col, t.getDay());
+                    //Get instructor
+                    String inst = "";
+                    for(int a=0; a<INSTRUCTORS_IN_SEARCH.size(); ++a)
+                    {
+                        if(INSTRUCTORS_IN_SEARCH.get(a).isTeaching(obj.getCcode()+" "+obj.getLecturesec()))
+                        {
+                            inst += INSTRUCTORS_IN_SEARCH.get(a).getName() + "\n";
+                        }
+                    }
+                    obj.setInstructor(inst);
                     //Have to prevent duplication
                     TableClass dupl = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
                     int flagg = 0;
@@ -374,15 +415,12 @@ public class Controller {
                 	}
 
                 	//End of prevention of duplication
-                    //if((t.getType()!=sec)&&(t.getType().substring(0,  3)!="Mo ")&&(t.getType().substring(0,  3)!="Tu ")&&(t.getType().substring(0,  3)!="We ")&&(t.getType()!="Th ")&&(t.getType().substring(0,  3)!="Fr ")&&(t.getType().substring(0,  3)!="Sa "))
+
                     if((t.getType()!=sec)&&(t.getType().length()<11))
                     {
-                    	//System.out.println(t.getType() + "sec: " + sec);
-
                     	if(flagg!=1)
                     	{
                     		datas3.add(obj);
-                    		//newList.add(obj);
                     	}
 
                     	if(flagg==1)
@@ -394,28 +432,22 @@ public class Controller {
                     		newList.add(obj);
                     	}
 
-                    	//newList.add(obj);
-
-                    	//datas3.add(obj);
                     	sec = t.getType();
                     	col = new Color(Math.random(), Math.random(), Math.random(), 0.5);
                     	obj.setColorr(col);
-                    	//System.out.println(t.getType() + "sec: " + sec);
                     }
 
                     if(t.getType().length()>11)
                     {
                     	obj.setLecturesec(prevSecType.substring(0, 3));
                     	obj.setColorr(col);
-                    	// System.out.println("prev sec: " + prevSecType);
+                    	//System.out.println("prev sec: " + prevSecType);
                     }
                     //datas3.add(obj);
                     if(flagg!=1)
                     {
                     	datasAll.add(obj);
                     }
-                    //datasAll.add(obj);
-                    //llist.setItems(datas3);
                     llist.setItems(newList);
 
                     newline += obj.getCcode() + " " + obj.getLecturesec() + "Slot " + j + ":" + t + "\n";	//My version which adds sections
@@ -425,15 +457,14 @@ public class Controller {
                     {
                     	obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
                     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            	//chk2.setSelected(!newValue);
+
                     			if(newValue==true)
                     			{
-                    				// System.out.println("Checkbox is checked");
+                    				//System.out.println("Checkbox is checked");
                         			blocks(obj, t);
                         			sameSection(obj, t);
                         			printEnrolled(obj);
                     			}
-                    			//else if((newValue==false))
                     			else if((newValue==false)&&(oldValue==true))
                     			{
                     				//Need to remove label from TimeTable and print on console
@@ -441,38 +472,12 @@ public class Controller {
                     				{
                     					printEnrolledRemove(obj);
                     				}
-                    				//printEnrolledRemove(obj);
                     				removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
                     			}
 
                         	}
                     	});
                     }
-
-                    /*obj.getEnroll().selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    	public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            //chk2.setSelected(!newValue);
-                    		if(newValue==true)
-                    		{
-                    			System.out.println("Checkbox is checked");
-                        		blocks(obj, t);
-                        		sameSection(obj, t);
-                        		printEnrolled(obj);
-                    		}
-                    		//else if((newValue==false))
-                    		else if((newValue==false)&&(oldValue==true))
-                    		{
-                    			//Need to remove label from TimeTable and print on console
-                    			if(datas3.contains(obj))
-                    			{
-                    				printEnrolledRemove(obj);
-                    			}
-                    			//printEnrolledRemove(obj);
-                    			removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
-                    		}
-
-                        }
-                    });*/
 
                     prevSecType = sec;
                 }
@@ -486,8 +491,12 @@ public class Controller {
         }
     }
 
-
-    Boolean check0(Course c) {
+    /**
+     * Checks a Course if there is a Slot that starts in AM
+     * @param c Course to be checked
+     * @return Boolean there is a Slot that starts in AM
+     */
+    static Boolean check0(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -499,7 +508,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check1(Course c) {
+    /**
+     * Checks a Course if there is a Slot that starts in PM
+     * @param c Course to be checked
+     * @return Boolean there is a Slot that starts in PM
+     */
+    public static Boolean check1(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -511,7 +525,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check2(Course c) {
+    /**
+     * Checks a Course if there is a slot in Monday
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Monday
+     */
+    public static Boolean check2(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -522,7 +541,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check3(Course c) {
+    /**
+     * Checks a Course if there is a slot in Tues
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Tues
+     */
+   public static Boolean check3(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -533,7 +557,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check4(Course c) {
+    /**
+     * Checks a Course if there is a slot in Wed
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Wed
+     */
+    public static Boolean check4(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -544,8 +573,12 @@ public class Controller {
         return check;
     }
 
-
-    Boolean check5(Course c) {
+    /**
+     * Checks a Course if there is a slot in Thurs
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Thurs
+     */
+    public static Boolean check5(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -556,7 +589,12 @@ public class Controller {
         return check;
     }
 
-    Boolean check6(Course c) {
+    /**
+     * Checks a Course if there is a slot in Fri
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Fri
+     */
+    public static Boolean check6(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -567,8 +605,12 @@ public class Controller {
         return check;
     }
 
-
-    Boolean check7(Course c) {
+    /**
+     * Checks a Course if there is a slot in Sat
+     * @param c Course to be checked
+     * @return Boolean there is a slot in Sat
+     */
+    public static Boolean check7(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -579,8 +621,12 @@ public class Controller {
         return check;
     }
 
-    //Labs and tutorials
-    Boolean check8(Course c) {
+    /**
+     * Checks a Course if there is a slot that is of type Lab or Tutorial
+     * @param c Course to be checked
+     * @return Boolean there is a slot that is of type Lab or Tutorial
+     */
+    public static Boolean check8(Course c) {
         Boolean check = false;
         for (int i = 0; i < c.getNumSlots(); i++) {
             Slot t = c.getSlot(i);
@@ -593,23 +639,34 @@ public class Controller {
         return check;
     }
 
-    //Common Core
-    Boolean check9(Course c) {
+    /**
+     * Checks a Course if it is 4YCC
+     * @param c Course to be checked
+     * @return Boolean the course is 4YCC
+     */
+    public Boolean check9(Course c) {
         return c.getCommonCourse();
 
     }
 
-    //No Exclusion
-    Boolean check10(Course c) {
+    /**
+     * Checks a Course for No Exclusion
+     * @param c Course to be checked
+     * @return Boolean the course has No Exclusion
+     */
+    public static Boolean check10(Course c) {
         if (c.getExclusion() == "null") {
             return true;
         }
         return false;
     }
 
-
+    /**
+     * Implementation of SelectAll Button in Filter Tab
+     * Selects All filters and changes next click to DeselectAll
+     */
     @FXML
-    void selectAll() {
+    public void selectAll() {
         AM.setSelected(true);
         PM.setSelected(true);
         Mon.setSelected(true);
@@ -626,7 +683,11 @@ public class Controller {
         SelectAll.setOnAction(e -> deselectAll());
     }
 
-    void deselectAll() {
+    /**
+     * Implementation of DeselectAll Button in Filter Tab
+     * Deselects all filters and changes next click to SelectAll
+     */
+    public void deselectAll() {
         AM.setSelected(false);
         PM.setSelected(false);
         Mon.setSelected(false);
@@ -639,40 +700,115 @@ public class Controller {
         CC.setSelected(false);
         NE.setSelected(false);
         SelectAll.setText("Select All");
-        SelectAll.setOnAction(e -> selectAll());
+        SelectAll.setOnAction(t -> selectAll());
+    }
+
+  /**Check if a course contains atleast a lecture, lab or tutorial**/
+  boolean isValidCourse(Course c){
+
+    for(int i = 0; i < c.getNumSlots(); i++){
+      if(Section.isValidSlot(c.getSlot(i))) return true;
+    }
+    return false;
+  }
+
+
+  /**Used by scraper to check if a section has already been scraped before**/
+  public static int inSectionSearch(int _sid){
+
+    if(SECTIONS_IN_SEARCH.size() == 0) return -1;
+
+    for(int i = 0; i < SECTIONS_IN_SEARCH.size(); i++){
+      int sid = SECTIONS_IN_SEARCH.get(i).getSectionID();
+      if( sid == _sid) return sid;
+    }
+
+    return -1;
+  }
+
+
+  /** Used by scraper to check if an instructor has already been scraped**/
+  public static int inInstructorSearch(String _ins){
+
+    if(INSTRUCTORS_IN_SEARCH.size() == 0) return -1;
+
+    for(int i = 0; i < INSTRUCTORS_IN_SEARCH.size(); i++){
+      if(INSTRUCTORS_IN_SEARCH.get(i).getName().equals(_ins)) {
+        // System.out.println("Found " + _ins);
+        return i;
+      }
     }
 
 
+    return -1;
+
+  }
+
+    // used for the search
+    public static int NUMBER_OF_COURSES = 0;
+    public static int NUMBER_OF_SECTIONS = 0;
+    public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
+    public static List<Section> SECTIONS_IN_SEARCH = new ArrayList<Section>();
+
+    // TASK 1
     @FXML
-    void search() {
+    public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
-    	for (Course c : v) {
-    		String newline = c.getTitle() + "\n";
-    		for (int i = 0; i < c.getNumSlots(); i++) {
-    			Slot t = c.getSlot(i);
-    			newline += "Slot " + i + ":" + t + "\n";
-    		}
-    		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
-    	}
+
+        //need to display the number of all subjects in a given term even when search is clicked
+        //(task5) - Jeff
+        //allSubjectSearch();
+
+        // handling 404 error - Anish
+      if(v == null){
+        textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
+        return;
+      }
+
+        textfieldSubject.setText("");
 
 
-      // TASK_6 - enable buttonSfqEnrollCourse
-      buttonSfqEnrollCourse.setDisable(false);
+    // number of courses found
+    Controller.NUMBER_OF_COURSES = 0;
+    for(Course c : v) if(isValidCourse(c)) Controller.NUMBER_OF_COURSES++;
+    textAreaConsole.setText("Total Number of different courses in this search: " + Controller.NUMBER_OF_COURSES);
+
+
+    // number of sections Found
+    Controller.NUMBER_OF_SECTIONS = SECTIONS_IN_SEARCH.size();
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    "Total Number of difference sections in this search: " + Controller.NUMBER_OF_SECTIONS + "\n\n");
+
+    //Free instructors
+    List<String> freeInstructors = new ArrayList<String>();
+    for(Instructor ins : Controller.INSTRUCTORS_IN_SEARCH) if(ins.isFreeTu310()) freeInstructors.add(ins.getName());
+    Collections.sort(freeInstructors);
+    String freeIns = "";
+    for(String str : freeInstructors) freeIns  += str + "\n";
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" +
+    "Instructors who has teaching assignment this term but does not need to teach at Tu 3:10pm:\n" + freeIns + "\n\n");
+
+
+    //print sections
+  	for (Course c : v) {
+      // if(!isValidCourse(c)) continue;
+  		String newline = c.getTitle() + "\n";
+      for(Section sec : c.getSections()) newline += sec.toString();
+  		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+  	}
+
+      freeInstructors.clear();
+      INSTRUCTORS_IN_SEARCH.clear();
+
     }
 
-    /*public ObservableList<TableClass> getTableClass()
-	{
-		ObservableList<TableClass> datas = FXCollections.observableArrayList();
-		datas.add(new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1));
-		return datas;
-	}*/
-
-
-
+    /**
+     * Creates a List for the list Tab and aligns each column with a property
+     */
     @FXML
-    void createList2()
+    public void createList2()
     {
-    	// System.out.println(":-/");
+    	System.out.println(":-/");
 
     	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
     	flSection.setCellValueFactory(new PropertyValueFactory<>("lecturesec"));
@@ -682,48 +818,14 @@ public class Controller {
 
     }
 
-
-    /*@FXML
-    void timeTable()
-    {
-    	//AnchorPane ap = (AnchorPane)tabList.getContent();
-
-    	for(int i=0; i<llist.getItems().size(); ++i)
-    	{
-    		TableClass block = llist.getItems().get(i);
-
-    		if(llist.getItems().get(i).getEnroll().isSelected())
-    		{
-    			System.out.println(":/");
-
-    			//Not Sure
-
-    			AnchorPane ap = (AnchorPane)tabTimetable.getContent();
-    	    	//Label randomLabel = new Label("COMP1022\nL1");
-    			Label randomLabel = new Label(block.getCcode()+"\n"+block.getLecturesec());
-    	    	Random r = new Random();
-    	    	double start = (r.nextInt(10) + 1) * 20 + 40;
-
-    	    	randomLabel.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	    	randomLabel.setLayoutX(600.0);
-    	    	randomLabel.setLayoutY(start);
-    	    	randomLabel.setMinWidth(100.0);
-    	    	randomLabel.setMaxWidth(100.0);
-    	    	randomLabel.setMinHeight(60);
-    	    	randomLabel.setMaxHeight(60);
-
-    	    	ap.getChildren().addAll(randomLabel);
-
-    	    	//Not sure ends
-    		}
-    	}
-
-    }*/
-
+    /**
+     * Adds a block for the section specified by ts object to the timetable
+     * @param ts Section to be added to timetable
+     * @param s Slot that belongs to section ts
+     */
     @FXML
     public void blocks(TableClass ts, Slot s)
     {
-
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
 
     	ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
@@ -753,10 +855,10 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-    	// System.out.println(atls);
-    	// System.out.println(atls*0.33);
+    	System.out.println(atls);
+    	System.out.println(atls*0.33);
 
-    	if(atls<60)
+    	if(atls<130)
     	{
     		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
     	}
@@ -764,10 +866,13 @@ public class Controller {
     	ap.getChildren().addAll(ts.getLab());
     }
 
-
-
+    /**
+     * Checks whether a slot belongs to section of ts object
+     * @param ts Section to be checked with
+     * @param s Slot that is part of section of ts
+     */
     @FXML
-    void sameSection(TableClass ts, Slot s)
+    public void sameSection(TableClass ts, Slot s)
     {
     	for(int i=0; i<datasAll.size(); ++i)
     	{
@@ -776,13 +881,17 @@ public class Controller {
     			if((datasAll.get(i).getEnroll().isSelected()==false)&&((ts.getEnroll().isSelected())==true))
     			{
     				datasAll.get(i).getEnroll().setSelected(true);
-    				// System.out.println("Same section");
+    				//System.out.println("Same section");
     			}
     		}
     	}
     }
 
-    void printEnrolled(TableClass ts)
+    /**
+     * As soon as a section is enrolled the Console output is updated with all the sections enrolled
+     * @param ts Section that has been enrolled
+     */
+    public void printEnrolled(TableClass ts)
     {
 
     	if(textAreaConsole.getText().substring(0, 36).equals("The following sections are enrolled:"))
@@ -802,8 +911,8 @@ public class Controller {
     			}
     		}
 
-    		// System.out.println("newstr" + newstr);
-    		// System.out.println(ts.getCcode() + " " + ts.getLecturesec());
+    		System.out.println("newstr" + newstr);
+    		System.out.println(ts.getCcode() + " " + ts.getLecturesec());
 
     		if((ts.getCcode() + " " + ts.getLecturesec()).equals(newstr)==false)
     		{
@@ -816,13 +925,18 @@ public class Controller {
     	}
     }
 
-    void printEnrolledRemove(TableClass ts)
+    /**
+     * Prints the enrolled courses on the Console after removing the section ts
+     * whose enrolment status has been changed from checked to unchecked
+     * @param ts Section whose enrolment status has been changed from checked to unchecked
+     */
+    public void printEnrolledRemove(TableClass ts)
     {
     	String match = ts.getCcode() + " " + ts.getLecturesec();
     	String resultant = "";
     	int end = 0;
 
-    	for(int i=37; i<1000; i=i+15)		//change 1000 later
+    	for(int i=37; i<10000; i=i+15)		//change 1000 later
     	{
     		if(match.equals(textAreaConsole.getText().substring(i, i+14)))
     		{
@@ -847,7 +961,10 @@ public class Controller {
     	}
     }
 
-    void lostEnrollment()
+    /**
+     * Prints the enrolled courses on the Console
+     */
+    public void lostEnrollment()
     {
     	String prefix = "";
     	int flag = 0;
@@ -872,9 +989,9 @@ public class Controller {
     /**
      * Removes all labels of a particular section from the timetable and changes the enrollment status of the sections
      * @param ts TableClass object that specifies which section to remove from timetable
-     * @param s
+     * @param s Slot of the Section
      */
-    void removeBlocks(TableClass ts, Slot s)
+    public void removeBlocks(TableClass ts, Slot s)
     {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
 
@@ -889,6 +1006,15 @@ public class Controller {
     			}
     		}
     	}
+    }
+
+    /**
+     * Returns the TableView for List
+     * @return TableView for List
+     */
+    public TableView<TableClass> getTable()
+    {
+    	return llist;
     }
 
 }
