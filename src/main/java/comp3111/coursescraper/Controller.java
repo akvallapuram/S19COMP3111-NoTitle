@@ -142,8 +142,19 @@ public class Controller {
     @FXML
     private TableColumn<TableClass, CheckBox> flEnroll;
 
+    /**
+     * Subset of all sections enrolled without any duplication
+     */
     ObservableList<TableClass> datas3 = FXCollections.observableArrayList();
+
+    /**
+     * List of all sections encountered
+     */
     List<TableClass> datasAll = new ArrayList<TableClass>();
+
+    /**
+     * ObservableList that stores all sections according to Filter
+     */
     ObservableList<TableClass> newList = FXCollections.observableArrayList();
 
 
@@ -395,7 +406,10 @@ public class Controller {
                     obj.setInstructor(inst);
                     //Have to prevent duplication
                     TableClass dupl = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
+                    TableClass dupl1 = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
                     int flagg = 0;
+                    int extra = 0;
+                    Color dummy = col;
                 	for(int l=0; l<datasAll.size(); ++l)
                 	{
                 		TableClass dup = datasAll.get(l);
@@ -409,11 +423,10 @@ public class Controller {
                 					flagg = 1;
                 					dupl = dup;
                 					break;
-                				}
-                			}
+                                }
+                            }
                 		}
-
-                	}
+                    }
 
                 	//End of prevention of duplication
 
@@ -426,7 +439,7 @@ public class Controller {
 
                     	if(flagg==1)
                     	{
-                    		newList.add(dupl);
+                            newList.add(dupl);
                     	}
                     	else
                     	{
@@ -440,13 +453,34 @@ public class Controller {
 
                     if(t.getType().length()>11)
                     {
-                    	obj.setLecturesec(prevSecType.substring(0, 3));
-                    	obj.setColorr(col);
+                        obj.setLecturesec(prevSecType.substring(0, 3));
+                        obj.setColorr(col);
                     }
-                    
+
+                    //
+                    for(int l=0; l<datasAll.size(); ++l)
+                	{
+                		TableClass dup = datasAll.get(l);
+                		if(dup.getCcode().equals(obj.getCcode()))
+                		{
+                			if(dup.getLecturesec().equals(obj.getLecturesec()))
+                			{
+                				if((dup.getCname().equals(obj.getCname()))&&((dup.getTday())==obj.getTday()))
+                				{
+                                    extra++;
+                                }
+                            }
+                		}
+                    }
+                    //
                     if(flagg!=1)
+                    //if(flagg!=1)
                     {
-                    	datasAll.add(obj);
+                        if(extra==0)
+                        {
+                            datasAll.add(obj);
+                        }
+                        //datasAll.add(obj);
                     }
                     llist.setItems(newList);
 
@@ -460,7 +494,7 @@ public class Controller {
 
                     			if(newValue==true)
                     			{
-                    				//System.out.println("Checkbox is checked");
+                    				System.out.println("Checkbox is checked");
                         			blocks(obj, t);
                         			sameSection(obj, t);
                         			printEnrolled(obj);
@@ -822,6 +856,7 @@ public class Controller {
 
     /**
      * Creates a List for the list Tab and aligns each column with a property
+     * Task3
      */
     @FXML
     public void createList2()
@@ -838,14 +873,15 @@ public class Controller {
      * Adds a block for the section specified by ts object to the timetable
      * @param ts Section to be added to timetable
      * @param s Slot that belongs to section ts
+     * Task 4
      */
     @FXML
     public void blocks(TableClass ts, Slot s)
     {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
 
-    	ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
-
+        ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
+        
     	ts.getLab().setBackground(new Background(new BackgroundFill(ts.getColorr(), CornerRadii.EMPTY, Insets.EMPTY)));
     	int d = s.getDay();
 
@@ -871,12 +907,12 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-    	if(atls<130)
+    	/*if(atls<130)
     	{
     		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
-    	}
+    	}*/
         
-        ts.getLab().setFont(ts.getLab().getFont().font(10));
+        ts.getLab().setFont(ts.getLab().getFont().font(5));
 
     	ap.getChildren().addAll(ts.getLab());
     }
@@ -885,6 +921,7 @@ public class Controller {
      * Checks whether a slot belongs to section of ts object
      * @param ts Section to be checked with
      * @param s Slot that is part of section of ts
+     * Task 3
      */
     @FXML
     public void sameSection(TableClass ts, Slot s)
@@ -895,7 +932,10 @@ public class Controller {
     		{
     			if((datasAll.get(i).getEnroll().isSelected()==false)&&((ts.getEnroll().isSelected())==true))
     			{
-    				datasAll.get(i).getEnroll().setSelected(true);
+                    //System.out.println(":/");
+                    datasAll.get(i).setColorr(ts.getColorr());
+                    datasAll.get(i).getEnroll().setSelected(true);
+                    break;
     			}
     		}
     	}
@@ -904,6 +944,7 @@ public class Controller {
     /**
      * As soon as a section is enrolled the Console output is updated with all the sections enrolled
      * @param ts Section that has been enrolled
+     * Task 3
      */
     public void printEnrolled(TableClass ts)
     {
@@ -940,6 +981,7 @@ public class Controller {
      * Prints the enrolled courses on the Console after removing the section ts
      * whose enrolment status has been changed from checked to unchecked
      * @param ts Section whose enrolment status has been changed from checked to unchecked
+     * Task 3
      */
     public void printEnrolledRemove(TableClass ts)
     {
@@ -974,6 +1016,7 @@ public class Controller {
 
     /**
      * Prints the enrolled courses on the Console
+     * Task 3
      */
     public void lostEnrollment()
     {
@@ -1001,6 +1044,7 @@ public class Controller {
      * Removes all labels of a particular section from the timetable and changes the enrollment status of the sections
      * @param ts TableClass object that specifies which section to remove from timetable
      * @param s Slot of the Section
+     * Task 4
      */
     public void removeBlocks(TableClass ts, Slot s)
     {
@@ -1022,6 +1066,7 @@ public class Controller {
     /**
      * Returns the TableView for List
      * @return TableView for List
+     * Task 3
      */
     public TableView<TableClass> getTable()
     {
