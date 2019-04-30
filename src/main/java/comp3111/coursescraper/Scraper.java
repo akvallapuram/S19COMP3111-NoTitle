@@ -97,6 +97,7 @@ public class Scraper {
 		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
+
 		if (times[0].equals("TBA"))
 			return;
 		for (int j = 0; j < times[0].length(); j+=2) {
@@ -127,9 +128,12 @@ public class Scraper {
 		if(sID == null) return;
 		int sectionID = Integer.parseInt(sID);
 
-		if (times[0].equals("TBA"))
+		if (times[0].equals("TBA")){
+			Controller.NUMBER_OF_SECTIONS++;
 			return;
+		}
 
+		System.out.println(type);
 
 		Section sec = new Section(sectionCode, sectionID);
 
@@ -147,6 +151,7 @@ public class Scraper {
 
 	}
 
+	Controller.NUMBER_OF_SECTIONS++;
 	Controller.SECTIONS_IN_SEARCH.add(sec);
 	c.addSection(sec);
 

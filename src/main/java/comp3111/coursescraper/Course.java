@@ -150,8 +150,28 @@ public class Course {
 		this.sections.add(s);
 	}
 
+	/**check if course atleast has one lecture lab or tutorial **/
+	public boolean isValid(){
+
+    for(int i = 0; i < this.numSlots; i++){
+      String type = this.slots[i].getType();
+      boolean b1 = type.startsWith("T");
+      boolean b2 = type.startsWith("L");
+
+      if(!b1 && !b2) return false;
+    }
+
+    return true;
+  }
+
 	public List<Section> getSections(){
 		return this.sections;
+	}
+
+	public String toString(){
+		String newline = this.title + "\n";
+		for(Section s : sections) newline += s.toString();
+		return newline;
 	}
 
 }
