@@ -826,7 +826,7 @@ public class Controller {
     @FXML
     public void createList2()
     {
-    	System.out.println(":-/");
+    	//System.out.println(":-/");
 
     	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
     	flSection.setCellValueFactory(new PropertyValueFactory<>("lecturesec"));
@@ -873,8 +873,8 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-    	System.out.println(atls);
-    	System.out.println(atls*0.33);
+    	//System.out.println(atls);
+    	//System.out.println(atls*0.33);
 
     	if(atls<130)
     	{
@@ -929,8 +929,8 @@ public class Controller {
     			}
     		}
 
-    		System.out.println("newstr" + newstr);
-    		System.out.println(ts.getCcode() + " " + ts.getLecturesec());
+    		//System.out.println("newstr" + newstr);
+    		//System.out.println(ts.getCcode() + " " + ts.getLecturesec());
 
     		if((ts.getCcode() + " " + ts.getLecturesec()).equals(newstr)==false)
     		{
