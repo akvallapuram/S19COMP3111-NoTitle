@@ -72,12 +72,7 @@ public class MyApplication extends Application {
 		Application.launch(args);
 	}
 
-	/*public ObservableList<TableClass> getTableClass()
-	{
-		ObservableList<TableClass> datas = FXCollections.observableArrayList();
-		datas.add(new TableClass("1", "1", "1", "1", "1"));
-		return datas;
-	}*/
+	
 
 
 }
