@@ -58,39 +58,12 @@ public class Section {
     return true;
   }
 
-  public boolean isValid(){
-
-    for(int i = 0; i < this.numSlots; i++){
-      String type = this.slots[i].getType();
-      boolean b1 = type.startsWith("T");
-      boolean b2 = type.startsWith("L");
-
-      if(!b1 && !b2) return false;
-    }
-
-    return true;
-  }
-
-  /**check if slot is lecture, lab or tutorial and in 9AM-10PM **/
-  public static boolean isValidSlot(Slot s){
-
-        if(s == null) return false;
-
-        String type = s.getType();
-        boolean b1 = type.startsWith("T");
-        boolean b2 = type.startsWith("L");
-
-        boolean b3 = (s.getStartHour() >= 9) && (s.getEndHour() <= 22);
-
-        if((b1 || b2) && b3) return true;
-        else return false;
-}
 
   public String toString(){
 
     String text = sectionCode.split(" ")[1] + " " + String.format("(%d)\n", sectionID);
     for(int i = 0; i < numSlots; i++)
-      if(isValidSlot(slots[i])) text += String.format("\t\t%s\n", slots[i].toString());
+      text += String.format("\t\t%s\n", slots[i].toString());
 
       return text;
     }

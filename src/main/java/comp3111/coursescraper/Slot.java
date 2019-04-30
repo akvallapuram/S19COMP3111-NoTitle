@@ -155,4 +155,12 @@ public class Slot {
 	 */
 	public void setType(String type) { this.type = type; }
 
+
+	/**check if slot in 9AM-10PM **/
+	public static boolean isValidSlot(Slot s){
+				if(s == null) return false;
+				if (s.getStartHour() >= 9 && s.getEndHour() <= 22) return true;
+				else return false;
+}
+
 }
