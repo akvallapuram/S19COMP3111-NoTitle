@@ -780,7 +780,6 @@ public class Controller {
   }
 
     // used for the search
-    public static int NUMBER_OF_COURSES = 0;
     public static int NUMBER_OF_SECTIONS = 0;
     public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
     public static List<Section> SECTIONS_IN_SEARCH = new ArrayList<Section>();
@@ -791,6 +790,7 @@ public class Controller {
 
       // disable the enrolled courses for SFQ Search
       buttonSfqEnrollCourse.setDisable(false);
+      Controller.NUMBER_OF_SECTIONS = 0;
 
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
@@ -820,13 +820,10 @@ public class Controller {
 
 
     // number of courses found
-    Controller.NUMBER_OF_COURSES = 0;
-    for(Course c : v) Controller.NUMBER_OF_COURSES++;
-    textAreaConsole.setText("Total Number of different courses in this search: " + Controller.NUMBER_OF_COURSES);
+    textAreaConsole.setText("Total Number of different courses in this search: " + v.size());
 
 
     // number of sections Found
-    Controller.NUMBER_OF_SECTIONS = SECTIONS_IN_SEARCH.size();
     textAreaConsole.setText(textAreaConsole.getText() + "\n" +
     "Total Number of difference sections in this search: " + Controller.NUMBER_OF_SECTIONS + "\n\n");
 
@@ -841,17 +838,18 @@ public class Controller {
 
 
     //print sections
-  	for (Course c : v) {
-      // if(!isValidCourse(c)) continue;
-  		String newline = c.getTitle() + "\n";
-      for(Section sec : c.getSections()) newline += sec.toString() + "\n";
-  		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
-  	}
+    String newline = "";
+  	for (Course c : v) newline += c.toString() + "\n\n\n";
+    textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
+
+      for(Course c : v)
+        for(Section s : c.getSections())
+          for(int i = 0; i < s.getNumSlots(); i++) System.out.println(s.getSlot(i).toString());
+
 
       freeInstructors.clear();
       INSTRUCTORS_IN_SEARCH.clear();
       SECTIONS_IN_SEARCH.clear();
-
     }
 
     /**
