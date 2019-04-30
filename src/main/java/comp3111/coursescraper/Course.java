@@ -15,8 +15,19 @@ public class Course {
 	private Slot [] slots;
 	private int numSlots;
 	private boolean commonCourse;
+
+	/**
+	* stores the SFQ score associated with this score
+	*/
 	private float scoreSFQ;
+	/**
+	* the number of sections associated for the above SFQ score
+	*/
 	private int numSectionsSFQ;
+	/**
+	* list of all the sections associated with the course
+	* @see Class Section
+	*/
 	private List<Section> sections;
 
 
@@ -135,10 +146,18 @@ public class Course {
 	 */
 	public void setCommonCourse(boolean cc) { this.commonCourse = cc; }
 
+	/**
+	* Returns Float SFQ score of the course
+	* @return {@link #scoreSFQ}
+	*/
 	public float getScoreSFQ(){
     return this.scoreSFQ;
   }
 
+	/**
+	* inserts a score for a course's section found in SFQ webpage
+	* @param float score is the score of a section that must be added
+	*/
   public void addToScoreSFQ(float score){
     if(score > 100 || score < 0) return;
     float num = numSectionsSFQ;
@@ -146,11 +165,18 @@ public class Course {
     numSectionsSFQ++;
   }
 
+	/**
+		Inserts a section found by scraper that is related to this course
+		@param Section s is a section that is related to this course
+	*/
 	public void addSection(Section s){
 		this.sections.add(s);
 	}
 
-	/**check if course atleast has one lecture lab or tutorial **/
+	/**
+	* check if course atleast has one lecture, lab or tutorial
+	* @return T/F if course has atleast one lecture, lab or tutorial
+	*/
 	public boolean isValid(){
 
     for(int i = 0; i < this.numSlots; i++){
@@ -164,10 +190,19 @@ public class Course {
     return true;
   }
 
+
+  /**
+	* returns the list sections in this course
+	* @return {@link #sections}
+	*/
 	public List<Section> getSections(){
 		return this.sections;
 	}
 
+	/**
+	* returns a string can be used for printing information about the course
+	* @return String newline which contains the course title and its section info
+	*/
 	public String toString(){
 		String newline = this.title + "\n";
 		for(Section s : sections) newline += s.toString();

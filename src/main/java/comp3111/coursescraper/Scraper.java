@@ -115,12 +115,27 @@ public class Scraper {
 
 	}
 
-
+	/**
+	* Adds a section found in the webpage to the given course
+	* helper function for {@link Scraper#scrape()}
+	* @param e a HtmlElement row consisting of section information
+	* @param c the course to which this section must be added
+	* @param secondRow T/F if secondRow
+	*/
 	private void addSection(HtmlElement e, Course c, boolean secondRow){
 
-		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
+		Controller.NUMBER_OF_SECTIONS++;
+		// get type
+		HtmlTableRow rowSec = (HtmlTableRow) e;
+		String prev = e.getPreviousSibling().asText();
+		String type = rowSec.getCell(0).asText();
+		if(type.length() > 11) type = prev.split("\\s+")[0] + " " + prev.split("\\s+")[1];
+
+
+		// String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
+
 
 		String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
 		sectionCode += " " + type.split(" ")[0];
@@ -128,14 +143,13 @@ public class Scraper {
 		if(sID == null) return;
 		int sectionID = Integer.parseInt(sID);
 
+
 		if (times[0].equals("TBA")){
-			Controller.NUMBER_OF_SECTIONS++;
 			return;
 		}
 
-		System.out.println(type);
-
 		Section sec = new Section(sectionCode, sectionID);
+
 
 		for (int j = 0; j < times[0].length(); j+=2) {
 			String code = times[0].substring(j , j + 2);
@@ -147,11 +161,16 @@ public class Scraper {
 			s.setEnd(times[3]);
 			s.setVenue(venue);
 			s.setType(type);
-			sec.addSlot(s);
+
+			// time of slot
+			if(type.length() > 11){
+				int index = Controller.inSectionSearch(sectionID);
+				Controller.SECTIONS_IN_SEARCH.get(index).addSlot(s);
+			}
+			else sec.addSlot(s);
 
 	}
 
-	Controller.NUMBER_OF_SECTIONS++;
 	Controller.SECTIONS_IN_SEARCH.add(sec);
 	c.addSection(sec);
 
@@ -232,7 +251,7 @@ public class Scraper {
 			// handling 404 exception with by returning null
 			Course pageError = new Course();
 			if(e.getStatusCode() == 404) pageError.setTitle("404PageNotFound");
-			else pageError.setTitle("UnknownError");
+			else pageError.setTitle("UnknownHTTPSError");
 			Vector<Course> errors = new Vector<Course>();
 			errors.add(pageError);
 			return errors;
