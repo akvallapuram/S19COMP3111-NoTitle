@@ -281,9 +281,10 @@ public class Controller {
     }
 
     /**
-     * Filter Results Task 2
+     * Filter Results Task 2 and add the sections to List (Task3)
      * Based on AND logic. If there exists 1+ slot in a Course for every requirement/filter,
      * Displays all slots of course based on filter
+     * List - takes all the sections displayed on the Console after filter and displays a new list in the List Tabgit 
      */
     @FXML
     public void filterResults() {
@@ -441,9 +442,8 @@ public class Controller {
                     {
                     	obj.setLecturesec(prevSecType.substring(0, 3));
                     	obj.setColorr(col);
-                    	//System.out.println("prev sec: " + prevSecType);
                     }
-                    //datas3.add(obj);
+                    
                     if(flagg!=1)
                     {
                     	datasAll.add(obj);
@@ -472,7 +472,7 @@ public class Controller {
                     				{
                     					printEnrolledRemove(obj);
                     				}
-                    				removeBlocks(obj, t);			//printEnrolled does not work with this - I think it works now
+                    				removeBlocks(obj, t);			
                     			}
 
                         	}
@@ -824,8 +824,6 @@ public class Controller {
     @FXML
     public void createList2()
     {
-    	System.out.println(":-/");
-
     	fcCode.setCellValueFactory(new PropertyValueFactory<>("ccode"));
     	flSection.setCellValueFactory(new PropertyValueFactory<>("lecturesec"));
     	fcName.setCellValueFactory(new PropertyValueFactory<>("cname"));
@@ -871,13 +869,12 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-    	System.out.println(atls);
-    	System.out.println(atls*0.33);
-
     	if(atls<130)
     	{
     		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
     	}
+        
+        ts.getLab().setFont(ts.getLab().getFont().font(10));
 
     	ap.getChildren().addAll(ts.getLab());
     }
@@ -897,7 +894,6 @@ public class Controller {
     			if((datasAll.get(i).getEnroll().isSelected()==false)&&((ts.getEnroll().isSelected())==true))
     			{
     				datasAll.get(i).getEnroll().setSelected(true);
-    				//System.out.println("Same section");
     			}
     		}
     	}
@@ -915,7 +911,7 @@ public class Controller {
     		String consoleCurr = textAreaConsole.getText();
     		String newstr = "";
 
-    		for(int i=37; i<100; ++i)		//change 100 later
+    		for(int i=37; i<1000; ++i)		//change 1000 later
     		{
     			if(consoleCurr.charAt(i)=='\n')
     			{
@@ -926,9 +922,6 @@ public class Controller {
     				newstr += consoleCurr.charAt(i);
     			}
     		}
-
-    		System.out.println("newstr" + newstr);
-    		System.out.println(ts.getCcode() + " " + ts.getLecturesec());
 
     		if((ts.getCcode() + " " + ts.getLecturesec()).equals(newstr)==false)
     		{
