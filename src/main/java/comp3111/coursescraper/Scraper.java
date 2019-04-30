@@ -16,6 +16,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import java.util.Vector;
 import org.apache.commons.lang3.StringUtils;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 /**
  * WebScraper provide a sample code that scrape web content. After it is constructed, you can call the method scrape with a keyword,
@@ -113,11 +114,6 @@ public class Scraper {
 
 	}
 
-	private void addInstructor(HtmlElement e, Section sec){
-
-
-
-	}
 
 	private void addSection(HtmlElement e, Course c, boolean secondRow){
 
@@ -175,9 +171,6 @@ public class Scraper {
 
 	public List<Course> scrape(String baseurl, String term, String sub) {
 
-		// used by the controller
-		Controller.NUMBER_OF_SECTIONS = 0;
-
 		try {
 
 			HtmlPage page = client.getPage(baseurl + "/" + term + "/subject/" + sub);
@@ -200,8 +193,7 @@ public class Scraper {
 				for ( HtmlElement e : (List<HtmlElement>)popupdetailslist) {
 					HtmlElement t = (HtmlElement) e.getFirstByXPath(".//th");
 					HtmlElement d = (HtmlElement) e.getFirstByXPath(".//td");
-					//System.out.println(t.getFirstChild());
-					// System.out.println(d.getChildNodes().get(0).asText());
+
 					if (t.asText().equals("EXCLUSION")) {
 						exclusion = d;
 					}
@@ -223,25 +215,6 @@ public class Scraper {
 						addSection(e, c, true);
 					}
 
-
-					// used by search() in Controller.java for INSTRUCTORS_IN_SEARCH
-					if(e!= null){
-						List<?> instructors = (List<?>) e.getByXPath(".//a[contains(@href,'instructor')]");
-						for(HtmlElement ins: (List<HtmlElement>)instructors){
-
-							// find the name
-							String insName = ins.asText();
-							// System.out.println(insName);
-
-							// // check if instructor already in search
-							// int insIndex = Controller.inInstructorSearch(insName);
-							// if(insIndex == -1) Controller.INSTRUCTORS_IN_SEARCH.add(new Instructor(insName, c));
-							// else Controller.INSTRUCTORS_IN_SEARCH.get(insIndex).addCourse(c);
-						}
-
-
-					}
-
 				}
 
 				result.add(c);
@@ -249,12 +222,21 @@ public class Scraper {
 			}
 			client.close();
 			return result;
-		} catch (Exception e) {
+		} catch (FailingHttpStatusCodeException e) {
 
 			// handling 404 exception with by returning null
+			Course pageError = new Course();
+			if(e.getStatusCode() == 404) pageError.setTitle("404PageNotFound");
+			else pageError.setTitle("UnknownError");
+			Vector<Course> errors = new Vector<Course>();
+			errors.add(pageError);
+			return errors;
+
+		}catch (Exception e){
 			System.out.println(e);
 			return null;
 		}
+
 	}
 
 

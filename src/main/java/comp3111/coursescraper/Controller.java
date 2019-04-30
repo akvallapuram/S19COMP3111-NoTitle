@@ -707,7 +707,8 @@ public class Controller {
   boolean isValidCourse(Course c){
 
     for(int i = 0; i < c.getNumSlots(); i++){
-      if(Section.isValidSlot(c.getSlot(i))) return true;
+      String type = c.getSlot(i).getType();
+      if(type.startsWith("L") || type.startsWith("T")) return true;
     }
     return false;
   }
@@ -753,24 +754,40 @@ public class Controller {
     // TASK 1
     @FXML
     public void search() {
+
+      // disable the enrolled courses for SFQ Search
+      buttonSfqEnrollCourse.setDisable(false);
+
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
         //need to display the number of all subjects in a given term even when search is clicked
         //(task5) - Jeff
         //allSubjectSearch();
 
-        // handling 404 error - Anish
-      if(v == null){
-        textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
-        return;
-      }
 
-        textfieldSubject.setText("");
+        // other errors
+        if(v == null) textAreaConsole.setText("Errors: check terminal");
+
+
+      // handling 404 error - Anish
+      if(v.size() == 1) {
+
+        if(v.get(0).getTitle().equals("404PageNotFound")){
+          textAreaConsole.setText("Error 404: Page not Found\nPlease check your parameters");
+          return;
+        }
+
+        if(v.get(0).getTitle().equals("UnknownError")){
+          textAreaConsole.setText("UnknownPageError");
+          return;
+        }
+
+      }
 
 
     // number of courses found
     Controller.NUMBER_OF_COURSES = 0;
-    for(Course c : v) if(isValidCourse(c)) Controller.NUMBER_OF_COURSES++;
+    for(Course c : v) Controller.NUMBER_OF_COURSES++;
     textAreaConsole.setText("Total Number of different courses in this search: " + Controller.NUMBER_OF_COURSES);
 
 
@@ -793,12 +810,13 @@ public class Controller {
   	for (Course c : v) {
       // if(!isValidCourse(c)) continue;
   		String newline = c.getTitle() + "\n";
-      for(Section sec : c.getSections()) newline += sec.toString();
+      for(Section sec : c.getSections()) newline += sec.toString() + "\n";
   		textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
   	}
 
       freeInstructors.clear();
       INSTRUCTORS_IN_SEARCH.clear();
+      SECTIONS_IN_SEARCH.clear();
 
     }
 
