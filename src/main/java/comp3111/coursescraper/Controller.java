@@ -464,8 +464,6 @@ public class Controller {
                         obj.setColorr(col);
                     }
 
-<<<<<<< HEAD
-=======
                     //
                     for(int l=0; l<datasAll.size(); ++l)
                 	{
@@ -482,7 +480,7 @@ public class Controller {
                 		}
                     }
                     //
->>>>>>> dbb1b2e502828071c7df2a60abbcff8c83f811fa
+
                     if(flagg!=1)
                     //if(flagg!=1)
                     {
@@ -842,9 +840,9 @@ public class Controller {
   	for (Course c : v) newline += c.toString() + "\n\n\n";
     textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
 
-      for(Course c : v)
-        for(Section s : c.getSections())
-          System.out.println(s.getSectionCode());
+      // for(Course c : v)
+      //   for(Section s : c.getSections())
+      //     System.out.println(s.getSectionCode());
 
 
       freeInstructors.clear();
@@ -879,7 +877,7 @@ public class Controller {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
 
         ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
-        
+
     	ts.getLab().setBackground(new Background(new BackgroundFill(ts.getColorr(), CornerRadii.EMPTY, Insets.EMPTY)));
     	int d = s.getDay();
 
@@ -905,18 +903,8 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-    	/*if(atls<130)
-    	{
-    		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
-<<<<<<< HEAD
-    	}
 
-        ts.getLab().setFont(ts.getLab().getFont().font(10));
-=======
-    	}*/
-        
-        ts.getLab().setFont(ts.getLab().getFont().font(5));
->>>>>>> dbb1b2e502828071c7df2a60abbcff8c83f811fa
+        ts.getLab().setFont(ts.getLab().getFont().font(6));
 
     	ap.getChildren().addAll(ts.getLab());
     }

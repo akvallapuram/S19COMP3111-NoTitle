@@ -124,18 +124,18 @@ public class Scraper {
 	*/
 	private void addSection(HtmlElement e, Course c, boolean secondRow){
 
-		Controller.NUMBER_OF_SECTIONS++;
-		// get type
-		HtmlTableRow rowSec = (HtmlTableRow) e;
-		String prev = e.getPreviousSibling().asText();
-		String type = rowSec.getCell(0).asText();
-		if(type.length() > 11) type = prev.split("\\s+")[0] + " " + prev.split("\\s+")[1];
-
-
-		// String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
+		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
 
+
+		// check the next row in case
+		DomNode next = e.getNextSibling();
+		boolean addNext = false;
+		if(next != null){
+			String day = next.asText().substring(0, 2);
+			for(int i = 0; i < Slot.DAYS.length; i++) if(Slot.DAYS[i].equals(day)) addNext = true;
+		}
 
 		String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
 		sectionCode += " " + type.split(" ")[0];
@@ -148,6 +148,7 @@ public class Scraper {
 			return;
 		}
 
+		Controller.NUMBER_OF_SECTIONS++;
 		Section sec = new Section(sectionCode, sectionID);
 
 
@@ -161,14 +162,19 @@ public class Scraper {
 			s.setEnd(times[3]);
 			s.setVenue(venue);
 			s.setType(type);
+			sec.addSlot(s);
 
-			// time of slot
-			if(type.length() > 11){
-				int index = Controller.inSectionSearch(sectionID);
-				Controller.SECTIONS_IN_SEARCH.get(index).addSlot(s);
-			}
-			else sec.addSlot(s);
+	}
 
+	if(addNext){
+		String timesNext[] = next.asText().split(" ");
+		Slot s = new Slot();
+		s.setDay(Slot.DAYS_MAP.get(timesNext[0]));
+		s.setStart(times[1]);
+		s.setEnd(times[3]);
+		s.setVenue(venue);
+		s.setType(type);
+		sec.addSlot(s);
 	}
 
 	Controller.SECTIONS_IN_SEARCH.add(sec);
