@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="" />
+    <list default="true" id="0761dc7f-b737-432f-9ae7-78e86f1bb80e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -54,6 +60,18 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="S19COMP3111-NoTitle" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="documentation" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="S19COMP3111-NoTitle" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="S19COMP3111-NoTitle" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="verification" type="c8890929:TasksNode$1" />
               </path>
               <path>
@@ -73,22 +91,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="1260">
               <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+            <state relative-caret-position="570">
+              <caret line="40" column="2" lean-forward="true" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2626#2627#0" expanded="true" />
                 <element signature="e#2657#2658#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -111,14 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4426">
-              <caret line="283" selection-start-line="283" selection-end-line="283" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="373">
+              <caret line="705" lean-forward="true" selection-start-line="705" selection-end-line="705" />
             </state>
           </provider>
         </entry>
@@ -126,7 +150,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
+            <state relative-caret-position="450">
               <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -138,8 +162,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
+            <state relative-caret-position="510">
+              <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -174,6 +198,7 @@
       <find>client</find>
       <find>select All</find>
       <find>searc</find>
+      <find>search</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,8 +219,8 @@
         <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/AllSearchTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java" />
         <option value="$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java" />
       </list>
     </option>
@@ -211,7 +236,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,6 +248,19 @@
               <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
               <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="S19COMP3111-NoTitle" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="javadoc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="S19COMP3111-NoTitle" type="b2602c69:ProjectViewProjectNode" />
@@ -341,11 +379,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556516943698" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556593170635" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
@@ -374,7 +412,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MyApplication">
+  <component name="RunManager" selected="Gradle.S19COMP3111-NoTitle [javadoc]">
     <configuration name="MyApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp3111.coursescraper.MyApplication" />
       <module name="S19COMP3111-NoTitle.main" />
@@ -445,7 +483,7 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="S19COMP3111-NoTitle [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="S19COMP3111-NoTitle [javadoc]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -456,7 +494,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="test" />
+            <option value="javadoc" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -485,11 +523,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.S19COMP3111-NoTitle [javadoc]" />
         <item itemvalue="Application.MyApplication" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle [check]" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestCoverageVerification]" />
         <item itemvalue="Gradle.S19COMP3111-NoTitle [jacocoTestReport]" />
-        <item itemvalue="Gradle.S19COMP3111-NoTitle [test]" />
       </list>
     </recent_temporary>
   </component>
@@ -542,8 +580,8 @@
     <frame x="0" y="23" width="1680" height="961" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7329287" visible="true" weight="0.2783883" />
-      <window_info id="Structure" order="1" sideWeight="0.2670713" side_tool="true" visible="true" weight="0.2783883" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7314112" visible="true" weight="0.25641027" />
+      <window_info id="Structure" order="1" sideWeight="0.26858878" side_tool="true" visible="true" weight="0.25641027" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
@@ -628,12 +666,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/resources/main/ui.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
           <caret line="59" column="126" lean-forward="true" selection-start-line="59" selection-start-column="126" selection-end-line="59" selection-end-column="126" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/build/classes/java/main/comp3111/coursescraper/MyApplication.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -668,12 +706,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/main/ui.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="137" column="50" lean-forward="true" selection-start-line="137" selection-end-line="138" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -704,16 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="86" column="56" selection-start-line="84" selection-start-column="8" selection-end-line="86" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
@@ -732,12 +760,36 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/ui.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="44" column="107" lean-forward="true" selection-start-line="44" selection-start-column="107" selection-end-line="44" selection-end-column="107" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/AllSearchTask.java" />
+    <entry file="file://$PROJECT_DIR$/build/reports/tests/test/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Section.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -746,10 +798,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/AllSearchTask.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="40" column="2" lean-forward="true" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2626#2627#0" expanded="true" />
+            <element signature="e#2657#2658#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Slot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="1260">
           <caret line="100" column="21" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
         </state>
       </provider>
@@ -768,48 +831,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/reports/tests/test/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/ItemTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Scraper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/comp3111/coursescraper/FxTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4426">
-          <caret line="283" selection-start-line="283" selection-end-line="283" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/comp3111/coursescraper/MyApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2626#2627#0" expanded="true" />
-            <element signature="e#2657#2658#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="373">
+          <caret line="705" lean-forward="true" selection-start-line="705" selection-end-line="705" />
         </state>
       </provider>
     </entry>

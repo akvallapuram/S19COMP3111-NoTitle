@@ -45,7 +45,10 @@ import javafx.beans.value.ChangeListener ;
 import javafx.beans.value.ObservableValue ;
 
 
-
+/**
+ * Controller class for MyApplication.java and Ui.fxml
+ * Implements functionality that interacts with UI elements
+ */
 public class Controller {
 
     /**
@@ -124,8 +127,14 @@ public class Controller {
     @FXML
     private CheckBox LT;
     @FXML
+    /**
+     * Select All Button in Filter Tab
+     */
     public Button SelectAll;
     @FXML
+    /**
+     * AllSS Button in Filter Tab
+     */
     public Button AllSS;
     @FXML
     private TableView<TableClass> llist;
@@ -679,6 +688,9 @@ public class Controller {
 
 
     @FXML
+    /**
+     * Basic Search button based on URL, Term, Subject
+     */
     public void search() {
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
