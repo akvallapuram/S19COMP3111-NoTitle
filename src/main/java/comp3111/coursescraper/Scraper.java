@@ -115,12 +115,27 @@ public class Scraper {
 
 	}
 
-
+	/**
+	* Adds a section found in the webpage to the given course
+	* helper function for {@link Scraper#scrape()}
+	* @param e a HtmlElement row consisting of section information
+	* @param c the course to which this section must be added
+	* @param secondRow T/F if secondRow
+	*/
 	private void addSection(HtmlElement e, Course c, boolean secondRow){
 
 		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
+
+
+		// check the next row in case
+		DomNode next = e.getNextSibling();
+		boolean addNext = false;
+		if(next != null){
+			String day = next.asText().substring(0, 2);
+			for(int i = 0; i < Slot.DAYS.length; i++) if(Slot.DAYS[i].equals(day)) addNext = true;
+		}
 
 		String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
 		sectionCode += " " + type.split(" ")[0];
@@ -128,14 +143,14 @@ public class Scraper {
 		if(sID == null) return;
 		int sectionID = Integer.parseInt(sID);
 
+
 		if (times[0].equals("TBA")){
-			Controller.NUMBER_OF_SECTIONS++;
 			return;
 		}
 
-		System.out.println(type);
-
+		Controller.NUMBER_OF_SECTIONS++;
 		Section sec = new Section(sectionCode, sectionID);
+
 
 		for (int j = 0; j < times[0].length(); j+=2) {
 			String code = times[0].substring(j , j + 2);
@@ -151,8 +166,18 @@ public class Scraper {
 
 	}
 
-	Controller.NUMBER_OF_SECTIONS++;
-	Controller.SECTIONS_IN_SEARCH.add(sec);
+	if(addNext){
+		String timesNext[] = next.asText().split(" ");
+		Slot s = new Slot();
+		s.setDay(Slot.DAYS_MAP.get(timesNext[0]));
+		s.setStart(times[1]);
+		s.setEnd(times[3]);
+		s.setVenue(venue);
+		s.setType(type);
+		sec.addSlot(s);
+	}
+
+
 	c.addSection(sec);
 
 
@@ -232,7 +257,7 @@ public class Scraper {
 			// handling 404 exception with by returning null
 			Course pageError = new Course();
 			if(e.getStatusCode() == 404) pageError.setTitle("404PageNotFound");
-			else pageError.setTitle("UnknownError");
+			else pageError.setTitle("UnknownHTTPSError");
 			Vector<Course> errors = new Vector<Course>();
 			errors.add(pageError);
 			return errors;
@@ -304,33 +329,6 @@ public class Scraper {
 		}
 
 		return result;
-	}
-
-
-	/**Helper function for the scrapeCourseSFQ function below**/
-	public static boolean isCourseEnrolled(String name, List<TableClass> courses){
-
-		for(int i = 0; i < courses.size(); i++){
-			TableClass course = courses.get(i);
-			String cCode = course.getCcode().trim();
-			String _name = name.trim();
-			if(cCode.equals(_name) && course.getEnroll().isSelected()) return true;
-		}
-
-		return false;
-	}
-
-
-	/**Helper function for the scrapeCourseSFQ function below**/
-	public static int courseInSFQ(String name, List<Course> courses){
-
-		if(courses.size() == 0) return -1;
-
-		String _name = name.trim();
-		for(int i = 0; i < courses.size(); i++)
-			if(courses.get(i).getTitle().trim().equals(_name)) return i;
-
-		return -1;
 	}
 
 

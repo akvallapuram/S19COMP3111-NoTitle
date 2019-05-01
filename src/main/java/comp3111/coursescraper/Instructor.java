@@ -12,6 +12,10 @@ import java.util.regex.*;
 
 public class Instructor{
 
+  /**
+  * list of sections taught by this instructor
+  * @see Class Section
+  */
   private List<Section> sectionsTaught;
   private String name;
   private boolean freeTu310;
@@ -85,8 +89,6 @@ public class Instructor{
     float num = numSectionsSFQ;
     this.scoreSFQ = (scoreSFQ*num + score) / (float)(num+1);
     numSectionsSFQ++;
-    // System.out.println(this.name + "'s new score is " + this.scoreSFQ);
-
   }
 
 

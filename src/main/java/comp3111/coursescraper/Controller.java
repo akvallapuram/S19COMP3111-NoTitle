@@ -266,25 +266,32 @@ public class Controller {
         return numcourses;
     }
 
+    /**
+    * Prints the SFQ score of all the instructors in the given url to the SFQ webpage
+    * @see Scraper#scrapeInstructorSFQ()
+    */
     @FXML
     void findInstructorSfq() {
         Scraper scraperSFQ = new Scraper();
         String url = textfieldSfqUrl.getText();
-        @SuppressWarnings("FIXME: this is a hack and should be fixed.")
         List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm");
-        //textAreaConsole.setText(textAreaConsole.getText() + "\n" + testfieldSfqUrl.getText());
+        // List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ(testfieldSfqUrl.getText());
 
         String newline = "";
         for(Instructor ins : instructors) newline += String.format("%s %.2f %n", ins.getName(), ins.getScoreSFQ());
         textAreaConsole.setText(newline);
     }
 
+    /**
+    * Prints the SFQ score of all the courses enrolled from the given url to the SFQ webpage
+    * @see Scraper#scrapeCourseSFQ()
+    */
     @FXML
     void findSfqEnrollCourse() {
       Scraper scraperSFQ = new Scraper();
       String url = textfieldSfqUrl.getText();
-      @SuppressWarnings("FIXME: this is a hack and should be fixed.")
       List<Course> courses = scraperSFQ.scrapeCourseSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm", datasAll);
+      // List<Course> courses = scraperSFQ.scrapeCourseSFQ(testfieldSfqUrl.getText());
 
       String newline = "";
       for(Course c : courses) newline += String.format("%s %.2f %n", c.getTitle(), c.getScoreSFQ());
@@ -476,7 +483,7 @@ public class Controller {
                             }
                 		}
                     }
-                    
+
                     if(flagg!=1)
                     {
                         if(extra==0)
@@ -509,7 +516,7 @@ public class Controller {
                     				{
                     					printEnrolledRemove(obj);
                     				}
-                    				removeBlocks(obj, t);			
+                    				removeBlocks(obj, t);
                     			}
 
                         	}
@@ -740,29 +747,6 @@ public class Controller {
         SelectAll.setOnAction(t -> selectAll());
     }
 
-  /**Check if a course contains atleast a lecture, lab or tutorial**/
-  boolean isValidCourse(Course c){
-
-    for(int i = 0; i < c.getNumSlots(); i++){
-      String type = c.getSlot(i).getType();
-      if(type.startsWith("L") || type.startsWith("T")) return true;
-    }
-    return false;
-  }
-
-
-  /**Used by scraper to check if a section has already been scraped before**/
-  public static int inSectionSearch(int _sid){
-
-    if(SECTIONS_IN_SEARCH.size() == 0) return -1;
-
-    for(int i = 0; i < SECTIONS_IN_SEARCH.size(); i++){
-      int sid = SECTIONS_IN_SEARCH.get(i).getSectionID();
-      if( sid == _sid) return sid;
-    }
-
-    return -1;
-  }
 
 
   /** Used by scraper to check if an instructor has already been scraped**/
@@ -785,7 +769,6 @@ public class Controller {
     // used for the search
     public static int NUMBER_OF_SECTIONS = 0;
     public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
-    public static List<Section> SECTIONS_IN_SEARCH = new ArrayList<Section>();
 
     // TASK 1
     @FXML
@@ -803,7 +786,7 @@ public class Controller {
 
 
         // other errors
-        if(v == null) textAreaConsole.setText("Errors: check terminal");
+        if(v == null) textAreaConsole.setText("Errors: check your terminal");
 
 
       // handling 404 error - Anish
@@ -814,8 +797,8 @@ public class Controller {
           return;
         }
 
-        if(v.get(0).getTitle().equals("UnknownError")){
-          textAreaConsole.setText("UnknownPageError");
+        if(v.get(0).getTitle().equals("UnknownHTTPSError")){
+          textAreaConsole.setText("UnknownHTTPSError");
           return;
         }
 
@@ -845,14 +828,10 @@ public class Controller {
   	for (Course c : v) newline += c.toString() + "\n\n\n";
     textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
 
-      for(Course c : v)
-        for(Section s : c.getSections())
-          for(int i = 0; i < s.getNumSlots(); i++) System.out.println(s.getSlot(i).toString());
-
-
+      // clear storage for next search
       freeInstructors.clear();
       INSTRUCTORS_IN_SEARCH.clear();
-      SECTIONS_IN_SEARCH.clear();
+      Controller.NUMBER_OF_SECTIONS = 0;
     }
 
     /**
@@ -882,7 +861,7 @@ public class Controller {
     	AnchorPane ap = (AnchorPane)tabTimetable.getContent();
 
         ts.getLab().setText(ts.getCcode()+"\n"+ts.getLecturesec());
-        
+
     	ts.getLab().setBackground(new Background(new BackgroundFill(ts.getColorr(), CornerRadii.EMPTY, Insets.EMPTY)));
     	int d = s.getDay();
 
