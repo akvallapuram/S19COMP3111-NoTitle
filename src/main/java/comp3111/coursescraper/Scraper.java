@@ -177,7 +177,7 @@ public class Scraper {
 		sec.addSlot(s);
 	}
 
-	Controller.SECTIONS_IN_SEARCH.add(sec);
+
 	c.addSection(sec);
 
 

@@ -746,19 +746,6 @@ public class Controller {
     }
 
 
-  /**Used by scraper to check if a section has already been scraped before**/
-  public static int inSectionSearch(int _sid){
-
-    if(SECTIONS_IN_SEARCH.size() == 0) return -1;
-
-    for(int i = 0; i < SECTIONS_IN_SEARCH.size(); i++){
-      int sid = SECTIONS_IN_SEARCH.get(i).getSectionID();
-      if( sid == _sid) return sid;
-    }
-
-    return -1;
-  }
-
 
   /** Used by scraper to check if an instructor has already been scraped**/
   public static int inInstructorSearch(String _ins){
@@ -780,7 +767,6 @@ public class Controller {
     // used for the search
     public static int NUMBER_OF_SECTIONS = 0;
     public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
-    public static List<Section> SECTIONS_IN_SEARCH = new ArrayList<Section>();
 
     // TASK 1
     @FXML
@@ -840,14 +826,10 @@ public class Controller {
   	for (Course c : v) newline += c.toString() + "\n\n\n";
     textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
 
-      // for(Course c : v)
-      //   for(Section s : c.getSections())
-      //     System.out.println(s.getSectionCode());
-
-
+      // clear storage for next search
       freeInstructors.clear();
       INSTRUCTORS_IN_SEARCH.clear();
-      SECTIONS_IN_SEARCH.clear();
+      Controller.NUMBER_OF_SECTIONS = 0;
     }
 
     /**

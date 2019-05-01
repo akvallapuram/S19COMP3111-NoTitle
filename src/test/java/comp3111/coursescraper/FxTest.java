@@ -41,7 +41,7 @@ public class FxTest extends ApplicationTest {
    		stage.setScene(scene);
    		stage.setTitle("Course Scraper");
 		stage.show();
-		ctr = loader.getController(); 
+		ctr = loader.getController();
    		s = scene;
 	}
 
