@@ -2,9 +2,9 @@
 ## Project Problem Statement and Activities
 
 ### S19COMP3111-NoTitle (Team34)
-* Anish - Task 1 + 6 
-* Nikhil - Task 3 + 4 
-* Jeff - Task 2 + 5 
+* Vallapuram Anish Krishna - Task 1 + 6 
+* Nanda Nikhil - Task 3 + 4 
+* Zhan Jefferson - Task 2 + 5 
 
 
 > **Activity 1 Due (6%): 18-3-2019 (Wk 7 Mon) 20:00**
