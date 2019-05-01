@@ -282,7 +282,7 @@ public class Controller {
         Scraper scraperSFQ = new Scraper();
         String url = textfieldSfqUrl.getText();
         List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ(url);
-
+        //System.out.println(System.getProperty("user.dir"));
         String newline = "";
         for(Instructor ins : instructors) newline += String.format("%s %.2f %n", ins.getName(), ins.getScoreSFQ());
         textAreaConsole.setText(newline);

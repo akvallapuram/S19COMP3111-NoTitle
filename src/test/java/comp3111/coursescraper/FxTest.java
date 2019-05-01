@@ -129,13 +129,15 @@ public void testSameSection()
 	@Test
 	public void testInstructorSFQ(){
 		clickOn("#buttonSearch");
-		clickOn("#tabFilter");
-		clickOn("#CC");
-		sleep(500);
-		clickOn("#tabList");
-		clickOn(1000, 160, MouseButton.PRIMARY);
-		sleep(500);
+//		clickOn("#tabFilter");
+//		clickOn("#CC");
+//		sleep(500);
+//		clickOn("#tabList");
+//		clickOn(1000, 160, MouseButton.PRIMARY);
+//		sleep(500);
 		clickOn("#tabSfq");
+		clickOn("#textfieldSfqUrl");
+		write("file://" + System.getProperty("user.dir").toString() + "/SchoolReport.htm");
 		clickOn("#buttonInstructorSfq");
 		sleep(500);
 		clickOn("#buttonSfqEnrollCourse");
