@@ -46,7 +46,8 @@ import javafx.beans.value.ObservableValue ;
 
 
 /**
- * This is the controller for MyApplication
+ * Controller class for MyApplication.java and Ui.fxml
+ * Implements functionality that interacts with UI elements
  */
 public class Controller {
 
@@ -127,12 +128,12 @@ public class Controller {
     private CheckBox LT;
     @FXML
     /**
-     * Select All Button
+     * Select All Button in Filter Tab
      */
     public Button SelectAll;
     @FXML
     /**
-     * All Subject Search Button
+     * AllSS Button in Filter Tab
      */
     public Button AllSS;
     @FXML
@@ -793,6 +794,9 @@ public class Controller {
     * Task 1
     */
     @FXML
+    /**
+     * Basic Search button based on URL, Term, Subject
+     */
     public void search() {
 
       // disable the enrolled courses for SFQ Search

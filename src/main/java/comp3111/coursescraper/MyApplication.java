@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
+ *
  * The entry point of the entire program. It is quite unlikely you need to change this file. But you can change it if you want :)
  *
  * GUI
@@ -70,7 +71,7 @@ public class MyApplication extends Application {
 		Application.launch(args);
 	}
 
-	
+
 
 
 }
