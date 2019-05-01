@@ -88,7 +88,8 @@ public class Instructor{
   * @return {@link #freeTu310}
   */
   public boolean isFreeTu310(){
-    return freeTu310;
+    for(Section s : this.sectionsTaught) if(s.getNumSlots() != 0) return freeTu310;
+    return false;
   }
 
   /**
@@ -116,6 +117,13 @@ public class Instructor{
     return this.scoreSFQ;
   }
 
+  /**
+  * Returns the sections taught by an Instructor
+  * @return {@link #sectionsTaught}
+  */
+  public List<Section> getSections(){
+    return this.sectionsTaught;
+  }
 
   /**
   * Adds a found SFQ score associated with the Instructor from the given SFQ url

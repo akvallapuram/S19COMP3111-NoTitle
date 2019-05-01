@@ -857,6 +857,9 @@ public class Controller {
     textAreaConsole.setText(textAreaConsole.getText() + "\n" +
     "Instructors who has teaching assignment this term but does not need to teach at Tu 3:10pm:\n" + freeIns + "\n\n");
 
+    for(Instructor ins : INSTRUCTORS_IN_SEARCH)
+
+      if(ins.getName().equals("HUI, Pan")) for(Section s : ins.getSections()) System.out.println(s.get;
 
     //print sections
     String newline = "";
