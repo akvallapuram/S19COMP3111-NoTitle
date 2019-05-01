@@ -802,12 +802,13 @@ public class Controller {
       // disable the enrolled courses for SFQ Search
       buttonSfqEnrollCourse.setDisable(false);
       Controller.NUMBER_OF_SECTIONS = 0;
+      int NUMBER_OF_COURSES = 0;
 
     	List<Course> v = scraper.scrape(textfieldURL.getText(), textfieldTerm.getText(),textfieldSubject.getText());
 
         //need to display the number of all subjects in a given term even when search is clicked
         //(task5) - Jeff
-        //allSubjectSearch();
+        allSubjectSearch();
 
 
         // other errors
@@ -829,9 +830,10 @@ public class Controller {
 
       }
 
+      for(Course c : v) if(c.isValid()) NUMBER_OF_COURSES++;
 
     // number of courses found
-    textAreaConsole.setText("Total Number of different courses in this search: " + v.size());
+    textAreaConsole.setText("Total Number of different courses in this search: " + NUMBER_OF_COURSES);
 
 
     // number of sections Found
