@@ -215,7 +215,13 @@ public class Scraper {
 			HtmlPage page = client.getPage(baseurl + "/" + term + "/subject/" + sub);
 
 
+
 			List<?> items = (List<?>) page.getByXPath("//div[@class='course']");
+
+			// get prefixes
+			List<?> depts = (List<?>) page.getByXPath("//div[@class='depts']/a");
+			Controller.NUMBER_OF_PREFIXES = depts.size();
+
 
 			Vector<Course> result = new Vector<Course>();
 

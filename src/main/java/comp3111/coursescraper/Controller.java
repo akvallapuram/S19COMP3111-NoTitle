@@ -785,7 +785,10 @@ public class Controller {
     * Global variable used to keep track of Instructors found in search
     */
     public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
-
+    /**
+    * Global variable used to keep track of the number of prefixes
+    */
+    public static int NUMBER_OF_PREFIXES = 0;
 
 
 
@@ -811,6 +814,7 @@ public class Controller {
         // allSubjectSearch();
 
 
+
         // other errors
         if(v == null) textAreaConsole.setText("Errors: check your terminal");
 
@@ -832,8 +836,11 @@ public class Controller {
 
       for(Course c : v) if(c.isValid()) NUMBER_OF_COURSES++;
 
+    // number of prefixes
+    textAreaConsole.setText(textAreaConsole.getText() + "\nTotal Number of Categories/Code Prefix: " + Controller.NUMBER_OF_PREFIXES);
+
     // number of courses found
-    textAreaConsole.setText("Total Number of different courses in this search: " + NUMBER_OF_COURSES);
+    textAreaConsole.setText(textAreaConsole.getText() + "\nTotal Number of different courses in this search: " + NUMBER_OF_COURSES);
 
 
     // number of sections Found
