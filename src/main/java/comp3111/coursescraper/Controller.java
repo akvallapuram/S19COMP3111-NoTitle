@@ -45,7 +45,9 @@ import javafx.beans.value.ChangeListener ;
 import javafx.beans.value.ObservableValue ;
 
 
-
+/**
+ * This is the controller for MyApplication
+ */
 public class Controller {
 
     /**
@@ -124,8 +126,14 @@ public class Controller {
     @FXML
     private CheckBox LT;
     @FXML
+    /**
+     * Select All Button
+     */
     public Button SelectAll;
     @FXML
+    /**
+     * All Subject Search Button
+     */
     public Button AllSS;
     @FXML
     private TableView<TableClass> llist;

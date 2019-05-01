@@ -117,7 +117,7 @@ public class Scraper {
 
 	/**
 	* Adds a section found in the webpage to the given course
-	* helper function for {@link Scraper#scrape()}
+	* helper function
 	* @param e a HtmlElement row consisting of section information
 	* @param c the course to which this section must be added
 	* @param secondRow T/F if secondRow

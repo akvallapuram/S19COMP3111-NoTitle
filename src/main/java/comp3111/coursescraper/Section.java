@@ -37,7 +37,7 @@ public class Section {
   /**
   * The number of slots that the Section currently has
   */
-	private int numSlots;
+  private int numSlots;
 
 
 
@@ -68,9 +68,10 @@ public class Section {
   }
 
   /**
-  * Returns the timetable slot of the Section for the given index
-  * @param i index of the slot in {@link #slots}
-  */
+   * Returns the timetable slot of the Section for the given index
+   * @param i index of the slot in {@link #slots}
+   * @return slot with the given index
+   */
   public Slot getSlot(int i){
     return this.slots[i];
   }

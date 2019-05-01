@@ -37,7 +37,7 @@ public class TableClass {
 	 * @param co Color
 	 * @param d Day
 	 */
-	TableClass(String c, String l, String cn, String i, Color co, int d)
+	public TableClass(String c, String l, String cn, String i, Color co, int d)
 	{
 		this.ccode = c;
 		this.lecturesec = l;
@@ -52,7 +52,7 @@ public class TableClass {
 	/**
 	 * This is the Default Constructor
 	 */
-	TableClass()
+	public TableClass()
 	{
 		this.ccode = " ";
 		this.lecturesec = " ";

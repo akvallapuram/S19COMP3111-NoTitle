@@ -16,7 +16,13 @@ public class Slot {
 	private LocalTime end;
 	private String venue;
 	private String type;
+	/**
+	 * Array of Dates
+	 */
 	public static final String DAYS[] = {"Mo", "Tu", "We", "Th", "Fr", "Sa"};
+	/**
+	 * Map of integer representation of dates (mo = 0)
+	 */
 	public static final Map<String, Integer> DAYS_MAP = new HashMap<String, Integer>();
 	static {
 		for (int i = 0; i < DAYS.length; i++)

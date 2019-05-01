@@ -1,11 +1,12 @@
 package comp3111.coursescraper;
 
-/**
- * OOP representation of a Course in a term. E.G. COMP 3111
- */
+
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * OOP representation of a Course in a term. E.G. COMP 3111
+ */
 public class Course {
 	private static final int DEFAULT_MAX_SLOT = 20;
 
