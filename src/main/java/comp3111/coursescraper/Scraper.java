@@ -2,6 +2,7 @@ package comp3111.coursescraper;
 
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -9,9 +10,13 @@ import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import java.util.Vector;
-
+import org.apache.commons.lang3.StringUtils;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 /**
  * WebScraper provide a sample code that scrape web content. After it is constructed, you can call the method scrape with a keyword,
@@ -92,6 +97,7 @@ public class Scraper {
 		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
 		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
 		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
+
 		if (times[0].equals("TBA"))
 			return;
 		for (int j = 0; j < times[0].length(); j+=2) {
@@ -109,6 +115,99 @@ public class Scraper {
 
 	}
 
+	/**
+	* Adds a section found in the webpage to the given course
+	* helper function
+	* @param e a HtmlElement row consisting of section information
+	* @param c the course to which this section must be added
+	* @param secondRow T/F if secondRow
+	*/
+	private void addSection(HtmlElement e, Course c, boolean secondRow){
+
+		String type = e.getChildNodes().get(secondRow ? 0 : 1).asText();
+		String times[] =  e.getChildNodes().get(secondRow ? 0 : 3).asText().split(" ");
+		String venue = e.getChildNodes().get(secondRow ? 1 : 4).asText();
+
+
+		// check the next row in case
+		DomNode next = e.getNextSibling();
+		boolean addNext = false;
+		if(next != null){
+			String day = next.asText().substring(0, 2);
+			for(int i = 0; i < Slot.DAYS.length; i++) if(Slot.DAYS[i].equals(day)) addNext = true;
+		}
+
+		String sectionCode = c.getTitle().split(" ")[0] + c.getTitle().split(" ")[1];
+		sectionCode += " " + type.split(" ")[0];
+		String sID = StringUtils.substringBetween(type, "(", ")");
+		if(sID == null) return;
+		int sectionID = Integer.parseInt(sID);
+
+
+		if (times[0].equals("TBA")){
+			return;
+		}
+
+		Controller.NUMBER_OF_SECTIONS++;
+		Section sec = new Section(sectionCode, sectionID);
+
+
+		for (int j = 0; j < times[0].length(); j+=2) {
+			String code = times[0].substring(j , j + 2);
+			if (Slot.DAYS_MAP.get(code) == null)
+				break;
+			Slot s = new Slot();
+			s.setDay(Slot.DAYS_MAP.get(code));
+			s.setStart(times[1]);
+			s.setEnd(times[3]);
+			s.setVenue(venue);
+			s.setType(type);
+			sec.addSlot(s);
+
+	}
+
+	if(addNext){
+		String timesNext[] = next.asText().split(" ");
+		Slot s = new Slot();
+		s.setDay(Slot.DAYS_MAP.get(timesNext[0]));
+		s.setStart(times[1]);
+		s.setEnd(times[3]);
+		s.setVenue(venue);
+		s.setType(type);
+		sec.addSlot(s);
+	}
+
+
+	c.addSection(sec);
+
+
+	if(e!= null){
+		List<?> instructors = (List<?>) e.getByXPath(".//a[contains(@href,'instructor')]");
+		for(HtmlElement ins: (List<HtmlElement>)instructors){
+
+			// find the name
+			String insName = ins.asText();
+
+			// check if instructor already in search
+			int insIndex = Controller.inInstructorSearch(insName);
+			if(insIndex == -1) Controller.INSTRUCTORS_IN_SEARCH.add(new Instructor(insName, sec));
+			else Controller.INSTRUCTORS_IN_SEARCH.get(insIndex).addSection(sec);
+		}
+	}
+
+
+}
+
+
+	/**
+	* A function for srapping for Course info from a given Webpage information
+	* @param baseurl the domain of the webpage to be scraped
+	* @param term the term of the calendar year that must be scraped format (YYTT)
+	* YY = 18 if year of term is 2018 and TT = {Fall, Winter, Spring, Summer} = {10, 20, 30, 40}
+	* @param sub the code of the department whose courses to be scraped
+	* e.g. Computer Science Department converts COMP
+	* @return a List of Courses that were found in the webpage {@link Course}
+	*/
 	public List<Course> scrape(String baseurl, String term, String sub) {
 
 		try {
@@ -133,8 +232,7 @@ public class Scraper {
 				for ( HtmlElement e : (List<HtmlElement>)popupdetailslist) {
 					HtmlElement t = (HtmlElement) e.getFirstByXPath(".//th");
 					HtmlElement d = (HtmlElement) e.getFirstByXPath(".//td");
-					//System.out.println(t.getFirstChild());
-					//System.out.println(d.getChildNodes().get(0).asText());
+
 					if (t.asText().equals("EXCLUSION")) {
 						exclusion = d;
 					}
@@ -149,20 +247,199 @@ public class Scraper {
 				List<?> sections = (List<?>) htmlItem.getByXPath(".//tr[contains(@class,'newsect')]");
 				for ( HtmlElement e: (List<HtmlElement>)sections) {
 					addSlot(e, c, false);
+					addSection(e, c, false);
 					e = (HtmlElement)e.getNextSibling();
-					if (e != null && !e.getAttribute("class").contains("newsect"))
+					if (e != null && !e.getAttribute("class").contains("newsect")){
 						addSlot(e, c, true);
+						addSection(e, c, true);
+					}
+
 				}
 
 				result.add(c);
+				// Controller.NUMBER_OF_SECTIONS += sections.size();
 			}
 			client.close();
 			return result;
-		} catch (Exception e) {
+		} catch (FailingHttpStatusCodeException e) {
 
-			// handling 404 exception with by returning null - Anish
+			// handling 404 exception with by returning null
+			Course pageError = new Course();
+			if(e.getStatusCode() == 404) pageError.setTitle("404PageNotFound");
+			else pageError.setTitle("UnknownHTTPSError");
+			Vector<Course> errors = new Vector<Course>();
+			errors.add(pageError);
+			return errors;
+
+		}catch (Exception e){
+			System.out.println(e);
 			return null;
 		}
+
+	}
+
+
+/**
+* Returns the index of the Instructor in a given Instructor List for a given Instructor Name
+* Helper function for the scrapeInstructorSFQ function below
+* @param name name of the Instructor
+* @param instructors list of instructors to search
+* @return index of the instructor found in the list (-1 if not found)
+*/
+
+	public static int instructorInSFQ(String name, List<Instructor> instructors){
+		if(instructors.size() == 0) return -1;
+		for(int i = 0; i < instructors.size(); i++)
+			if(instructors.get(i).getName().equals(name)) return i;
+		return -1;
+	}
+
+
+	/**
+	* Scrapes the SFQ webpage for Instructors
+	* @param sfqURL url of the SFQ webpage from Instructors SFQ scores must be scraped
+	* @return list of Instructors with their SFQ scores updated
+	*/
+	public List<Instructor> scrapeInstructorSFQ(String sfqURL){
+
+		List<Instructor> result = new ArrayList<Instructor>();
+
+		try{
+
+			// get page
+			HtmlPage page = client.getPage(sfqURL);
+
+			// get all tables for a Department
+			List<?> departments = (List<?>) page.getByXPath(".//table[contains(@border, '1')]");
+
+			// skip the first table - it is overall statistics
+			departments.remove(0);
+
+			for ( HtmlTable dept : (List<HtmlTable>)departments){
+				for(HtmlTableRow row : dept.getRows()){
+
+					// name
+					String ins = row.getCell(2).asText();
+					// section score
+					String score = row.getCell(4).asText().split("\\(")[0];
+
+					if(row.getCells().size() == 8 && !ins.trim().isEmpty() && !ins.contains("Instructor") && !score.contains("-")){
+
+						// get the numbers
+						float scoref = Float.parseFloat(score);
+						int insIndex = instructorInSFQ(ins, result);
+
+						// new instructor
+						if(insIndex == -1){
+							Instructor newIns = new Instructor(ins);
+							newIns.addToScoreSFQ(scoref);
+							result.add(newIns);
+						}
+
+						// existing instructor
+						else result.get(insIndex).addToScoreSFQ(scoref);
+					}
+
+				} // end of rows in a Dept.
+			} // end of Depts.
+
+		}catch (Exception e){
+			System.out.println(e);
+			System.out.println(sfqURL);
+		}
+
+		return result;
+	}
+
+
+
+	/**
+	* scrapes the given SFQ webpage for Courses
+	* @param sfqURL url of the SFQ webpage to be scrapped
+	* @param courses list of courses enrolled from task 4
+	* @return list of courses enrolled with their SFQ scores updated
+	* task 6
+	**/
+	public List<Course> scrapeCourseSFQ(String sfqURL, List<TableClass> courses){
+
+
+		// retrieve a list of enrolled courses
+		List<String> enrolledCourses = new ArrayList<String>();
+
+		for(TableClass cou : courses){
+
+			boolean check = false;
+			String name = cou.getCcode().trim();
+			boolean isEnrolled = cou.getEnroll().isSelected();
+
+			if(!isEnrolled) continue;
+			for(int i = 0; i < enrolledCourses.size(); i++){
+				if(enrolledCourses.get(i).equals(name)) check = true;
+			}
+
+			if(!check) enrolledCourses.add(name);
+
+		} // end of creating list of enrolled courses
+
+		List<Course> result = new ArrayList<Course>();
+
+		try{
+
+			// get page
+			HtmlPage page = client.getPage(sfqURL);
+
+			// get all tables for a Department
+			List<?> departments = (List<?>) page.getByXPath(".//table[contains(@border, '1')]");
+
+			// skip the first table - it is overall statistics
+			departments.remove(0);
+
+			// search every department
+			for ( HtmlTable dept : (List<HtmlTable>)departments){
+
+
+				List<HtmlTableRow> rows = dept.getRows();
+				for(int r = 0; r < rows.size(); r++){
+
+						// name
+						String cName = rows.get(r).getCell(0).asText().trim();
+						boolean checkEnroll = false;
+
+						// not a new course row
+						if(cName.isEmpty() || cName.contains("Course") ||
+							 cName.contains("Overall") || rows.get(r).getCells().size() != 6) continue;
+
+						// check if name in enrolledCourses
+						for(String course : enrolledCourses)
+							if(course.equals(cName)) checkEnroll = true;
+
+						if(checkEnroll){
+							// create new course
+							Course courseSFQ = new Course();
+							courseSFQ.setTitle(cName);
+
+							// get all the scores
+							while(rows.get(++r).getCells().size() == 8){
+								String score = rows.get(r).getCell(3).asText().split("\\(")[0];
+								float scoref = 0;
+								if(!score.contains("-")) scoref = Float.parseFloat(score);
+								if(!rows.get(r).getCell(1).asText().trim().isEmpty()) courseSFQ.addToScoreSFQ(scoref);
+							}
+
+							result.add(courseSFQ);
+
+						}
+
+				} // end of rows in a Dept.
+			} // end of Depts.
+
+
+		}catch (Exception e){
+			System.out.println(e);
+			System.out.println(sfqURL);
+		}
+
+		return result;
 	}
 
 }

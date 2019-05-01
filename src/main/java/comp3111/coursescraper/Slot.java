@@ -16,7 +16,13 @@ public class Slot {
 	private LocalTime end;
 	private String venue;
 	private String type;
+	/**
+	 * Array of Dates
+	 */
 	public static final String DAYS[] = {"Mo", "Tu", "We", "Th", "Fr", "Sa"};
+	/**
+	 * Map of integer representation of dates (mo = 0)
+	 */
 	public static final Map<String, Integer> DAYS_MAP = new HashMap<String, Integer>();
 	static {
 		for (int i = 0; i < DAYS.length; i++)
@@ -154,5 +160,17 @@ public class Slot {
 	 * @param type the type of Slot (Lab, Tutorial, Lecture)
 	 */
 	public void setType(String type) { this.type = type; }
+
+
+	/**
+	* Checks if slot in 9AM-10PM to be valid slot
+	* @param s slot to be check
+	* @return T/F if the slot is valid
+	*/
+	public static boolean isValidSlot(Slot s){
+				if(s == null) return false;
+				if (s.getStartHour() >= 9 && s.getEndHour() <= 22) return true;
+				else return false;
+}
 
 }

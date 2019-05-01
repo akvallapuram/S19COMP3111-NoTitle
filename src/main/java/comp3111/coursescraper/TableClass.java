@@ -10,11 +10,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.control.Label;
 
 /**
- * This class is for the List Tab as well as TimeTable. A row in the List corresponds to an object of TableClass class.
+ *This class is for the List Tab as well as TimeTable. A row in the List corresponds to an object of TableClass class.
  *Thus, the List contains multiple TableClass objects.
  * 
  * @author nikhilnanda
  *
+ * Task 3/4
  */
 public class TableClass {
 
@@ -36,7 +37,7 @@ public class TableClass {
 	 * @param co Color
 	 * @param d Day
 	 */
-	TableClass(String c, String l, String cn, String i, Color co, int d)
+	public TableClass(String c, String l, String cn, String i, Color co, int d)
 	{
 		this.ccode = c;
 		this.lecturesec = l;
@@ -51,7 +52,7 @@ public class TableClass {
 	/**
 	 * This is the Default Constructor
 	 */
-	TableClass()
+	public TableClass()
 	{
 		this.ccode = " ";
 		this.lecturesec = " ";
@@ -186,6 +187,7 @@ public class TableClass {
 	 */
 	public void setColorr(Color co)
 	{
+		//this.colorr = new Color(co.getRed(), co.getGreen(), co.getBlue(), 0.5);
 		this.colorr = co;
 	}
 	

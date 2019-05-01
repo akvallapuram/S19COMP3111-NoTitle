@@ -1,6 +1,9 @@
 package comp3111.coursescraper;
 
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * OOP representation of a Course in a term. E.G. COMP 3111
  */
@@ -14,6 +17,20 @@ public class Course {
 	private int numSlots;
 	private boolean commonCourse;
 
+	/**
+	* stores the SFQ score associated with this score
+	*/
+	private float scoreSFQ;
+	/**
+	* the number of sections associated for the above SFQ score
+	*/
+	private int numSectionsSFQ;
+	/**
+	* list of all the sections associated with the course
+	* @see Class Section
+	*/
+	private List<Section> sections;
+
 
 	/**
 	 * Creation of Course
@@ -23,12 +40,17 @@ public class Course {
 		slots = new Slot[DEFAULT_MAX_SLOT];
 		for (int i = 0; i < DEFAULT_MAX_SLOT; i++) slots[i] = null;
 		numSlots = 0;
+
+		this.scoreSFQ = 0;
+		this.numSectionsSFQ = 0;
+		sections = new ArrayList<Section>();
 	}
 
 	/**
 	 * Adds a Slot to a Course. E.G. Course COMP 3111 has a Slot L1
 	 * @param s Slot
 	 */
+
 	public void addSlot(Slot s) {
 		if (numSlots >= DEFAULT_MAX_SLOT)
 			return;
@@ -38,7 +60,7 @@ public class Course {
 	/**
 	 * Returns a slot of a course at specified index
 	 * @param i slot index of course
-	 * @return Slot
+	 * @return slot of with the given index
 	 */
 	public Slot getSlot(int i) {
 		if (i >= 0 && i < numSlots)
@@ -115,6 +137,7 @@ public class Course {
 	 * Returns boolean if a Course is a Common Course
 	 * @return T/F if CC
 	 */
+
 	public boolean getCommonCourse() { return commonCourse; }
 
 
@@ -123,4 +146,69 @@ public class Course {
 	 * @param cc T/F if a course is a common course
 	 */
 	public void setCommonCourse(boolean cc) { this.commonCourse = cc; }
+
+	/**
+	* Returns Float SFQ score of the course
+	* @return {@link #scoreSFQ}
+	*/
+	public float getScoreSFQ(){
+    return this.scoreSFQ;
+  }
+
+	/**
+	* inserts a score for a course's section found in SFQ webpage
+	* @param score is the score of a section that must be added
+	*/
+  public void addToScoreSFQ(float score){
+    if(score > 100 || score < 0) return;
+    float num = numSectionsSFQ;
+    this.scoreSFQ = (scoreSFQ*num + score) / (float)(num+1);
+    numSectionsSFQ++;
+  }
+
+	/**
+		Inserts a section found by scraper that is related to this course
+		@param s is a section that is related to this course
+	*/
+	public void addSection(Section s){
+		this.sections.add(s);
+	}
+
+	/**
+	* check if course atleast has one lecture, lab or tutorial
+	* @return T/F if course has atleast one lecture, lab or tutorial
+	*/
+	public boolean isValid(){
+
+		boolean check = false;
+    for(int i = 0; i < this.numSlots; i++){
+      String type = this.slots[i].getType();
+      boolean b1 = type.startsWith("T");
+      boolean b2 = type.startsWith("L");
+
+      if(b1 || b2) check = true;
+    }
+
+    return check;
+  }
+
+
+  /**
+	* returns the list sections in this course
+	* @return {@link #sections}
+	*/
+	public List<Section> getSections(){
+		return this.sections;
+	}
+
+	/**
+	* returns a string can be used for printing information about the course
+	* @return String newline which contains the course title and its section info
+	*/
+	public String toString(){
+		String newline = this.title + "\n";
+		for(Section s : sections) newline += s.toString();
+		return newline;
+	}
+
 }

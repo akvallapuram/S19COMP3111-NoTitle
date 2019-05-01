@@ -181,4 +181,108 @@ public class ItemTest {
 		blocks(tb, st);
 	}*/
 
+	@Test
+	public void testSectionClass(){
+		Section testSection = new Section("COMP 3111 L1", 1232);
+
+		// assertions at initialisation
+		String sc = testSection.getSectionCode();
+		int sid = testSection.getSectionID();
+		int numSlots = testSection.getNumSlots();
+		String info = testSection.toString();
+		assertTrue(sc.equals("COMP 3111 L1"));
+		assertEquals(sid, 1232);
+		assertEquals(numSlots, 0);
+		assertEquals(testSection.getSlot(0), null);
+		assertTrue(info.contains("(1232)"));
+
+		// adding a slot
+		Slot s = new Slot();
+		s.setStart("09:30AM");
+		testSection.addSlot(s);
+		assertEquals(testSection.getNumSlots(), 1);
+		assertEquals(testSection.getSlot(0).getStartHour(), 9);
+	}
+
+	@Test
+	public void testInstructorClass(){
+
+		// SFQ instructor construction
+		Instructor testInsSFQ = new Instructor("testIns");
+		assertTrue(testInsSFQ.getName().equals("testIns"));
+		assertEquals((int)testInsSFQ.getScoreSFQ(), 0);
+		assertTrue(testInsSFQ.isFreeTu310());
+
+		// adding SFQ score
+		testInsSFQ.addToScoreSFQ(-78);
+		assertEquals((int)testInsSFQ.getScoreSFQ(), 0);
+		testInsSFQ.addToScoreSFQ(1000);
+		assertEquals((int)testInsSFQ.getScoreSFQ(), 0);
+		testInsSFQ.addToScoreSFQ(20);
+		testInsSFQ.addToScoreSFQ(80);
+		assertEquals((int)testInsSFQ.getScoreSFQ(), 50);
+
+		// Normal Instructor Construction
+
+		Section sec1 = new Section("COMP 3111 L1", 1232);
+		Instructor normalIns = new Instructor("NormalIns", sec1);
+		Section sec2 = new Section("COMP 3131 L2", 1732);
+		normalIns.addSection(sec2);
+		Section sec3 = new Section("COMP 3222 L1", 1242);
+		normalIns.addSection(sec3);
+		assertFalse(normalIns.isTeaching("COMP 2323 L7"));
+	}
+
+	@Test
+	public void testSlotValid(){
+		Slot s1 = null;
+		assertFalse(Slot.isValidSlot(s1));
+		Slot s2 = new Slot();
+		s2.setStart("09:30AM");
+		s2.setEnd("10:30AM");
+		assertTrue(Slot.isValidSlot(s2));
+		Slot s3 = new Slot();
+		s3.setStart("00:00AM");
+		s3.setEnd("01:30AM");
+		s3.setVenue("Room");
+		assertFalse(Slot.isValidSlot(s3));
+		assertTrue(s3.getVenue().equals("Room"));
+		assertEquals(s3.getEnd().getHour(), 1);
+	}
+
+	@Test
+	public void testCourseSFQ(){
+		Course c = new Course();
+		c.addToScoreSFQ(-78);
+		assertEquals((int)c.getScoreSFQ(), 0);
+		c.addToScoreSFQ(1000);
+		assertEquals((int)c.getScoreSFQ(), 0);
+		c.addToScoreSFQ(20);
+		c.addToScoreSFQ(80);
+		assertEquals((int)c.getScoreSFQ(), 50);
+
+		c.setTitle("COMP 3223");
+		Section sec1 = new Section("COMP 3223 L1", 3443);
+		Section sec2 = new Section("COMP 3333 L1", 2232);
+		Section sec3 = new Section("COMP 4545 L1", 2321);
+		c.addSection(sec1);
+		c.addSection(sec2);
+		c.addSection(sec3);
+		assertTrue(c.toString().contains("COMP 3223"));
+		assertEquals(c.getSections().get(0).getSectionID(), 3443);
+		Slot s1 = new Slot();
+		s1.setType("R1");
+		c.addSlot(s1);
+		assertFalse(c.isValid());
+		Slot s2 = new Slot();
+		s2.setType("LA3");
+		c.addSlot(s2);
+		assertTrue(c.isValid());
+	}
+
+	// @Test public void 
+
+
+
+
 }
