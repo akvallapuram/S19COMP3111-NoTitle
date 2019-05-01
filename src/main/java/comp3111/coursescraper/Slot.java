@@ -156,7 +156,11 @@ public class Slot {
 	public void setType(String type) { this.type = type; }
 
 
-	/**check if slot in 9AM-10PM **/
+	/**
+	* Checks if slot in 9AM-10PM to be valid slot
+	* @param s slot to be check
+	* @return T/F if the slot is valid
+	*/
 	public static boolean isValidSlot(Slot s){
 				if(s == null) return false;
 				if (s.getStartHour() >= 9 && s.getEndHour() <= 22) return true;

@@ -205,7 +205,7 @@ public class Scraper {
 	* @param term the term of the calendar year that must be scraped format (YYTT)
 	* YY = 18 if year of term is 2018 and TT = {Fall, Winter, Spring, Summer} = {10, 20, 30, 40}
 	* @param sub the code of the department whose courses to be scraped
-	* e.g. Computer Science Department -> COMP
+	* e.g. Computer Science Department converts COMP
 	* @return a List of Courses that were found in the webpage {@link Course}
 	*/
 	public List<Course> scrape(String baseurl, String term, String sub) {
@@ -279,7 +279,14 @@ public class Scraper {
 	}
 
 
-/**Helper function for the scrapeInstructorSFQ function below**/
+/**
+* Returns the index of the Instructor in a given Instructor List for a given Instructor Name
+* Helper function for the scrapeInstructorSFQ function below
+* @param name name of the Instructor
+* @param instructors list of instructors to search
+* @return index of the instructor found in the list (-1 if not found)
+*/
+
 	public static int instructorInSFQ(String name, List<Instructor> instructors){
 		if(instructors.size() == 0) return -1;
 		for(int i = 0; i < instructors.size(); i++)
@@ -288,7 +295,11 @@ public class Scraper {
 	}
 
 
-	/**TASK_6: Scrapping the SFQ webpage for Instructors**/
+	/**
+	* Scrapes the SFQ webpage for Instructors
+	* @param sfqURL url of the SFQ webpage from Instructors SFQ scores must be scraped
+	* @return list of Instructors with their SFQ scores updated
+	*/
 	public List<Instructor> scrapeInstructorSFQ(String sfqURL){
 
 		List<Instructor> result = new ArrayList<Instructor>();
@@ -342,7 +353,13 @@ public class Scraper {
 
 
 
-	/**TASK_6: scrapping the SFQ webpage for Courses**/
+	/**
+	* scrapes the given SFQ webpage for Courses
+	* @param sfqURL url of the SFQ webpage to be scrapped
+	* @param courses list of courses enrolled from task 4
+	* @return list of courses enrolled with their SFQ scores updated
+	* task 6
+	**/
 	public List<Course> scrapeCourseSFQ(String sfqURL, List<TableClass> courses){
 
 

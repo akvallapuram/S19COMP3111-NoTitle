@@ -59,7 +59,7 @@ public class Course {
 	/**
 	 * Returns a slot of a course at specified index
 	 * @param i slot index of course
-	 * @return Slot
+	 * @return slot of with the given index
 	 */
 	public Slot getSlot(int i) {
 		if (i >= 0 && i < numSlots)
@@ -156,7 +156,7 @@ public class Course {
 
 	/**
 	* inserts a score for a course's section found in SFQ webpage
-	* @param float score is the score of a section that must be added
+	* @param score is the score of a section that must be added
 	*/
   public void addToScoreSFQ(float score){
     if(score > 100 || score < 0) return;
@@ -167,7 +167,7 @@ public class Course {
 
 	/**
 		Inserts a section found by scraper that is related to this course
-		@param Section s is a section that is related to this course
+		@param s is a section that is related to this course
 	*/
 	public void addSection(Section s){
 		this.sections.add(s);

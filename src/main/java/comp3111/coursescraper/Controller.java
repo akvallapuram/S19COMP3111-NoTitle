@@ -266,7 +266,7 @@ public class Controller {
 
     /**
     * Prints the SFQ score of all the instructors in the given url to the SFQ webpage
-    * @see Scraper#scrapeInstructorSFQ()
+    * Task 6
     */
     @FXML
     void findInstructorSfq() {
@@ -281,7 +281,7 @@ public class Controller {
 
     /**
     * Prints the SFQ score of all the courses enrolled from the given url to the SFQ webpage
-    * @see Scraper#scrapeCourseSFQ()
+    * Task 6
     */
     @FXML
     void findSfqEnrollCourse() {
@@ -298,7 +298,7 @@ public class Controller {
      * Filter Results Task 2 and add the sections to List (Task3)
      * Based on AND logic. If there exists 1+ slot in a Course for every requirement/filter,
      * Displays all slots of course based on filter
-     * List - takes all the sections displayed on the Console after filter and displays a new list in the List Tab 
+     * List - takes all the sections displayed on the Console after filter and displays a new list in the List Tab
      */
     @FXML
     public void filterResults() {
@@ -745,7 +745,11 @@ public class Controller {
 
 
 
-  /** Used by scraper to check if an instructor has already been scraped**/
+  /**
+  * Checks if an instructor has already been scraped
+  * @param _ins name of the instructor to check
+  * @return index of the instructor found in the list of Instructors scraped (-1 if not found)
+  */
   public static int inInstructorSearch(String _ins){
 
     if(INSTRUCTORS_IN_SEARCH.size() == 0) return -1;
@@ -762,11 +766,24 @@ public class Controller {
 
   }
 
-    // used for the search
+
+
+    /**
+    * Global variable used to keep track of number of sections found in search
+    */
     public static int NUMBER_OF_SECTIONS = 0;
+    /**
+    * Global variable used to keep track of Instructors found in search
+    */
     public static List<Instructor> INSTRUCTORS_IN_SEARCH  = new ArrayList<Instructor>();
 
-    // TASK 1
+
+
+
+    /**
+    * Searches for info for all Courses in a given URL for a given term and department
+    * Task 1
+    */
     @FXML
     public void search() {
 
@@ -887,7 +904,7 @@ public class Controller {
     	{
     		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
     	}
-        
+
         ts.getLab().setFont(ts.getLab().getFont().font(10));
 
     	ap.getChildren().addAll(ts.getLab());

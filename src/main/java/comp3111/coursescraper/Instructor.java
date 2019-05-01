@@ -19,7 +19,6 @@ public class Instructor{
 
   /**
   * list of sections taught by this instructor
-  * @see Class Section
   */
   private List<Section> sectionsTaught;
   private String name;
@@ -30,7 +29,6 @@ public class Instructor{
   /**
   * Adds a section that is assigned to the Instructor
   * @param s Section that must be assigned
-  * @see {@link #Section}
   */
   public void addSection(Section s){
     this.sectionsTaught.add(s);
@@ -55,7 +53,6 @@ public class Instructor{
   * Constructor for instructor is section is assigned
   * @param _name name of the instructor
   * @param _section a section that is assigned to the instructor
-  * @see {@link #Section}
   */
   public Instructor(String _name, Section _section){
     this.name = _name;
@@ -96,7 +93,7 @@ public class Instructor{
 
   /**
   * Checks if the Instructor is teaching a specified section
-  * @param String _secCode section code of the Section @see {@link Section}
+  * @param _secCode section code of the Section
   * @return T/F if the Instructor teaches the section
   */
   public boolean isTeaching(String _secCode){
