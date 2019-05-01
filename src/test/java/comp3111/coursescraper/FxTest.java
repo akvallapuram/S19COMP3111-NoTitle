@@ -82,6 +82,7 @@ public void testSameSection()
 	Slot st = new Slot();
 	//tab.setLab(new Label());
 	ctr.sameSection(tab, st);
+	//ctr.printEnrolled(tab);
 }
 
 //	@Test

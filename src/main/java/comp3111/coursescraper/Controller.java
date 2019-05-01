@@ -298,7 +298,7 @@ public class Controller {
      * Filter Results Task 2 and add the sections to List (Task3)
      * Based on AND logic. If there exists 1+ slot in a Course for every requirement/filter,
      * Displays all slots of course based on filter
-     * List - takes all the sections displayed on the Console after filter and displays a new list in the List Tabgit
+     * List - takes all the sections displayed on the Console after filter and displays a new list in the List Tab 
      */
     @FXML
     public void filterResults() {
@@ -406,6 +406,10 @@ public class Controller {
                             inst += INSTRUCTORS_IN_SEARCH.get(a).getName() + "\n";
                         }
                     }
+                    if(inst.equals(""))
+                    {
+                        inst = "TBA";
+                    }
                     obj.setInstructor(inst);
                     //Have to prevent duplication
                     TableClass dupl = new TableClass("1", "1", "1", "1", Color.color(Math.random(), Math.random(), Math.random(), 0.5), 1);
@@ -475,10 +479,8 @@ public class Controller {
                             }
                 		}
                     }
-                    //
 
                     if(flagg!=1)
-                    //if(flagg!=1)
                     {
                         if(extra==0)
                         {
@@ -498,7 +500,7 @@ public class Controller {
 
                     			if(newValue==true)
                     			{
-                    				System.out.println("Checkbox is checked");
+                    				//System.out.println("Checkbox is checked");
                         			blocks(obj, t);
                         			sameSection(obj, t);
                         			printEnrolled(obj);
@@ -881,8 +883,12 @@ public class Controller {
     	ts.getLab().setMinHeight(atls*0.33);
     	ts.getLab().setMaxHeight(atls*0.33);
 
-
-        ts.getLab().setFont(ts.getLab().getFont().font(6));
+    	if(atls<60)
+    	{
+    		ts.getLab().setText(ts.getCcode()+" "+ts.getLecturesec());
+    	}
+        
+        ts.getLab().setFont(ts.getLab().getFont().font(10));
 
     	ap.getChildren().addAll(ts.getLab());
     }
@@ -922,9 +928,9 @@ public class Controller {
     	if(textAreaConsole.getText().substring(0, 36).equals("The following sections are enrolled:"))
     	{
     		String consoleCurr = textAreaConsole.getText();
-    		String newstr = "";
+            String newstr = "";
 
-    		for(int i=37; i<1000; ++i)		//change 1000 later
+    		for(int i=37; i<textAreaConsole.getText().length(); ++i)		//change 1000 later
     		{
     			if(consoleCurr.charAt(i)=='\n')
     			{
@@ -957,9 +963,9 @@ public class Controller {
     {
     	String match = ts.getCcode() + " " + ts.getLecturesec();
     	String resultant = "";
-    	int end = 0;
+        int end = 0;
 
-    	for(int i=37; i<10000; i=i+15)		//change 1000 later
+    	for(int i=37; i<textAreaConsole.getText().length(); i=i+15)		//change 10000 later
     	{
     		if(match.equals(textAreaConsole.getText().substring(i, i+14)))
     		{
