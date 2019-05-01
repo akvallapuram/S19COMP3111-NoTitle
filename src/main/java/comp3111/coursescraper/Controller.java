@@ -860,7 +860,7 @@ public class Controller {
 
     //print sections
     String newline = "";
-  	for (Course c : v) newline += c.toString() + "\n\n\n";
+  	for (Course c : v) if(c.isValid()) newline += c.toString() + "\n\n\n";
     textAreaConsole.setText(textAreaConsole.getText() + "\n" + newline);
 
       // clear storage for next search
