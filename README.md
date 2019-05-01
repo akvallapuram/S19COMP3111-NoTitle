@@ -1,7 +1,10 @@
 # COMP3111: Software Engineering Project - Course Scraper
 ## Project Problem Statement and Activities
 
-
+##S19COMP3111-NoTitle
+Anish - Task 1 + 6 
+Nikhil - Task 3 + 4 
+Jeff - Task 2 + 5 
 
 
 > **Activity 1 Due (6%): 18-3-2019 (Wk 7 Mon) 20:00**
