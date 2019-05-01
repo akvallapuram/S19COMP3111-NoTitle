@@ -6,6 +6,10 @@
 * Nanda Nikhil - Task 3 + 4
 * Zhan Jefferson - Task 2 + 5
 
+* For Task 4 ('Timetable') - each block has section code and course code in two lines except for the label that are 50 minutes (<60 minutes) which is in one line. The overlapped area has a different colour which is the rgb combination of the overlapped blocks.
+
+* For Task 3 ('List') - The enrolment status of a section is persistent even when another search is performed, another filter is applied, or selecting other tabs and can be seen on the filterTab's/listTab's Console. In order to remove the enrolled status of a section, filter will have to be done in order to get the List with the enrolled section. Then unchecking the checkbox will remove the enrolled status of the section.
+
 
 > **Activity 1 Due (6%): 18-3-2019 (Wk 7 Mon) 20:00**
 > Submission details will be provided on Canvas
