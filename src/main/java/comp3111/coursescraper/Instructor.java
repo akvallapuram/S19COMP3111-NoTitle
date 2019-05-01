@@ -9,7 +9,12 @@ import java.util.Random;
 import java.util.List;
 import java.util.regex.*;
 
-
+/**
+* This class for storing data about an Instructor whose information has been scraped
+* from HKUST Course Catalog and SFQ websites.
+* @author akvallapuram
+* Task 1/6
+*/
 public class Instructor{
 
   /**
@@ -22,7 +27,11 @@ public class Instructor{
   private float scoreSFQ;
   private int numSectionsSFQ;
 
-
+  /**
+  * Adds a section that is assigned to the Instructor
+  * @param s Section that must be assigned
+  * @see {@link #Section}
+  */
   public void addSection(Section s){
     this.sectionsTaught.add(s);
 
@@ -42,6 +51,12 @@ public class Instructor{
 
   }
 
+  /**
+  * Constructor for instructor is section is assigned
+  * @param _name name of the instructor
+  * @param _section a section that is assigned to the instructor
+  * @see {@link #Section}
+  */
   public Instructor(String _name, Section _section){
     this.name = _name;
     this.freeTu310 = true;
@@ -50,6 +65,10 @@ public class Instructor{
   }
 
 
+  /**
+  * Constructor for instructor for pure SFQ rating purposes
+  * @param _name name of the instructor
+  */
   public Instructor(String _name){
     this.name = _name;
     this.numSectionsSFQ = 0;
@@ -59,15 +78,27 @@ public class Instructor{
   }
 
 
+  /**
+  * Returns the name of the Instructor
+  * @return {@link #name}
+  */
   public String getName(){
     return this.name;
   }
 
-
+  /**
+  * Returns if the Instructor is free on Tuesday 3:10PM
+  * @return {@link #freeTu310}
+  */
   public boolean isFreeTu310(){
     return freeTu310;
   }
 
+  /**
+  * Checks if the Instructor is teaching a specified section
+  * @param String _secCode section code of the Section @see {@link Section}
+  * @return T/F if the Instructor teaches the section
+  */
   public boolean isTeaching(String _secCode){
     String [] _secName = _secCode.split("\\s+");
     String _secN = String.join(" ", _secName);
@@ -80,10 +111,19 @@ public class Instructor{
   }
 
 
+  /**
+  * Returns the SFQ score of the Instructor scraped from the given SFQ url
+  * @return {@link #scoreSFQ}
+  */
   public float getScoreSFQ(){
     return this.scoreSFQ;
   }
 
+
+  /**
+  * Adds a found SFQ score associated with the Instructor from the given SFQ url
+  * @param score the score found in the SFQ page related to the Instructor
+  */
   public void addToScoreSFQ(float score){
     if(score > 100 || score < 0) return;
     float num = numSectionsSFQ;

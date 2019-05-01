@@ -2,10 +2,8 @@ package comp3111.coursescraper;
 
 
 import javafx.collections.FXCollections;
-
-
-
-
+import java.io.File;
+import java.net.URL;
 
 
 import javafx.application.Platform;
@@ -274,8 +272,7 @@ public class Controller {
     void findInstructorSfq() {
         Scraper scraperSFQ = new Scraper();
         String url = textfieldSfqUrl.getText();
-        List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm");
-        // List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ(testfieldSfqUrl.getText());
+        List<Instructor> instructors = scraperSFQ.scrapeInstructorSFQ(url);
 
         String newline = "";
         for(Instructor ins : instructors) newline += String.format("%s %.2f %n", ins.getName(), ins.getScoreSFQ());
@@ -290,8 +287,7 @@ public class Controller {
     void findSfqEnrollCourse() {
       Scraper scraperSFQ = new Scraper();
       String url = textfieldSfqUrl.getText();
-      List<Course> courses = scraperSFQ.scrapeCourseSFQ("file:///Users/anishkrishnavallapuram/Desktop/School%20Summary%20Report.htm", datasAll);
-      // List<Course> courses = scraperSFQ.scrapeCourseSFQ(testfieldSfqUrl.getText());
+      List<Course> courses = scraperSFQ.scrapeCourseSFQ(url, datasAll);
 
       String newline = "";
       for(Course c : courses) newline += String.format("%s %.2f %n", c.getTitle(), c.getScoreSFQ());

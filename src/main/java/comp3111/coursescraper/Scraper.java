@@ -199,6 +199,15 @@ public class Scraper {
 }
 
 
+	/**
+	* A function for srapping for Course info from a given Webpage information
+	* @param baseurl the domain of the webpage to be scraped
+	* @param term the term of the calendar year that must be scraped format (YYTT)
+	* YY = 18 if year of term is 2018 and TT = {Fall, Winter, Spring, Summer} = {10, 20, 30, 40}
+	* @param sub the code of the department whose courses to be scraped
+	* e.g. Computer Science Department -> COMP
+	* @return a List of Courses that were found in the webpage {@link Course}
+	*/
 	public List<Course> scrape(String baseurl, String term, String sub) {
 
 		try {
