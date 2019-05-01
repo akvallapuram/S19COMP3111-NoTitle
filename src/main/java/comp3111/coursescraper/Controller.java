@@ -836,6 +836,7 @@ public class Controller {
 
       for(Course c : v) if(c.isValid()) NUMBER_OF_COURSES++;
 
+
     // number of prefixes
     textAreaConsole.setText("Total Number of Categories/Code Prefix: " + Controller.NUMBER_OF_PREFIXES);
 

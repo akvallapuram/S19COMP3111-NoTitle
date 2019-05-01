@@ -181,13 +181,15 @@ public class Course {
 	public boolean isValid(){
 
 		boolean check = false;
-    for(int i = 0; i < this.numSlots; i++){
-      String type = this.slots[i].getType();
-      boolean b1 = type.startsWith("T");
-      boolean b2 = type.startsWith("L");
 
-      if(b1 || b2) check = true;
-    }
+		for(Section s : this.sections){
+
+			String type = s.getSectionCode().split(" ")[1];
+			boolean b1 = type.startsWith("T");
+			boolean b2 = type.startsWith("L");
+			if(b1 || b2) check = true;
+
+		}
 
     return check;
   }

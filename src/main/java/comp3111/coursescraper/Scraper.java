@@ -144,9 +144,6 @@ public class Scraper {
 		int sectionID = Integer.parseInt(sID);
 
 		if(!type.startsWith("R")) Controller.NUMBER_OF_SECTIONS++;
-		if (times[0].equals("TBA")){
-			return;
-		}
 
 
 		Section sec = new Section(sectionCode, sectionID);
