@@ -808,7 +808,7 @@ public class Controller {
 
         //need to display the number of all subjects in a given term even when search is clicked
         //(task5) - Jeff
-        allSubjectSearch();
+        // allSubjectSearch();
 
 
         // other errors
