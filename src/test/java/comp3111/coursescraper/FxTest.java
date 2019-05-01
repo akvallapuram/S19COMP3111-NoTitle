@@ -24,6 +24,7 @@ import javafx.scene.control.TableView ;
 import javafx.scene.control.CheckBox ;
 import javafx.scene.control.Label;
 
+import javafx.scene.input.MouseButton;
 
 public class FxTest extends ApplicationTest {
 
@@ -116,5 +117,28 @@ public void testSameSection()
 		TableView<TableClass> tab = ctr.getTable();
 
 	}*/
+
+	@Test
+	public void test404Handler(){
+		clickOn("#textfieldTerm");
+		write("4545");
+		clickOn("#buttonSearch");
+	}
+
+	@Test
+	public void testInstructorSFQ(){
+		clickOn("#buttonSearch");
+		clickOn("#tabFilter");
+		clickOn("#CC");
+		sleep(500);
+		clickOn("#tabList");
+		clickOn(1000, 160, MouseButton.PRIMARY);
+		sleep(500);
+		clickOn("#tabSfq");
+		clickOn("#buttonInstructorSfq");
+		sleep(500);
+		clickOn("#buttonSfqEnrollCourse");
+		sleep(500);
+	}
 
 }

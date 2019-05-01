@@ -207,7 +207,6 @@ public class ControllerTest {
 
     @Test
     public void allSubjectSearch2() {
-
     }
 
     @Test

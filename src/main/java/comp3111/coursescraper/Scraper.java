@@ -332,33 +332,6 @@ public class Scraper {
 	}
 
 
-	/**Helper function for the scrapeCourseSFQ function below**/
-	public static boolean isCourseEnrolled(String name, List<TableClass> courses){
-
-		for(int i = 0; i < courses.size(); i++){
-			TableClass course = courses.get(i);
-			String cCode = course.getCcode().trim();
-			String _name = name.trim();
-			if(cCode.equals(_name) && course.getEnroll().isSelected()) return true;
-		}
-
-		return false;
-	}
-
-
-	/**Helper function for the scrapeCourseSFQ function below**/
-	public static int courseInSFQ(String name, List<Course> courses){
-
-		if(courses.size() == 0) return -1;
-
-		String _name = name.trim();
-		for(int i = 0; i < courses.size(); i++)
-			if(courses.get(i).getTitle().trim().equals(_name)) return i;
-
-		return -1;
-	}
-
-
 
 	/**TASK_6: scrapping the SFQ webpage for Courses**/
 	public List<Course> scrapeCourseSFQ(String sfqURL, List<TableClass> courses){
